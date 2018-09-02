@@ -1,2 +1,2 @@
 # Calendula
-cloud calendar with collaborate work
+cloud calendar with collaborate work.
