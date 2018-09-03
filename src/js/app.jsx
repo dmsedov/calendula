@@ -13,10 +13,10 @@ const store = createStore(rootReducer);
 const jwt = localStorage.getItem('user');
 
 if (localStorage.getItem('user')) {
-  const userData = JSON.parse(decodeJwt(jwt));
-  const { name, role } = userData;
+  const userData = decodeJwt(jwt);
+  const { name, admin } = userData;
 
-  store.dispatch(loginUserSuccess({ name, role, isAuthenticated: true }));
+  store.dispatch(loginUserSuccess({ name, admin, isAuthenticated: true }));
 }
 
 ReactDOM.render(

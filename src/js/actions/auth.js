@@ -1,4 +1,5 @@
 import { createAction } from 'redux-actions';
+import decodeJwt from 'jwt-decode';
 import * as api from '../api';
 
 export const loginUserRequest = createAction('LOGIN_USER_REQUEST');
@@ -11,8 +12,14 @@ export const loginUser = resp => async (dispatch) => {
   dispatch(loginUserRequest());
 
   try {
-    const res = await api.loginUser(resp);
-    dispatch(loginUserSuccess(res));
+    // const res = await api.loginUser(resp); // заглушка
+    setTimeout(() => {
+      const res = { token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiRG1pdHJ5IFNlZG92IiwiYWRtaW4iOnRydWUsImVyciI6e30sImp0aSI6IjkzMDg2MWE0LTQ0MGItNDA2Yy1iODUxLTc5ODJlYTBjNTc5OCIsImlhdCI6MTUzNjAwMjEwNiwiZXhwIjoxNTM2MDA1NzA2fQ.op7F69AbrEHdzPrKd0V7hNDinUB-H-z9DhpEnxL93Zw' };
+      localStorage.setItem('user', res.token);
+      const { name, admin } = decodeJwt(res.token);
+      dispatch(loginUserSuccess({ name, admin }));
+    }, 2000);
+    // dispatch(loginUserSuccess(res));
   } catch (e) {
     dispatch(loginUserFailure);
   }

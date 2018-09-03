@@ -3,7 +3,14 @@ import Component from '../components/LoginPage';
 import { loginUserRequest, loginUserSuccess, loginUserFailure, loginUser } from '../actions/auth';
 
 
-const mapStateToProps = state => state.user;
+const mapStateToProps = (state) => {
+  const { userFetchingProfileState, user } = state;
+  return {
+    requestStatus: userFetchingProfileState,
+    user,
+  };
+};
+
 const actions = {
   loginUserRequest,
   loginUserSuccess,

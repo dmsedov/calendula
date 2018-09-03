@@ -26,25 +26,27 @@ export default class LoginPage extends React.Component {
 
   render() {
     return (
-      <div className="auth-form">
-        <h2>Авторизация</h2>
-        <p className="auth-tip">Авторизуйтесь через представленные ниже сервисы:</p>
-        <ul className="list-sm">
-          <GoogleLogin
-            clientId={GOOGLE_CLIENT_ID}
-            buttonText="Google"
-            className="btn google-social"
-            onSuccess={this.successGoogleResp}
-            Failure={this.failedGoogleResp}
-          />
-          <FacebookLogin
-            appId={FACEBOOK_APP_ID}
-            fields="name,email,picture"
-            callback={this.successFbResp}
-            textButton="Facebook"
-            cssClass="btn facebook-social"
-          />
-        </ul>
+      <div className="center-container" style={{ height: '700px' }}>
+        <div className="auth-form">
+          <h2>Авторизация</h2>
+          <p className="auth-tip">Авторизуйтесь через представленные ниже сервисы:</p>
+          <div className="list-sm">
+            <GoogleLogin
+              clientId={GOOGLE_CLIENT_ID}
+              buttonText="Google"
+              className="btn google-social"
+              onSuccess={this.successGoogleResp}
+              Failure={this.failedGoogleResp}
+            />
+            <FacebookLogin
+              appId={FACEBOOK_APP_ID}
+              fields="name,email,picture"
+              callback={this.successFbResp}
+              textButton="Facebook"
+              cssClass="btn facebook-social"
+            />
+          </div>
+        </div>
       </div>
     );
   }
