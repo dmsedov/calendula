@@ -1,0 +1,11 @@
+@import 'variables';
+@import '~bootstrap/scss/bootstrap';
+@import 'authForm';
+@import 'accessForm';
+@import 'eventEditor';
+@import 'eventBio';
+@import 'calendar';
+
+@media (max-width: 992px) {
+  font-size: 12px;
+}

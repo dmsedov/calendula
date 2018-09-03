@@ -1,0 +1,54 @@
+.auth-form {
+  padding: 2rem 1rem;
+  font-size: 1rem;
+
+  h2 {
+    text-align: center;
+  }
+
+  .auth-tip {
+    padding: 0.5rem;
+    text-align: center;
+  }
+
+  .list-sm {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+  }
+
+  .auth-service {
+    display: flex;
+    justify-content: center;
+    list-style-type: none;
+
+    .btn {
+      position: relative;
+      margin-bottom: 0.5rem;
+      width: 12rem;
+      height: 40px;
+      color: $black;
+      text-align: center;
+      border: 1px solid $silver;
+
+      &::before {
+        position: absolute;
+        top: 5%;
+        left: 10%;
+      }
+    }
+
+    .btn.vk-sm {
+      &::before {
+        content: url('/src/images/icons/vk-32px.png');
+      }
+    }
+
+    .btn.google-sm {
+      &::before {
+        content: url('/src/images/icons/google-32px.png');
+      }
+    }
+  }
+}
