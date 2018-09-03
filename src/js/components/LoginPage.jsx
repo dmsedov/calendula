@@ -2,58 +2,26 @@ import React from 'react';
 import GoogleLogin from 'react-google-login';
 import FacebookLogin from 'react-facebook-login';
 import { GOOGLE_CLIENT_ID, FACEBOOK_APP_ID } from '../client_config.json';
+import makeUserDataByApiType from '../helpers/makeUserDataByApiType';
 
 export default class LoginPage extends React.Component {
-  successRespGoogle = (resp) => {
+  successGoogleResp = (resp) => {
     console.log(resp);
-    const { profileObj: { name } } = resp;
-    const { history } = this.props;
-    this.props.login({ name, history });
+    this.signUp('google', resp);
   }
 
-  failedRespGoogle = (resp) => {
+  failedGoogleResp = (resp) => {
     console.log(resp, 'failed resp');
   }
 
-  successRespFb = (resp) => {
+  successFbResp = (resp) => {
     console.log(resp, 'resp from Fb');
-    const { name } = resp;
-    const { history } = this.props;
-    this.props.login({ name, history });
-  }
-
-  makeUserDataByApiType = (type, resp) =>{
-    return {
-      google: function(resp) {
-        const { profileObj: { googleId, name, imageUrl, email } } = resp;
-
-        userData = {
-          id: googleId,
-          name,
-          email,
-          imageUrl,
-        };
-        return userData;
-      },
-      facebook: function(resp) {
-        const { userId, name, email, picture: { data: { url } } } = resp;
-
-        userData = {
-          id: userId,
-          name,
-          email,
-          imageUrl: url,
-        };
-        return userData;
-      },
-    }[type];
+    this.signUp('facebook', resp);
   }
 
   signUp = (type, resp) => {
-    const { loginUser } = this.props;
-
-    const userData = this.makeUserDataByApiType(type, resp);
-    loginUser(userData);
+    const userData = makeUserDataByApiType(type)(resp);
+    this.props.loginUser(userData);
   }
 
   render() {
@@ -66,13 +34,13 @@ export default class LoginPage extends React.Component {
             clientId={GOOGLE_CLIENT_ID}
             buttonText="Google"
             className="btn google-social"
-            onSuccess={this.successRespGoogle}
-            Failure={this.failedRespGoogle}
+            onSuccess={this.successGoogleResp}
+            Failure={this.failedGoogleResp}
           />
           <FacebookLogin
             appId={FACEBOOK_APP_ID}
             fields="name,email,picture"
-            callback={this.successRespFb}
+            callback={this.successFbResp}
             textButton="Facebook"
             cssClass="btn facebook-social"
           />
