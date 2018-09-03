@@ -1,10 +1,7 @@
 import { handleActions } from 'redux-actions';
 import * as actions from '../actions/auth';
 
-const sessionData = JSON.parse(window.localStorage.getItem('user'));
-const defaultState = { isAuthenticated: false, name: null, role: null, err: {} };
-const initialState = sessionData || defaultState;
-
+const initialState = { isAuthenticated: false, name: null, role: null, err: {} };
 
 const userFetchingProfileState = handleActions({
   [actions.loginUserRequest]() {
