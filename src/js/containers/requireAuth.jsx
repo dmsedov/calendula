@@ -1,29 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-
+import { Redirect } from 'react-router-dom';
 
 export default (ComposedComponent) => {
   class Authentication extends React.Component {
-    componentWillMount() {
-      const { isAuthenticated } = this.props;
-      console.log('componentWillMount authentication', isAuthenticated);
-      if (!isAuthenticated) {
-        this.props.history.replace('/login');
-      }
-    }
-
-    componentWillUpdate(nextProps) {
-      const { isAuthenticated } = nextProps;
-      console.log('componentWillUpdate authentication', isAuthenticated);
-      if (!isAuthenticated) {
-        this.props.history.replace('/login');
-      }
-    }
-
     render() {
-      return (
-        <ComposedComponent />
-      );
+      return this.props.isAuthenticated ? <ComposedComponent /> : <Redirect to="/login" push />;
     }
   }
 
