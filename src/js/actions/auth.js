@@ -8,7 +8,13 @@ export const loginUserFailure = createAction('LOGIN__USER_FAILURE');
 
 export const logoutUser = createAction('LOGOUT_USER');
 
-export const loginUser = resp => async (dispatch) => {
+export const logout = history => (dispatch) => {
+  localStorage.removeItem('user');
+  dispatch(logoutUser());
+  history.push('/login');
+};
+
+export const login = (resp, history) => async (dispatch) => {
   dispatch(loginUserRequest());
 
   try {
@@ -18,7 +24,9 @@ export const loginUser = resp => async (dispatch) => {
       localStorage.setItem('user', res.token);
       const { name, admin } = decodeJwt(res.token);
       dispatch(loginUserSuccess({ name, admin }));
+      history.push('/calendar');
     }, 2000);
+
     // dispatch(loginUserSuccess(res));
   } catch (e) {
     dispatch(loginUserFailure);

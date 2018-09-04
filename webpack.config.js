@@ -78,6 +78,7 @@ const config = {
     compress: true,
     open: true,
     historyApiFallback: true,
+    openPage: 'login',
   },
 };
 

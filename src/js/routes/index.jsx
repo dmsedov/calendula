@@ -1,12 +1,16 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-// import PrivateRoutes from '../components/PrivateRoutes';
 import LoginPage from '../containers/LoginPage';
-// import Calendar from '../containers/Calendar';
-// import NotFoundPage from '../components/NotFoundPage';
-// <Route component={NotFoundPage} />
+import noRequireAuth from '../containers/noRequireAuth';
+import requireAuth from '../containers/requireAuth';
+import Calendar from '../containers/Calendar';
+import NotFoundPage from '../components/NotFoundPage';
+
+
 export default (
   <Switch>
-    <Route exact path="/login" component={LoginPage} />
+    <Route exact path="/calendar" component={requireAuth(Calendar)} />
+    <Route exact path="/login" component={noRequireAuth(LoginPage)} />
+    <Route component={NotFoundPage} />
   </Switch>
 );

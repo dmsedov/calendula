@@ -20,8 +20,10 @@ export default class LoginPage extends React.Component {
   }
 
   signUp = (type, resp) => {
+    const { history, login } = this.props;
+
     const userData = makeUserDataByApiType(type)(resp);
-    this.props.loginUser(userData);
+    login(userData, history);
   }
 
   render() {
