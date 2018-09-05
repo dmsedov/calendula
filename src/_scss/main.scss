@@ -1,11 +1,25 @@
 @import 'variables';
 @import '~bootstrap/scss/bootstrap';
-@import 'authForm';
-@import 'accessForm';
-@import 'eventEditor';
-@import 'eventBio';
-@import 'calendar';
 
 @media (max-width: 992px) {
   font-size: 12px;
 }
+
+@import 'header';
+
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 500px;
+
+  @media (min-width: 1366px) {
+    width: 1230px;
+  }
+}
+
+@import 'authForm';
+@import 'eventEditor';
+@import 'eventBio';
+@import 'calendar';
+@import 'footer';

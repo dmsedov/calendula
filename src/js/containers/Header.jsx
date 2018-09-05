@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import Component from '../components/Calendar';
+import Component from '../components/Header';
 import * as actionCreators from '../actions/auth';
 
 const mapStateToProps = (state) => {

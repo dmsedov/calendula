@@ -39,31 +39,29 @@ export default class LoginPage extends React.Component {
     const { requestStatus, user: { err } } = this.props;
 
     return (
-      <div className="center-container" style={{ height: '700px' }}>
+      <div className="auth-form">
         {requestStatus === 'requested' ? renderPreloaderLayout('Please wait') : null}
-        <div className="auth-form">
-          <h2>Вход</h2>
-          <p className="auth-tip">Войдите через представленные ниже сервисы:</p>
-          <div className="list-sm">
-            <GoogleLogin
-              clientId={GOOGLE_CLIENT_ID}
-              buttonText="Google"
-              className="btn google-social"
-              onRequest={this.handleRequestToForeignApi}
-              onSuccess={this.successGoogleResp}
-              Failure={this.failedGoogleResp}
-            />
-            <FacebookLogin
-              appId={FACEBOOK_APP_ID}
-              fields="name,email,picture"
-              textButton="Facebook"
-              cssClass="btn facebook-social"
-              callback={this.successFbResp}
-              onClick={this.handleRequestToForeignApi}
-            />
-          </div>
-          {requestStatus === 'failure' ? renderErrorReport(err) : null}
+        <h2>Entry</h2>
+        <p className="auth-tip">Login using below the represented services:</p>
+        <div className="list-sm">
+          <GoogleLogin
+            clientId={GOOGLE_CLIENT_ID}
+            buttonText="Google"
+            className="btn google-social"
+            onRequest={this.handleRequestToForeignApi}
+            onSuccess={this.successGoogleResp}
+            Failure={this.failedGoogleResp}
+          />
+          <FacebookLogin
+            appId={FACEBOOK_APP_ID}
+            fields="name,email,picture"
+            textButton="Facebook"
+            cssClass="btn facebook-social"
+            callback={this.successFbResp}
+            onClick={this.handleRequestToForeignApi}
+          />
         </div>
+        {requestStatus === 'failure' ? renderErrorReport(err) : null}
       </div>
     );
   }

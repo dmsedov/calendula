@@ -4,8 +4,8 @@ export default class Header extends React.Component {
   renderHomeMenu = () => {
     return (
       <ul className="navbar-nav">
-        <li className="nav-item active">
-          <a className="nav-link" href="#">Войти <span className="sr-only">(current)</span></a>
+        <li className="nav-item">
+          <a className="nav-link" href="#">Login</a>
         </li>
       </ul>
     );
@@ -15,13 +15,13 @@ export default class Header extends React.Component {
     return (
       <ul className="navbar-nav">
         <li className="nav-item active">
-          <a className="nav-link" href="#">Сгенерировать ссылку <span className="sr-only">(current)</span></a>
+          <a className="nav-link" href="#">Generate link</a>
         </li>
         <li className="nav-item">
-          <a className="nav-link" href="#">Настройки доступа</a>
+          <a className="nav-link" href="#">Access settings</a>
         </li>
         <li className="nav-item">
-          <a className="nav-link" href="#">Выйти</a>
+          <a href="#" onClick={this.handleLogOut}>Logout</a>
         </li>
       </ul>
     );
@@ -31,9 +31,9 @@ export default class Header extends React.Component {
     const { isAuthenticated } = this.props;
 
     return (
-      <header>
+      <header id="header">
         <div className="menu-position bg-primary">
-          <nav className="navbar navbar-expand-lg navbar-dark">
+          <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
             <a className="navbar-brand" href="#">Calendula</a>
             <button type="button" className="search btn btn-primary" data-toggle="modal" data-target="#search" />
             <div className="modal fade" id="search" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
