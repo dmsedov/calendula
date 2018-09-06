@@ -1,20 +1,44 @@
 @import 'variables';
 @import '~bootstrap/scss/bootstrap';
 
-@media (max-width: 992px) {
-  font-size: 12px;
+html,
+body {
+  height: 100%;
+  @media (max-width: 992px) {
+    font-size: 12px;
+  }
+}
+
+#app {
+  display: flex;
+  width: 100%;
+  height: inherit;
+
+  @media (min-width: 1230px) {
+    justify-content: center;
+  }
+}
+
+#wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  @media (min-width: 1230px) {
+    width: 1230px;
+  }
 }
 
 @import 'header';
 
-.content {
+main {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 500px;
+  flex: 1 0 auto;
+  // margin-top: $headerHeight;
+  // // padding-top: $headerHeight;
 
   @media (min-width: 1366px) {
-    width: 1230px;
+    justify-content: center;
   }
 }
 
