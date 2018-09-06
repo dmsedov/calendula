@@ -28,7 +28,7 @@ ReactDOM.render(
       <App />
     </BrowserRouter>
   </Provider>,
-  document.getElementById('container'),
+  document.getElementById('app'),
 );
 
 console.log('The App is launched!!! ');

@@ -10,6 +10,9 @@ const isDevelopment = env === 'development';
 const isProduction = !isDevelopment;
 
 const config = {
+  entry: {
+    './src/index.js': './src/index.jsx',
+  },
   module: {
     rules: [{
       test: /\.html$/,

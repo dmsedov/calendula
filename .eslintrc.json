@@ -23,6 +23,7 @@
     "import/extensions": [{
       "jsx": "none"
     }],
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "react/sort-comp": [1, {
       "order": [
         "lifecycle",
