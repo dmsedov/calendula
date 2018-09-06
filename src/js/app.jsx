@@ -7,12 +7,12 @@ import routes from './routes';
 
 const App = () => {
   return (
-    <div>
-      <Header />
-      <Main>
+    <div id="wrapper">
+      <Header key="header" />
+      <Main key="main">
         {routes}
       </Main>
-      <Footer />
+      <Footer key="footer" />
     </div>
   );
 };

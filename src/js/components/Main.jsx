@@ -5,9 +5,7 @@ const Main = (props) => {
 
   return (
     <main>
-      <div className="content">
-        {children}
-      </div>
+      {children}
     </main>
   );
 };

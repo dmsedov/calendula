@@ -31,7 +31,7 @@ export default class Header extends React.Component {
     const { isAuthenticated } = this.props;
 
     return (
-      <header id="header">
+      <header>
         <div className="menu-position bg-primary">
           <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
             <a className="navbar-brand" href="#">Calendula</a>
