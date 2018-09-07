@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import Component from '../components/Header';
 import * as actionCreators from '../actions/auth';
 
@@ -8,4 +9,4 @@ const mapStateToProps = (state) => {
   return { isAuthenticated };
 };
 
-export default connect(mapStateToProps, actionCreators)(Component);
+export default withRouter(connect(mapStateToProps, actionCreators)(Component));

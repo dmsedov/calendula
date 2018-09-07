@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import Component from '../components/LoginPage';
+import Component from '../components/Login';
 import { loginUserRequest, loginUserSuccess, loginUserFailure, login } from '../actions/auth';
 
 

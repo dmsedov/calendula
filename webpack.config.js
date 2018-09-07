@@ -1,4 +1,5 @@
 /* eslint-disable */
+const path = require('path');
 const { argv } = require('yargs');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
@@ -13,9 +14,9 @@ const config = {
   entry: {
     './src/index.js': './src/index.jsx',
   },
-  output: {
-    publicPath: 'static',
-  },
+  // output: {
+  //   publicPath: '/static/',
+  // },
   module: {
     rules: [{
       test: /\.html$/,
@@ -84,7 +85,6 @@ const config = {
     compress: true,
     open: true,
     historyApiFallback: true,
-    openPage: 'login',
   },
 };
 
