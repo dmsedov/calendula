@@ -13,6 +13,9 @@ const config = {
   entry: {
     './src/index.js': './src/index.jsx',
   },
+  output: {
+    publicPath: 'static',
+  },
   module: {
     rules: [{
       test: /\.html$/,
