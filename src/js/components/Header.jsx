@@ -9,56 +9,78 @@ export default class Header extends React.Component {
     logout(history);
   }
 
-  defineMenuOn = (pathName) => {
-    const { isAuthenticated } = this.props;
+  getNavMenuBy = (userStatus, isAdmin, pathName) => {
+    const menuItemsByUserStatus = {
+      autheticated: this.makeAuthNavMenu,
+      guest: this.makeNotAuthMenu,
+    };
 
-    if (pathName === '/' && !isAuthenticated) {
-      return (
-        <Link to="login" className="nav-link" href="#">Login</Link>
-      );
-    }
-    if (pathName === '/' && isAuthenticated) {
-      return (
-        <Link to="calendar" className="nav-link" href="#">Calendar</Link>
-      );
-    }
-
-    if (pathName === '/login') {
-      return (
-        <Link to="/" className="nav-link" href="#">Home</Link>
-      );
-    }
-    return <Link to="/" className="nav-link" href="#">Back to home page</Link>;
+    return menuItemsByUserStatus[userStatus](pathName, isAdmin) || this.makeNotFoundPageMenuItems();
   }
 
-  renderNoAuthNavMenu = (items) => {
-    return (
-      <ul className="navbar-nav">
-        <li className="nav-item">{items}</li>
-      </ul>
-    );
-  }
-
-  renderAuthNavMenu = () => {
-    return (
-      <ul className="navbar-nav">
-        <li className="nav-item">
-          <Link to="/" className="nav-link" href="#">Home</Link>
-        </li>
+  makeAuthNavMenu = (pathName, isAdmin) => {
+    const makeAdminItems = () => {
+      return isAdmin ? [
         <li className="nav-item active">
           <a className="nav-link" href="#">Generate link</a>
-        </li>
+        </li>,
         <li className="nav-item">
           <a className="nav-link" href="#">Access settings</a>
-        </li>
+        </li>,
+      ] : null;
+    };
+    return {
+      '/': (
+        <ul className="navbar-nav">
+          <li className="nav-item">
+            <Link to="calendar" className="nav-link" href="#">Calendar</Link>
+          </li>
+        </ul>
+      ),
+      '/calendar': (
+        <ul className="navbar-nav">
+          <li className="nav-item">
+            <Link to="/" className="nav-link" href="#">Home</Link>
+          </li>
+          {makeAdminItems()}
+          <li className="nav-item">
+            <a className="nav-link" href="#" onClick={this.handleLogOut}>Logout</a>
+          </li>
+        </ul>
+      ),
+    }[pathName];
+  }
+
+  makeNotAuthMenu = (pathName) => {
+    return {
+      '/': (
+        <ul className="navbar-nav">
+          <li className="nav-item">
+            <Link to="login" className="nav-link" href="#">Login</Link>
+          </li>
+        </ul>
+      ),
+      '/login': (
+        <ul className="navbar-nav">
+          <li className="nav-item">
+            <Link to="/" className="nav-link" href="#">Home</Link>
+          </li>
+        </ul>
+      ),
+    }[pathName];
+  }
+
+  makeNotFoundPageMenuItems = () => {
+    return (
+      <ul className="navbar-nav">
         <li className="nav-item">
-          <a className="nav-link" href="#" onClick={this.handleLogOut}>Logout</a>
+          <Link className="nav-link" to="/">Back to Home</Link>
         </li>
       </ul>
     );
   }
 
-  renderSearh = () => {
+  renderSearhEl = () => {
     return [
       <button key="searchBtn" type="button" className="search btn btn-primary" data-toggle="modal" data-target="#search" />,
       <div key="modalForSearchBtn" className="modal fade" id="search" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -77,19 +99,19 @@ export default class Header extends React.Component {
   }
 
   render() {
-    const { isAuthenticated, location: { pathname } } = this.props;
+    const { isAuthenticated, mode, isAdmin, location: { pathname } } = this.props;
 
     return (
       <header>
         <div className="menu-position bg-primary">
           <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
-            <a className="navbar-brand" href="#">Calendula</a>
-            {isAuthenticated ? this.renderSearh() : null}
+            <Link className="navbar-brand" to="/">Calendula</Link>
+            {isAuthenticated ? this.renderSearhEl() : null}
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
               <span className="navbar-toggler-icon" />
             </button>
             <div className="collapse navbar-collapse" id="navbarNav">
-              {isAuthenticated ? this.renderAuthNavMenu() : this.renderNoAuthNavMenu(this.defineMenuOn(pathname))}
+              {this.getNavMenuBy(mode, isAdmin, pathname)}
             </div>
           </nav>
         </div>

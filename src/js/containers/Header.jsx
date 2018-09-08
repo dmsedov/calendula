@@ -4,9 +4,10 @@ import Component from '../components/Header';
 import * as actionCreators from '../actions/auth';
 
 const mapStateToProps = (state) => {
-  const { isAuthenticated } = state.user;
+  const { isAuthenticated, isAdmin } = state.user;
+  const mode = isAuthenticated ? 'autheticated' : 'guest';
 
-  return { isAuthenticated };
+  return { isAuthenticated, mode, isAdmin };
 };
 
 export default withRouter(connect(mapStateToProps, actionCreators)(Component));

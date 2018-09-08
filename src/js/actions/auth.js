@@ -19,10 +19,10 @@ export const login = (resp, history) => async (dispatch) => {
   try {
     // const res = await api.loginUser(resp); // заглушка
     setTimeout(() => {
-      const res = { data: { token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiRG1pdHJ5IFNlZG92IiwiYWRtaW4iOnRydWUsImVyciI6e30sImp0aSI6IjkzMDg2MWE0LTQ0MGItNDA2Yy1iODUxLTc5ODJlYTBjNTc5OCIsImlhdCI6MTUzNjAwMjEwNiwiZXhwIjoxNTM2MDA1NzA2fQ.op7F69AbrEHdzPrKd0V7hNDinUB-H-z9DhpEnxL93Zw' } };
+      const res = { data: { token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRG1pdHJ5IFNlZG92IiwiaXNBZG1pbiI6dHJ1ZX0.d26gl15zLp3bi_jtduiEp4lFQE8rPn98C0Hx_0puuac' } };
       localStorage.setItem('user', res.data.token);
-      const { name, admin } = decodeJwt(res.data.token);
-      dispatch(loginUserSuccess({ name, admin }));
+      const { name, isAdmin } = decodeJwt(res.data.token);
+      dispatch(loginUserSuccess({ name, isAdmin }));
       history.push('/calendar');
     }, 2000);
 
