@@ -1,12 +1,30 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import _ from 'lodash';
+import cn from 'classnames';
+import Search from '../containers/Search';
 
 export default class Header extends React.Component {
+  state = {
+    isExpandNavMenu: false,
+  }
+
   handleLogOut = (e) => {
     e.preventDefault();
 
     const { logout, history } = this.props;
     logout(history);
+  }
+
+  handleClickOnLink = name => (e) => {
+    e.preventDefault();
+
+    const { openModal } = this.props;
+    openModal({ name });
+  }
+
+  handleClickOnNavBtn = () => {
+    this.setState({ isExpandNavMenu: !this.state.isExpandNavMenu });
   }
 
   getNavMenuBy = (userStatus, isAdmin, pathName) => {
@@ -21,11 +39,11 @@ export default class Header extends React.Component {
   makeAuthNavMenu = (pathName, isAdmin) => {
     const makeAdminItems = () => {
       return isAdmin ? [
-        <li className="nav-item active">
-          <a className="nav-link" href="#">Generate link</a>
+        <li key={_.uniqueId()} className="nav-item active">
+          <a className="nav-link" href="#" onClick={this.handleClickOnLink('GenLink')}>Generate link</a>
         </li>,
-        <li className="nav-item">
-          <a className="nav-link" href="#">Access settings</a>
+        <li key={_.uniqueId()} className="nav-item">
+          <a className="nav-link" href="#" onClick={this.handleClickOnLink('Access')}>Access settings</a>
         </li>,
       ] : null;
     };
@@ -81,40 +99,60 @@ export default class Header extends React.Component {
   }
 
   renderSearhEl = () => {
-    return [
-      <button key="searchBtn" type="button" className="search btn btn-primary" data-toggle="modal" data-target="#search" />,
-      <div key="modalForSearchBtn" className="modal fade" id="search" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div className="modal-dialog" role="document">
-          <div className="modal-content">
-            <div className="modal-body">
-              <form className="form-inline my-2 my-lg-0">
-                <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
-                <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>,
-    ];
+    return <button type="button" className="search btn btn-primary" data-toggle="modal" onClick={this.handleClickOnLink('Search')} />;
+  }
+
+  renderModalBy = (name) => {
+    const Modal = {
+      Search
+    }[name];
+
+    return <Modal />;
   }
 
   render() {
-    const { isAuthenticated, mode, isAdmin, location: { pathname } } = this.props;
+    const { isExpandNavMenu } = this.state;
+    const {
+      isAuthenticated,
+      mode,
+      isAdmin,
+      location: { pathname },
+      isModalShown,
+      modalName,
+    } = this.props;
 
+    const classesForBtn = cn({
+      'navbar-toggler': true,
+      collapsed: isExpandNavMenu,
+    });
+    const classesForNavBar = cn({
+      collapse: true,
+      'navbar-collapse': true,
+      show: isExpandNavMenu
+    });
     return (
       <header>
         <div className="menu-position bg-primary">
           <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
             <Link className="navbar-brand" to="/">Calendula</Link>
-            {isAuthenticated ? this.renderSearhEl() : null}
-            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            {isAuthenticated && pathname === '/calendar' ? this.renderSearhEl() : null}
+            <button
+              className={classesForBtn}
+              type="button"
+              data-toggle="collapse"
+              aria-controls="navbarNav"
+              aria-expanded={isExpandNavMenu}
+              aria-label="Toggle navigation"
+              onClick={this.handleClickOnNavBtn}
+            >
               <span className="navbar-toggler-icon" />
             </button>
-            <div className="collapse navbar-collapse" id="navbarNav">
+            <div className={classesForNavBar}>
               {this.getNavMenuBy(mode, isAdmin, pathname)}
             </div>
           </nav>
         </div>
+        {isModalShown ? this.renderModalBy(modalName) : null}
       </header>
     );
   }
