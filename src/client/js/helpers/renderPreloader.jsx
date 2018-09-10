@@ -22,7 +22,7 @@ export default (processName) => {
 
   return (
     <div style={stylesLayot}>
-      <img alt="" src="/src/images/icons/preloader.gif" />
+      <img alt="" src="/src/client/images/icons/preloader.gif" />
       <p style={styleStatus}>{processName}...</p>
     </div>);
 };
