@@ -1,0 +1,78 @@
+{
+  "name": "Calendula",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.jsx",
+  "scripts": {
+    "lint": "./node_modules/eslint/bin/eslint.js src",
+    "dev-server": "webpack-dev-server --mode development",
+    "build-dev": "webpack --mode development ./src/client/index.jsx --output-public-path='/static/' --output ./static/main.js",
+    "build": "webpack --mode production ./src/client/index.jsx --output-public-path='/static/' --output ./static/main.js",
+    "test": "jest --colors"
+  },
+  "keywords": [
+    "react",
+    "redux"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "^8.6.5",
+    "babel-core": "^6.26.3",
+    "babel-eslint": "^8.2.6",
+    "babel-jest": "^23.4.0",
+    "babel-loader": "^7.1.5",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "css-loader": "^1.0.0",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "enzyme-to-json": "^3.3.4",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb": "^17.0.0",
+    "eslint-plugin-import": "^2.13.0",
+    "eslint-plugin-jsx-a11y": "^6.1.0",
+    "eslint-plugin-react": "^7.10.0",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.2.0",
+    "jest": "^23.4.0",
+    "js-polyfills": "^0.1.42",
+    "mini-css-extract-plugin": "^0.4.1",
+    "node-sass": "^4.9.2",
+    "postcss-loader": "^2.1.5",
+    "regenerator-runtime": "^0.12.0",
+    "sass-loader": "^7.0.3",
+    "style-loader": "^0.21.0",
+    "uglifyjs-webpack-plugin": "^1.2.7",
+    "webpack": "^4.15.1",
+    "webpack-cli": "^3.0.8",
+    "webpack-dev-server": "^3.1.8",
+    "yargs": "^12.0.0"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.0.0",
+    "axios": "^0.18.0",
+    "bootstrap": "^4.1.1",
+    "classnames": "^2.2.6",
+    "jquery": "^3.3.1",
+    "jwt-decode": "^2.2.0",
+    "lodash": "^4.17.10",
+    "popper.js": "^1.14.3",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "react-facebook-login": "^4.0.1",
+    "react-google-login": "^3.2.1",
+    "react-redux": "^5.0.7",
+    "react-router-dom": "^4.3.1",
+    "redux": "^4.0.0",
+    "redux-actions": "^2.4.0",
+    "redux-form": "^7.4.2",
+    "redux-thunk": "^2.3.0"
+  },
+  "jest": {
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ]
+  }
+}

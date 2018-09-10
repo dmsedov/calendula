@@ -1,0 +1,8 @@
+#front
+node_modules
+package-lock.json
+static
+
+#back
+vendor
+main

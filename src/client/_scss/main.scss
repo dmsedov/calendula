@@ -1,0 +1,47 @@
+@import 'variables';
+@import '~bootstrap/scss/bootstrap';
+
+html,
+body {
+  height: 100%;
+  @media (max-width: 992px) {
+    font-size: 12px;
+  }
+}
+
+#app {
+  display: flex;
+  width: 100%;
+  height: inherit;
+
+  @media (min-width: 1230px) {
+    justify-content: center;
+  }
+}
+
+#wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  @media (min-width: 1230px) {
+    width: 1230px;
+  }
+}
+
+@import 'header';
+
+main {
+  display: flex;
+  flex: 1 0 auto;
+  margin-bottom: 2rem;
+
+  @media (min-width: 1366px) {
+    justify-content: center;
+  }
+}
+
+@import 'authForm';
+@import 'eventEditor';
+@import 'eventBio';
+@import 'calendar';

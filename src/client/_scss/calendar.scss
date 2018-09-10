@@ -1,0 +1,117 @@
+#calendar-content {
+  width: 100%;
+}
+
+.calendar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin: 2rem 0;
+  width: 300px;
+
+  .nav-arrow {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+
+    &.left {
+      background-image: url('/src/client/images/icons/left-arrow.png');
+    }
+
+    &.right {
+      background-image: url('/src/client/images/icons/right-arrow.png');
+    }
+  }
+
+  .date {
+    font-size: 1.2rem;
+  }
+
+  .add-event-btn {
+    position: fixed;
+    right: 2%;
+    bottom: 5%;
+    width: 50px;
+    height: 50px;
+    background: url('/src/client/images/icons/add-event-btn.png');
+    cursor: pointer;
+    z-index: 1000;
+  }
+}
+
+.days {
+  display: flex;
+  flex-wrap: wrap;
+  width: 90%;
+  @media (max-width: 991px) {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  @media (min-width: 668px) AND (max-width: 991px) {
+    width: 600px;
+  }
+  @media (min-width: 1366px) {
+    width: 1230px;
+  }
+}
+
+.day {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+  padding-left: 2rem;
+  width: 80%;
+  height: 200px;
+  font-size: 12px;
+  border: 1px solid $silver;
+  @media (max-width: 991px) {
+    height: 300px;
+    font-size: 1rem;
+  }
+  @media (min-width: 992px) {
+    width: 14%;
+  }
+
+  &.not-current {
+    background-color: $darkgrey;
+  }
+
+  .day-of-week {
+    position: absolute;
+    top: 0;
+    left: .2rem;
+
+    .name {
+      display: block;
+      font-size: 1rem;
+    }
+
+    .number {
+      display: block;
+      font-size: 1.5rem;
+    }
+
+    .number.active {
+      color: $red;
+    }
+  }
+
+  .content {
+    padding-left: 1rem;
+    height: 90%;
+    overflow-y: hidden;
+
+    .events {
+      margin: 0;
+      padding: 0;
+    }
+  }
+}
