@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import _ from 'lodash';
 import Search from './Search';
+import AccessForm from './AccessForm';
 
 export default (Component) => {
   return class BuilderMenuByPath extends React.Component {
@@ -26,7 +27,7 @@ export default (Component) => {
            <a className="nav-link" href="#" onClick={this.handleClickOnLink('GenLink')}>Generate link</a>
          </li>,
          <li key={_.uniqueId()} className="nav-item">
-           <a className="nav-link" href="#" onClick={this.handleClickOnLink('Access')}>Access settings</a>
+           <a className="nav-link" href="#" onClick={this.handleClickOnLink('AccessForm')}>Access settings</a>
          </li>,
        ] : null;
      };
@@ -87,6 +88,7 @@ export default (Component) => {
 
      const Modal = {
        Search,
+       AccessForm,
      }[name];
 
      return isModalShown ? <Modal /> : null;
