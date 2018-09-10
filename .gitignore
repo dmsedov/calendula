@@ -1,3 +1,8 @@
+#front
 node_modules
 package-lock.json
-public
+static
+
+#back
+vendor
+main
