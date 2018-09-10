@@ -16,9 +16,9 @@ const jwt = localStorage.getItem('user');
 
 if (localStorage.getItem('user')) {
   const userData = decodeJwt(jwt);
-  const { name, admin } = userData;
+  const { name, isAdmin } = userData;
 
-  store.dispatch(loginUserSuccess({ name, admin, isAuthenticated: true }));
+  store.dispatch(loginUserSuccess({ name, isAdmin, isAuthenticated: true }));
 }
 
 

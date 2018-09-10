@@ -19,7 +19,7 @@ export const login = (resp, history) => async (dispatch) => {
   try {
     // const res = await api.loginUser(resp); // заглушка
     setTimeout(() => {
-      const res = { data: { token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRG1pdHJ5IFNlZG92IiwiaXNBZG1pbiI6dHJ1ZX0.d26gl15zLp3bi_jtduiEp4lFQE8rPn98C0Hx_0puuac' } };
+      const res = { data: { token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc0FkbWluIjp0cnVlLCJuYW1lIjoiRG1pdHJ5IFNlZG92IiwiaXNBdXRoZW50aWNhdGVkIjp0cnVlfQ.EbHdv0iY5Elh74jk5S2SCnWKvHYA-ODm4bFYdILkAuQ' } };
       localStorage.setItem('user', res.data.token);
       const { name, isAdmin } = decodeJwt(res.data.token);
       dispatch(loginUserSuccess({ name, isAdmin }));

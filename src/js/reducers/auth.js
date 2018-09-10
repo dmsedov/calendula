@@ -15,7 +15,7 @@ const userFetchingProfileState = handleActions({
   },
   [actions.logoutUser]() {
     return 'none';
-  }
+  },
 }, 'none');
 
 const user = handleActions({
@@ -26,9 +26,9 @@ const user = handleActions({
     return { isAuthenticated: true, name, isAdmin, err: null };
   },
   [actions.loginUserFailure](state, { payload: { err } }) {
-    return { ...state, isAuthenticated: false, err };
+    return { ...state, isAuthenticated: false, isAdmin: null, err };
   },
-  [actions.logoutUser](state, { payload }) {
+  [actions.logoutUser]() {
     return { isAuthenticated: false, name: null, isAdmin: null, err: null };
   },
 }, initialState);
