@@ -1,9 +1,11 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import Component from '../components/Header';
-import { logout } from '../actions/auth';
-import * as headerActions from '../actions/header';
-import buildMenuByPath from './buildMenuByPath';
+import Component from '../../components/common/Header';
+import { logout } from '../../actions/auth';
+import * as headerActions from '../../actions/header';
+import addFuncMenuTo from '../../hoc/addFuncMenu';
+import Search from '../modals/Search';
+import AccessForm from '../modals/AccessForm';
 
 const mapStateToProps = (state) => {
   const { isAuthenticated, isAdmin } = state.user;
@@ -20,4 +22,4 @@ const mapStateToProps = (state) => {
 };
 
 export default withRouter(connect(mapStateToProps,
-  { ...headerActions, logout })(buildMenuByPath(Component)));
+  { ...headerActions, logout })(addFuncMenuTo(Component, { Search, AccessForm })));

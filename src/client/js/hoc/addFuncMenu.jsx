@@ -1,11 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import _ from 'lodash';
-import Search from './Search';
-import AccessForm from './AccessForm';
 
-export default (Component) => {
-  return class BuilderMenuByPath extends React.Component {
+
+export default (Component, modalItems) => {
+  return class FuncMenuBuilder extends React.Component {
+    modalComponents = modalItems;
+
     handleOpenModal = name => (e) => {
       e.preventDefault();
       const { openModal, closeNavMenu, isExpandNavMenu } = this.props;
@@ -89,11 +90,7 @@ export default (Component) => {
    renderModalItemByName = (name) => {
      const { isModalShown } = this.props;
 
-     const Modal = {
-       Search,
-       AccessForm,
-     }[name];
-
+     const Modal = this.modalComponents[name];
      return isModalShown ? <Modal /> : null;
    }
 
