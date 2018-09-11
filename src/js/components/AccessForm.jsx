@@ -84,6 +84,7 @@ export default class AccessForm extends React.Component {
             </div>
           </div>
         </div>
+        <div className="modal-backdrop fade show" onClick={this.handleCloseModal} />
       </div>
     );
   }
