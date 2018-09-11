@@ -6,17 +6,20 @@ import AccessForm from './AccessForm';
 
 export default (Component) => {
   return class BuilderMenuByPath extends React.Component {
-    handleClickOnLink = name => (e) => {
+    handleOpenModal = name => (e) => {
       e.preventDefault();
-      const { openModal } = this.props;
-
+      const { openModal, closeNavMenu, isExpandNavMenu } = this.props;
+      if (isExpandNavMenu) {
+        closeNavMenu();
+      }
       openModal({ name });
     }
 
 
    handleLogOut = (e) => {
      e.preventDefault();
-     const { logout, history } = this.props;
+     const { closeNavMenu, logout, history } = this.props;
+     closeNavMenu();
      logout(history);
    }
 
@@ -24,10 +27,10 @@ export default (Component) => {
      const makeAdminItems = () => {
        return isAdmin ? [
          <li key={_.uniqueId()} className="nav-item active">
-           <a className="nav-link" href="#" onClick={this.handleClickOnLink('GenLink')}>Generate link</a>
+           <a className="nav-link" href="#" onClick={this.handleOpenModal('GenLink')}>Generate link</a>
          </li>,
          <li key={_.uniqueId()} className="nav-item">
-           <a className="nav-link" href="#" onClick={this.handleClickOnLink('AccessForm')}>Access settings</a>
+           <a className="nav-link" href="#" onClick={this.handleOpenModal('AccessForm')}>Access settings</a>
          </li>,
        ] : null;
      };
@@ -36,14 +39,14 @@ export default (Component) => {
        '/': (
          <ul className="navbar-nav">
            <li className="nav-item">
-             <Link to="calendar" className="nav-link" href="#">Calendar</Link>
+             <Link to="calendar" className="nav-link">Calendar</Link>
            </li>
          </ul>
        ),
        '/calendar': (
          <ul className="navbar-nav">
            <li className="nav-item">
-             <Link to="/" className="nav-link" href="#">Home</Link>
+             <Link to="/" className="nav-link">Home</Link>
            </li>
            {makeAdminItems()}
            <li className="nav-item">
@@ -59,14 +62,14 @@ export default (Component) => {
        '/': (
          <ul className="navbar-nav">
            <li className="nav-item">
-             <Link to="login" className="nav-link" href="#">Login</Link>
+             <Link to="login" className="nav-link">Login</Link>
            </li>
          </ul>
        ),
        '/login': (
          <ul className="navbar-nav">
            <li className="nav-item">
-             <Link to="/" className="nav-link" href="#">Home</Link>
+             <Link to="/" className="nav-link">Home</Link>
            </li>
          </ul>
        ),
@@ -94,21 +97,21 @@ export default (Component) => {
      return isModalShown ? <Modal /> : null;
    }
 
-   renderNavMenuByPath = () => {
+   renderNavMenuByPath = (openModalHandler) => {
      const { userStatus, isAdmin, location: { pathname } } = this.props;
      const menuItemsByUserStatus = {
        authenticated: this.makeAuthNavMenu,
        guest: this.makeNotAuthMenu,
      };
      return menuItemsByUserStatus[userStatus](pathname, isAdmin)
-     || this.makeNotFoundPageMenuItems();
+     || this.makeNotFoundPageMenuItems(openModalHandler);
    }
 
    render() {
      return (
        <Component
          {...this.props}
-         handleClickOnLink={this.handleClickOnLink}
+         handleOpenModal={this.handleOpenModal}
          renderNavMenuByPath={this.renderNavMenuByPath}
          renderModalItemByName={this.renderModalItemByName}
        />

@@ -2,12 +2,12 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Component from '../components/Header';
 import { logout } from '../actions/auth';
-import { openModal, closeModal } from '../actions/header';
+import * as headerActions from '../actions/header';
 import buildMenuByPath from './buildMenuByPath';
 
 const mapStateToProps = (state) => {
   const { isAuthenticated, isAdmin } = state.user;
-  const { isModalShown, modalName } = state.header;
+  const { isExpandNavMenu, isModalShown, modalName } = state.header;
   const mode = isAuthenticated ? 'authenticated' : 'guest';
 
   return {
@@ -15,8 +15,9 @@ const mapStateToProps = (state) => {
     isAdmin,
     isModalShown,
     modalName,
+    isExpandNavMenu,
   };
 };
 
 export default withRouter(connect(mapStateToProps,
-  { openModal, closeModal, logout })(buildMenuByPath(Component)));
+  { ...headerActions, logout })(buildMenuByPath(Component)));
