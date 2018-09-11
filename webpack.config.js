@@ -12,11 +12,8 @@ const isProduction = !isDevelopment;
 
 const config = {
   entry: {
-    './src/index.js': './src/index.jsx',
+    './src/client/index.js': './src/client/index.jsx',
   },
-  // output: {
-  //   publicPath: '/static/',
-  // },
   module: {
     rules: [{
       test: /\.html$/,
@@ -59,7 +56,7 @@ const config = {
       chunkFilename: '[id].css',
     }),
     new HtmlWebpackPlugin({
-      template: './src/html/index.html',
+      template: './src/client/html/index.html',
     }),
   ],
   optimization: isProduction ? {
