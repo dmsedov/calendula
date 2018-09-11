@@ -37,7 +37,11 @@ export default class Menu extends React.Component {
         <span className="navbar-toggler-icon" />
       </button>,
       <div key={_.uniqueId()} className={classesForNavBar}>
-        {renderNavMenuByPath()}
+        <ul className="navbar-nav">
+          {React.Children.map(renderNavMenuByPath(), item => (
+            <li key={_.uniqueId()} className="nav-item">{item}</li>
+          ))}
+        </ul>
       </div>,
     ];
   }
