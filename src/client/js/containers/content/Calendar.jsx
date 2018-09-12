@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import Component from '../components/Calendar';
-import * as actionCreators from '../actions/auth';
+import Component from '../../components/content/Calendar';
+import * as actionCreators from '../../actions/auth';
 
 const mapStateToProps = (state) => {
   return state.user;

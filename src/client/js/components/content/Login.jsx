@@ -1,10 +1,10 @@
 import React from 'react';
 import GoogleLogin from 'react-google-login';
 import FacebookLogin from 'react-facebook-login';
-import { GOOGLE_CLIENT_ID, FACEBOOK_APP_ID } from '../client_config.json';
-import makeUserDataByApiType from '../helpers/makeUserDataByApiType';
-import renderPreloaderLayout from '../helpers/renderPreloader';
-import renderErrorReport from '../helpers/renderErrorReport';
+import { GOOGLE_CLIENT_ID, FACEBOOK_APP_ID } from '../../client_config.json';
+import makeUserDataByApiType from '../../helpers/makeUserDataByApiType';
+import renderPreloaderLayout from '../../helpers/renderPreloader';
+import renderErrorReport from '../../helpers/renderErrorReport';
 
 
 export default class LoginPage extends React.Component {

@@ -1,14 +1,14 @@
 import React from 'react';
-import Header from './containers/Header';
-import Main from './components/Main';
+import Header from './containers/common/Header';
+import Main from './components/common/Main';
 import routes from './routes';
 
 
 const App = () => {
   return (
     <div id="wrapper">
-      <Header key="header" />
-      <Main key="main">
+      <Header />
+      <Main>
         {routes}
       </Main>
     </div>

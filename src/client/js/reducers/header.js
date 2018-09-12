@@ -1,14 +1,25 @@
 import { handleActions } from 'redux-actions';
-import { openModal, closeModal } from '../actions/header';
+import {
+  openModal,
+  closeModal,
+  openNavMenu,
+  closeNavMenu,
+} from '../actions/header';
 
-const initialState = { isModalShown: false, modalName: null };
+const initialState = { isExpandNavMenu: false, isModalShown: false, modalName: null };
 
 const header = handleActions({
-  [openModal](state, { payload: { name } }) {
-    return { isModalShown: true, modalName: name };
+  [openNavMenu](state) {
+    return { ...state, isExpandNavMenu: true };
   },
-  [closeModal]() {
-    return { isModalShown: false, modalName: null };
+  [closeNavMenu](state) {
+    return { ...state, isExpandNavMenu: false };
+  },
+  [openModal](state, { payload: { name } }) {
+    return { isExpandNavMenu: false, isModalShown: true, modalName: name };
+  },
+  [closeModal](state) {
+    return { ...state, isModalShown: false, modalName: null };
   },
 }, initialState);
 

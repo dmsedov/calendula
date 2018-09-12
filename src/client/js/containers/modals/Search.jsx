@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import Component from '../components/Search';
-import { closeModal } from '../actions/header';
+import Component from '../../components/modals/Search';
+import { closeModal } from '../../actions/header';
 
 
 const mapStateToProps = () => {

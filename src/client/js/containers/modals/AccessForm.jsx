@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import Component from '../components/AccessForm';
-import * as actionCreators from '../actions/header';
+import Component from '../../components/modals/AccessForm';
+import * as actionCreators from '../../actions/header';
 
 const mapStateToProps = () => {
   return {};
