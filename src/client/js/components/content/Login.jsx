@@ -44,7 +44,7 @@ export default class LoginPage extends React.Component {
     return (
       <div id="auth-form-content">
         <div className="auth-form">
-          {requestStatus === 'requested' ? renderPreloaderLayout('Please wait') : null}
+          {requestStatus === 'requested' ? renderPreloaderLayout('Registration') : null}
           <h2>Entry</h2>
           <p className="auth-tip">Login using below the represented services:</p>
           <div className="list-sm">
