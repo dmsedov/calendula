@@ -1,7 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import _ from 'lodash';
+// import _ from 'lodash';
+import paths from '../paths';
 
+const { main, calendar, login } = paths;
 
 export default (Component, modalItems) => {
   return class FuncMenuBuilder extends React.Component {
@@ -31,31 +33,31 @@ export default (Component, modalItems) => {
     makeAuthNavMenu = (pathName, isAdmin) => {
       const makeItemsByRights = () => {
         return isAdmin ? [
-          <Link to="/" className="nav-link" onClick={this.handleClickOnNavItem}>Home</Link>,
+          <Link to={main} className="nav-link" onClick={this.handleClickOnNavItem}>Home</Link>,
           <a className="nav-link" href="#" onClick={this.handleOpenModal('GenLink')}>Generate link</a>,
           <a className="nav-link" href="#" onClick={this.handleOpenModal('AccessForm')}>Access settings</a>,
           <a className="nav-link" href="#" onClick={this.handleLogOut}>Logout</a>,
         ] :
           [
-            <Link to="/" className="nav-link" onClick={this.handleClickOnNavItem}>Home</Link>,
+            <Link to={main} className="nav-link" onClick={this.handleClickOnNavItem}>Home</Link>,
             <a className="nav-link" href="#" onClick={this.handleLogOut}>Logout</a>,
           ];
       }; // поправить нарушение DRY!!!
       return {
-        '/': <Link to="calendar" className="nav-link" onClick={this.handleClickOnNavItem}>Calendar</Link>,
-        '/calendar': makeItemsByRights(),
+        [main]: <Link to={calendar} className="nav-link" onClick={this.handleClickOnNavItem}>Calendar</Link>,
+        [calendar]: makeItemsByRights(),
       }[pathName];
     }
 
     makeNotAuthMenu = (pathName) => {
       return {
-        '/': <Link to="login" className="nav-link" onClick={this.handleClickOnNavItem}>Login</Link>,
-        '/login': <Link to="/" className="nav-link" onClick={this.handleClickOnNavItem}>Home</Link>,
+        [main]: <Link to={login} className="nav-link" onClick={this.handleClickOnNavItem}>Login</Link>,
+        [login]: <Link to={main} className="nav-link" onClick={this.handleClickOnNavItem}>Home</Link>,
       }[pathName];
     }
 
     makeNotFoundPageMenuItems = () => {
-      return <Link className="nav-link" to="/" onClick={this.handleClickOnNavItem}>Back to Home</Link>;
+      return <Link className="nav-link" to={main} onClick={this.handleClickOnNavItem}>Back to Home</Link>;
     }
 
     renderModalItemByName = (name) => {
