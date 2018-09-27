@@ -24,6 +24,12 @@ header {
   }
 }
 
+.navbar-brand {
+  @media (min-width: 992px) {
+    padding-top: 0;
+  }
+}
+
 .menu-layout {
   position: fixed;
   top: 0;
