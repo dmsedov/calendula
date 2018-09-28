@@ -22,12 +22,11 @@ export default class Header extends React.Component {
   }
 
   render() {
-    // const { isExpandNavMenu } = this.state;
     const {
       userStatus,
       location: { pathname },
-      modalName,
-      renderModalItemByName,
+      // modalName,
+      // renderModalItemByName,
       isExpandNavMenu,
     } = this.props;
 
@@ -41,7 +40,6 @@ export default class Header extends React.Component {
             {isExpandNavMenu ? <div className="menu-layout" onClick={this.handleClickBeyoundOfMenu} /> : null}
           </nav>
         </div>
-        {renderModalItemByName(modalName)}
       </header>
     );
   }

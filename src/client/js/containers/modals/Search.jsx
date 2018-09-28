@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Component from '../../components/modals/Search';
-import { closeModal } from '../../actions/header';
+import { closeModal } from '../../actions/uiPopup';
 
 
 const mapStateToProps = () => {

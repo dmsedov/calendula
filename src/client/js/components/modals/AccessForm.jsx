@@ -1,17 +1,9 @@
 import React from 'react';
 
 export default class AccessForm extends React.Component {
-  handleCloseModal = () => {
-    const { closeModal } = this.props;
-
-    closeModal();
-  }
-
   render() {
-    const styles = { display: 'block' };
-
     return (
-      <div className="modal fade show" id="access-control" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style={styles}>
+      <div id="access-control">
         <div className="modal-dialog modal-dialog-centered modal-lg" role="document">
           <div className="modal-content">
             <div className="modal-header">
@@ -84,7 +76,6 @@ export default class AccessForm extends React.Component {
             </div>
           </div>
         </div>
-        <div className="modal-backdrop fade show" onClick={this.handleCloseModal} />
       </div>
     );
   }

@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
 import { userFetchingProfileState, user } from './auth';
-import header from './header';
+import uiPopup from './uiPopup';
 
 export default combineReducers({
   userFetchingProfileState,
   user,
-  header,
+  uiPopup,
 });

@@ -4,11 +4,11 @@ import {
   closeModal,
   openNavMenu,
   closeNavMenu,
-} from '../actions/header';
+} from '../actions/uiPopup';
 
 const initialState = { isExpandNavMenu: false, isModalShown: false, modalName: null };
 
-const header = handleActions({
+const uiPopup = handleActions({
   [openNavMenu](state) {
     return { ...state, isExpandNavMenu: true };
   },
@@ -23,4 +23,4 @@ const header = handleActions({
   },
 }, initialState);
 
-export default header;
+export default uiPopup;
