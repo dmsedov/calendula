@@ -25,9 +25,14 @@ header {
 }
 
 .navbar-brand {
+  color: $white;
   @media (min-width: 992px) {
     padding-top: 0;
   }
+}
+
+.nav-link {
+  color: $white;
 }
 
 .menu-layout {

@@ -1,20 +1,17 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
+import { Navbar, NavbarToggler, NavbarBrand, Collapse } from 'reactstrap';
 import Menu from '../content/Menu';
 import paths from '../../paths';
 
 const { main, calendar } = paths;
 
 export default class Header extends React.Component {
-  handleClickBeyoundOfMenu = () => {
-    const { closeNavMenu } = this.props;
-    closeNavMenu();
-  }
+  handleCloseModal = () => {
+    const { closeModal } = this.props;
 
-  handleClickOnLogo = () => {
-    const { closeNavMenu } = this.props;
-    closeNavMenu();
-  } // требует рефакторинга обработчиков много повторений!!!
+    closeModal();
+  }
 
   renderSearhEl = () => {
     const { handleOpenModal } = this.props;
@@ -25,20 +22,20 @@ export default class Header extends React.Component {
     const {
       userStatus,
       location: { pathname },
-      // modalName,
-      // renderModalItemByName,
       isExpandNavMenu,
     } = this.props;
 
     return (
       <header>
-        <div className="menu-position bg-primary">
-          <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
-            <Link className="navbar-brand" to={main} onClick={this.handleClickOnLogo}>Calendula</Link>
-            {userStatus === 'authenticated' && pathname === calendar ? this.renderSearhEl() : null}
-            <Menu {...this.props} />
-            {isExpandNavMenu ? <div className="menu-layout" onClick={this.handleClickBeyoundOfMenu} /> : null}
-          </nav>
+        <div className="menu-position">
+          <Navbar expand="md">
+            <NavbarBrand href={main}>Calendula</NavbarBrand>
+            <NavbarToggler onClick={this.toggle} />
+            <Collapse isOpen={isExpandNavMenu} navbar>
+              <Menu {...this.props} />
+            </Collapse>
+          </Navbar>
+          {userStatus === 'authenticated' && pathname === calendar ? this.renderSearhEl() : null}
         </div>
       </header>
     );
