@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import cn from 'classnames';
+import { Modal } from 'reactstrap';
 import AccessForm from '../modals/AccessForm';
 import Search from '../modals/Search';
 import * as uiActions from '../../actions/uiPopup';
@@ -15,35 +15,16 @@ class ModalConductor extends React.Component {
   render() {
     const { isModalShown, modalName } = this.props;
 
-    const styles = {
-      display: isModalShown ? 'block' : 'none',
-    };
-
-    const modalClasses = cn({
-      modal: true,
-      fade: true,
-      show: isModalShown ? true : false,
-    });
-
-    // const layoutClasses = cn({
-    //   'modal-backdrop': true,
-    //   fade: true,
-    //   show: true,
-    // });
-
     const modals = {
       Search,
       AccessForm,
     };
-    const Modal = modals[modalName];
+    const ModalContent = modals[modalName];
 
     return (
-      <div className={modalClasses} tabIndex="-1" style={styles} role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        {isModalShown ? [
-          <Modal />,
-          <div className="modal-backdrop fade show" onClick={this.handleCloseModal} />,
-        ] : null}
-      </div>
+      <Modal isOpen={isModalShown} toggle={this.handleCloseModal}>
+        {isModalShown ? <ModalContent toggle={this.handleCloseModal} /> : null}
+      </Modal>
     );
   }
 }
