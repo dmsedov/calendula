@@ -53,6 +53,12 @@ header {
   }
 }
 
+.navbar-dark {
+  .navbar-toggler {
+    border: 1px solid $silver;
+  }
+}
+
 .menu-layout {
   position: fixed;
   top: 0;

@@ -22,10 +22,12 @@ export default class Header extends React.Component {
       handleOpenModal,
     } = this.props;
 
+    const navBarStyle = { backgroundColor: 'blue' };
+
     return (
       <header>
         <div className="menu-position">
-          <Navbar color="blue" light expand="md">
+          <Navbar color="blue" dark style={navBarStyle} expand="md">
             <NavbarBrand href={main}>Calendula</NavbarBrand>
             <NavbarToggler className="mr-2" onClick={this.toggleNavBar} />
             <Collapse isOpen={isNavMenuOpen} navbar>
