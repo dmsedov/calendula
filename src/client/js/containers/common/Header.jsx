@@ -3,22 +3,21 @@ import { withRouter } from 'react-router-dom';
 import Component from '../../components/common/Header';
 import { logout } from '../../actions/auth';
 import * as uiActions from '../../actions/uiPopup';
-import addFuncMenuTo from '../../hoc/addFuncMenu';
-import Search from '../modals/Search';
-import AccessForm from '../modals/AccessForm';
+import MenuSwitch from '../../hoc/MenuSwitch';
 
 const mapStateToProps = (state) => {
   const { isAuthenticated, isAdmin } = state.user;
-  const { isExpandNavMenu, isModalShown } = state.uiPopup;
+  const { isNavMenuOpen, isModalShown, isNavElClicked } = state.uiPopup;
   const mode = isAuthenticated ? 'authenticated' : 'guest';
 
   return {
     userStatus: mode,
     isAdmin,
     isModalShown,
-    isExpandNavMenu,
+    isNavMenuOpen,
+    isNavElClicked,
   };
 };
 
 export default withRouter(connect(mapStateToProps,
-  { ...uiActions, logout })(addFuncMenuTo(Component, { Search, AccessForm })));
+  { ...uiActions, logout })(MenuSwitch(Component)));

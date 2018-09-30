@@ -2,40 +2,40 @@ import React from 'react';
 // import { Link } from 'react-router-dom';
 import { Navbar, NavbarToggler, NavbarBrand, Collapse } from 'reactstrap';
 import Menu from '../content/Menu';
+import Search from '../content/Search';
 import paths from '../../paths';
 
 const { main, calendar } = paths;
 
 export default class Header extends React.Component {
-  handleCloseModal = () => {
-    const { closeModal } = this.props;
-
-    closeModal();
-  }
-
-  renderSearhEl = () => {
-    const { handleOpenModal } = this.props;
-    return <button type="button" className="search btn btn-primary" data-toggle="modal" onClick={handleOpenModal('Search')} />;
+  toggleNavBar = () => {
+    const { isNavMenuOpen, openNavMenu, closeNavMenu } = this.props;
+    // closeNavMenu({ navMenuState: isNavMenuOpen });
+    isNavMenuOpen ? closeNavMenu({ navMenuState: isNavMenuOpen }) : openNavMenu();
   }
 
   render() {
     const {
-      userStatus,
       location: { pathname },
-      isExpandNavMenu,
+      isNavMenuOpen,
+      renderNavMenu,
+      handleOpenModal,
     } = this.props;
 
     return (
       <header>
         <div className="menu-position">
-          <Navbar expand="md">
+          <Navbar color="blue" light expand="md">
             <NavbarBrand href={main}>Calendula</NavbarBrand>
-            <NavbarToggler onClick={this.toggle} />
-            <Collapse isOpen={isExpandNavMenu} navbar>
-              <Menu {...this.props} />
+            <NavbarToggler className="mr-2" onClick={this.toggleNavBar} />
+            <Collapse isOpen={isNavMenuOpen} navbar>
+              <Menu renderNavMenu={renderNavMenu} />
             </Collapse>
           </Navbar>
-          {userStatus === 'authenticated' && pathname === calendar ? this.renderSearhEl() : null}
+          <Search
+            openModal={handleOpenModal}
+            show={pathname === calendar}
+          />
         </div>
       </header>
     );

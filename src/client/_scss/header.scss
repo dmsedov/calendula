@@ -1,6 +1,8 @@
 header {
+  position: fixed;
   flex: 0 0 auto;
   width: 100%;
+  max-width: $maxContentWidth;
   height: $headerHeight;
 }
 
@@ -11,7 +13,7 @@ header {
 }
 
 .menu-position {
-  position: fixed;
+  position: relative;
   height: inherit;
   z-index: 1040;
 }
@@ -20,7 +22,7 @@ header {
   position: relative;
   background-color: inherit;
   @media (min-width: 1230px) {
-    width: 1230px;
+    width: $maxContentWidth;
   }
 }
 
@@ -29,10 +31,26 @@ header {
   @media (min-width: 992px) {
     padding-top: 0;
   }
+
+  &:hover {
+    color: $white;
+  }
+}
+
+.navbar-collapse {
+  flex-grow: 0;
 }
 
 .nav-link {
   color: $white;
+
+  &:hover {
+    color: $white;
+  }
+
+  &:active {
+    color: $white;
+  }
 }
 
 .menu-layout {

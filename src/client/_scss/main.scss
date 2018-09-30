@@ -24,7 +24,7 @@ body {
   width: 100%;
 
   @media (min-width: 1230px) {
-    width: 1230px;
+    width: $maxContentWidth;
   }
 }
 

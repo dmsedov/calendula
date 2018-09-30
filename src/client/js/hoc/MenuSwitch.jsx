@@ -1,32 +1,31 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-// import _ from 'lodash';
 import paths from '../paths';
 
 const { main, calendar, login } = paths;
 
-export default (Component, modalItems) => {
+export default (Component) => {
   return class FuncMenuBuilder extends React.Component {
-    modalComponents = modalItems;
-
     handleOpenModal = name => (e) => {
       e.preventDefault();
-      const { openModal, closeNavMenu, isExpandNavMenu } = this.props;
-      if (isExpandNavMenu) {
-        closeNavMenu();
-      }
+      const { openModal } = this.props;
       openModal({ name });
     }
 
     handleClickOnNavItem = () => {
-      const { closeNavMenu } = this.props;
-      closeNavMenu();
+      const { closeNavMenu, isNavMenuOpen } = this.props;
+      if (isNavMenuOpen) {
+        closeNavMenu({ navMenuState: !isNavMenuOpen });
+      }
+      // else {
+      //   openNavMenu();
+      // }
     }
 
     handleLogOut = (e) => {
       e.preventDefault();
-      const { closeNavMenu, logout, history } = this.props;
-      closeNavMenu();
+      const { closeNavMenu, isNavMenuOpen, logout, history } = this.props;
+      closeNavMenu({ navMenuState: isNavMenuOpen });
       logout(history);
     }
 
@@ -60,21 +59,17 @@ export default (Component, modalItems) => {
       return <Link className="nav-link" to={main} onClick={this.handleClickOnNavItem}>Back to Home</Link>;
     }
 
-    renderModalItemByName = (name) => {
-      const { isModalShown } = this.props;
-
-      const Modal = this.modalComponents[name];
-      return isModalShown ? <Modal /> : null;
-    }
-
-    renderNavMenuByPath = (openModalHandler) => {
-      const { userStatus, isAdmin, location: { pathname } } = this.props;
+    renderNavMenuByPathAndRights = (openModalHandler) => {
+      const { userStatus, isAdmin, location: { pathname }, isNavMenuOpen } = this.props;
       const menuItemsByUserStatus = {
         authenticated: this.makeAuthNavMenu,
         guest: this.makeNotAuthMenu,
       };
-      return menuItemsByUserStatus[userStatus](pathname, isAdmin)
+      const menuItems = menuItemsByUserStatus[userStatus](pathname, isAdmin)
      || this.makeNotFoundPageMenuItems(openModalHandler);
+      return (!!isNavMenuOpen && menuItems) || menuItems;
+      // (isNavMenuOpen && menuItems) ||
+      // return isNavMenuOpen ? menuItems : null ; // лаги с анимацией при нажатии на элемент меню
     }
 
     render() {
@@ -82,8 +77,7 @@ export default (Component, modalItems) => {
         <Component
           {...this.props}
           handleOpenModal={this.handleOpenModal}
-          renderNavMenuByPath={this.renderNavMenuByPath}
-          renderModalItemByName={this.renderModalItemByName}
+          renderNavMenu={this.renderNavMenuByPathAndRights}
         />
       );
     }

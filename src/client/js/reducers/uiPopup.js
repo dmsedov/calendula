@@ -6,17 +6,26 @@ import {
   closeNavMenu,
 } from '../actions/uiPopup';
 
-const initialState = { isExpandNavMenu: false, isModalShown: false, modalName: null };
+const initialState = {
+  isNavMenuOpen: false,
+  isModalShown: false,
+  modalName: null,
+};
 
 const uiPopup = handleActions({
   [openNavMenu](state) {
-    return { ...state, isExpandNavMenu: true };
+    return { ...state, isNavMenuOpen: true };
   },
-  [closeNavMenu](state) {
-    return { ...state, isExpandNavMenu: false };
+  [closeNavMenu](state, { payload: { navMenuState } }) {
+    // const isNavMenuOpen = navMenuState === state.isNavMenuOpen ? !navMenuState : navMenuState;
+    return { ...state, isNavMenuOpen: navMenuState };
   },
   [openModal](state, { payload: { name } }) {
-    return { isExpandNavMenu: false, isModalShown: true, modalName: name };
+    return {
+      isNavMenuOpen: false,
+      isModalShown: true,
+      modalName: name,
+    };
   },
   [closeModal](state) {
     return { ...state, isModalShown: false, modalName: null };

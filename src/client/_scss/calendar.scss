@@ -13,7 +13,7 @@
   display: flex;
   align-items: center;
   justify-content: space-around;
-  margin: 2rem 0;
+  margin: 5rem 0 2rem;
   width: 300px;
 
   .nav-arrow {
@@ -59,7 +59,7 @@
     width: 600px;
   }
   @media (min-width: 1366px) {
-    width: 1230px;
+    width: $maxContentWidth;
   }
 }
 
