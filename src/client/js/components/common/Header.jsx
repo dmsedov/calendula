@@ -23,17 +23,18 @@ export default class Header extends React.Component {
   }
 
   renderLayout = () => {
-    const styles = {
+    const backLayoutStyles =  {
       position: 'absolute',
       right: 0,
       left: 0,
       height: '100vh',
-      backgroundColor: 'transparent!important',
       zIndex: 500,
-    };
+    }
     return (
-      <div className="nav-backlayout" style={styles} onClick={this.handleClickOnLayout} />
-    )
+      <div style={{ position: 'relative' }}>
+        <div style={backLayoutStyles} onClick={this.handleClickOnLayout} />
+      </div>
+    );
   }
 
   render() {
@@ -43,6 +44,7 @@ export default class Header extends React.Component {
       renderNavMenu,
       handleOpenModal,
       isNavElClicked,
+      isSmallScreen,
       paths: { main, calendar },
     } = this.props;
 
@@ -52,11 +54,11 @@ export default class Header extends React.Component {
           <Navbar dark expand="md">
             <NavbarBrand href={main}>Calendula</NavbarBrand>
             <NavbarToggler className="mr-2" onClick={this.toggleNavBar} />
-            <Collapse isOpen={isNavMenuOpen} exit={!isNavElClicked} navbar>
+            <Collapse isOpen={isNavMenuOpen} exit={isSmallScreen} navbar>
               <Menu renderNavMenu={renderNavMenu} />
             </Collapse>
-            {isNavMenuOpen ? this.renderLayout() : null}
           </Navbar>
+          {isNavMenuOpen ? this.renderLayout() : null}
           <Search
             openModal={handleOpenModal}
             show={pathname === calendar}
