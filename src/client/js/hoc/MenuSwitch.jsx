@@ -1,11 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import paths from '../paths';
-
-const { main, calendar, login } = paths;
 
 export default (Component) => {
-  return class FuncMenuBuilder extends React.Component {
+  return class DynamicMenuBuilder extends React.Component {
     handleOpenModal = name => (e) => {
       e.preventDefault();
       const { openModal } = this.props;
@@ -13,23 +10,22 @@ export default (Component) => {
     }
 
     handleClickOnNavItem = () => {
-      const { closeNavMenu, isNavMenuOpen } = this.props;
+      const { closeNavMenu, isNavMenuOpen, clickOnNavItem } = this.props;
+      clickOnNavItem();
       if (isNavMenuOpen) {
-        closeNavMenu({ navMenuState: !isNavMenuOpen });
+        closeNavMenu();
       }
-      // else {
-      //   openNavMenu();
-      // }
     }
 
     handleLogOut = (e) => {
       e.preventDefault();
-      const { closeNavMenu, isNavMenuOpen, logout, history } = this.props;
-      closeNavMenu({ navMenuState: isNavMenuOpen });
+      const { closeNavMenu, logout, history } = this.props;
+      closeNavMenu();
       logout(history);
     }
 
     makeAuthNavMenu = (pathName, isAdmin) => {
+      const { paths: { main, calendar } } = this.props;
       const makeItemsByRights = () => {
         return isAdmin ? [
           <Link to={main} className="nav-link" onClick={this.handleClickOnNavItem}>Home</Link>,
@@ -49,6 +45,7 @@ export default (Component) => {
     }
 
     makeNotAuthMenu = (pathName) => {
+      const { paths: { main, login } } = this.props;
       return {
         [main]: <Link to={login} className="nav-link" onClick={this.handleClickOnNavItem}>Login</Link>,
         [login]: <Link to={main} className="nav-link" onClick={this.handleClickOnNavItem}>Home</Link>,
@@ -56,20 +53,19 @@ export default (Component) => {
     }
 
     makeNotFoundPageMenuItems = () => {
+      const { paths: { main } } = this.props;
       return <Link className="nav-link" to={main} onClick={this.handleClickOnNavItem}>Back to Home</Link>;
     }
 
-    renderNavMenuByPathAndRights = (openModalHandler) => {
-      const { userStatus, isAdmin, location: { pathname }, isNavMenuOpen } = this.props;
+    renderNavMenuByPathAndRights = () => {
+      const { userStatus, isAdmin, location: { pathname } } = this.props;
       const menuItemsByUserStatus = {
         authenticated: this.makeAuthNavMenu,
         guest: this.makeNotAuthMenu,
       };
       const menuItems = menuItemsByUserStatus[userStatus](pathname, isAdmin)
-     || this.makeNotFoundPageMenuItems(openModalHandler);
-      return (!!isNavMenuOpen && menuItems) || menuItems;
-      // (isNavMenuOpen && menuItems) ||
-      // return isNavMenuOpen ? menuItems : null ; // лаги с анимацией при нажатии на элемент меню
+     || this.makeNotFoundPageMenuItems();
+      return menuItems;
     }
 
     render() {

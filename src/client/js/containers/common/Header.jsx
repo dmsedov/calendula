@@ -4,10 +4,15 @@ import Component from '../../components/common/Header';
 import { logout } from '../../actions/auth';
 import * as uiActions from '../../actions/uiPopup';
 import MenuSwitch from '../../hoc/MenuSwitch';
+import paths from '../../paths';
 
 const mapStateToProps = (state) => {
-  const { isAuthenticated, isAdmin } = state.user;
-  const { isNavMenuOpen, isModalShown, isNavElClicked } = state.uiPopup;
+  const {
+    user: { isAuthenticated, isAdmin },
+    uiPopup: { isNavMenuOpen, isModalShown, isNavElClicked },
+    uiScreen: { isSmallScreen },
+  } = state;
+
   const mode = isAuthenticated ? 'authenticated' : 'guest';
 
   return {
@@ -16,6 +21,8 @@ const mapStateToProps = (state) => {
     isModalShown,
     isNavMenuOpen,
     isNavElClicked,
+    isSmallScreen,
+    paths,
   };
 };
 

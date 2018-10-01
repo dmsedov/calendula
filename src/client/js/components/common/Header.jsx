@@ -3,15 +3,37 @@ import React from 'react';
 import { Navbar, NavbarToggler, NavbarBrand, Collapse } from 'reactstrap';
 import Menu from '../content/Menu';
 import Search from '../content/Search';
-import paths from '../../paths';
-
-const { main, calendar } = paths;
 
 export default class Header extends React.Component {
   toggleNavBar = () => {
-    const { isNavMenuOpen, openNavMenu, closeNavMenu } = this.props;
-    // closeNavMenu({ navMenuState: isNavMenuOpen });
-    isNavMenuOpen ? closeNavMenu({ navMenuState: isNavMenuOpen }) : openNavMenu();
+    const { isNavMenuOpen, openNavMenu, closeNavMenu, isSmallScreen } = this.props;
+    if (!isSmallScreen) {
+      closeNavMenu();
+    }
+    if (isNavMenuOpen) {
+      closeNavMenu({ navMenuState: isNavMenuOpen });
+    } else {
+      openNavMenu();
+    }
+  }
+
+  handleClickOnLayout = () => {
+    const { closeNavMenu } = this.props;
+    closeNavMenu();
+  }
+
+  renderLayout = () => {
+    const styles = {
+      position: 'absolute',
+      right: 0,
+      left: 0,
+      height: '100vh',
+      backgroundColor: 'transparent!important',
+      zIndex: 500,
+    };
+    return (
+      <div className="nav-backlayout" style={styles} onClick={this.handleClickOnLayout} />
+    )
   }
 
   render() {
@@ -20,19 +42,20 @@ export default class Header extends React.Component {
       isNavMenuOpen,
       renderNavMenu,
       handleOpenModal,
+      isNavElClicked,
+      paths: { main, calendar },
     } = this.props;
-
-    const navBarStyle = { backgroundColor: 'blue' };
 
     return (
       <header>
         <div className="menu-position">
-          <Navbar color="blue" dark style={navBarStyle} expand="md">
+          <Navbar dark expand="md">
             <NavbarBrand href={main}>Calendula</NavbarBrand>
             <NavbarToggler className="mr-2" onClick={this.toggleNavBar} />
-            <Collapse isOpen={isNavMenuOpen} navbar>
+            <Collapse isOpen={isNavMenuOpen} exit={!isNavElClicked} navbar>
               <Menu renderNavMenu={renderNavMenu} />
             </Collapse>
+            {isNavMenuOpen ? this.renderLayout() : null}
           </Navbar>
           <Search
             openModal={handleOpenModal}

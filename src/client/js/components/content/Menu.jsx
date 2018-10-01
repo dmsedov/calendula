@@ -4,9 +4,7 @@ import { Nav, NavItem } from 'reactstrap';
 
 export default class Menu extends React.Component {
   render() {
-    const {
-      renderNavMenu,
-    } = this.props;
+    const { renderNavMenu } = this.props;
 
     return (
       <Nav navbar>
