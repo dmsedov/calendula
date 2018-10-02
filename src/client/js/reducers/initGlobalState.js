@@ -12,7 +12,6 @@ export const initGlobalState = ({
     isNavMenuOpen: false,
     isModalShown: false,
     modalName: null,
-    isNavElClicked: null,
   },
   uiScreen: {
     isSmallScreen: mediaQueryList.matches,

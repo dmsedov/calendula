@@ -32,14 +32,10 @@ export const uiPopup = handleActions({
       isNavMenuOpen: false,
       isModalShown: true,
       modalName: name,
-      isNavElClicked: false,
     };
   },
   [closeModal](state) {
     return { ...state, isModalShown: false, modalName: null };
-  },
-  [clickOnNavItem](state) {
-    return { ...state, isNavElClicked: true };
   },
   [clickOnMenuBackLayout](state) {
     return { ...state, isNavElClicked: false };
