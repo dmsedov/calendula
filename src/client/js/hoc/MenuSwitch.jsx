@@ -11,10 +11,10 @@ export default (Component) => {
 
     handleClickOnNavItem = () => {
       const { closeNavMenu, isNavMenuOpen, clickOnNavItem } = this.props;
-      clickOnNavItem();
       if (isNavMenuOpen) {
         closeNavMenu();
       }
+      clickOnNavItem();
     }
 
     handleLogOut = (e) => {

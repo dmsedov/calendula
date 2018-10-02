@@ -43,7 +43,6 @@ export default class Header extends React.Component {
       isNavMenuOpen,
       renderNavMenu,
       handleOpenModal,
-      isNavElClicked,
       isSmallScreen,
       paths: { main, calendar },
     } = this.props;
@@ -55,7 +54,11 @@ export default class Header extends React.Component {
             <NavbarBrand href={main}>Calendula</NavbarBrand>
             <NavbarToggler className="mr-2" onClick={this.toggleNavBar} />
             <Collapse isOpen={isNavMenuOpen} exit={isSmallScreen} navbar>
-              <Menu renderNavMenu={renderNavMenu} />
+              <Menu
+                isNavMenuOpen={isNavMenuOpen}
+                navMenu={renderNavMenu()}
+                isSmallScreen={isSmallScreen}
+              />
             </Collapse>
           </Navbar>
           {isNavMenuOpen ? this.renderLayout() : null}

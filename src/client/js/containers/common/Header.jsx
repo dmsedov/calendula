@@ -9,7 +9,7 @@ import paths from '../../paths';
 const mapStateToProps = (state) => {
   const {
     user: { isAuthenticated, isAdmin },
-    uiPopup: { isNavMenuOpen, isModalShown, isNavElClicked },
+    uiPopup: { isNavMenuOpen, isModalShown, isNavElClicked, navItem },
     uiScreen: { isSmallScreen },
   } = state;
 
@@ -20,6 +20,7 @@ const mapStateToProps = (state) => {
     isAdmin,
     isModalShown,
     isNavMenuOpen,
+    navItem,
     isNavElClicked,
     isSmallScreen,
     paths,
