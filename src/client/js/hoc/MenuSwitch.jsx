@@ -10,11 +10,10 @@ export default (Component) => {
     }
 
     handleClickOnNavItem = () => {
-      const { closeNavMenu, isNavMenuOpen, clickOnNavItem } = this.props;
+      const { closeNavMenu, isNavMenuOpen } = this.props;
       if (isNavMenuOpen) {
         closeNavMenu();
       }
-      clickOnNavItem();
     }
 
     handleLogOut = (e) => {
@@ -31,13 +30,11 @@ export default (Component) => {
           <Link to={main} className="nav-link" onClick={this.handleClickOnNavItem}>Home</Link>,
           <a className="nav-link" href="#" onClick={this.handleOpenModal('GenLink')}>Generate link</a>,
           <a className="nav-link" href="#" onClick={this.handleOpenModal('AccessForm')}>Access settings</a>,
-          <a className="nav-link" href="#" onClick={this.handleLogOut}>Logout</a>,
         ] :
           [
             <Link to={main} className="nav-link" onClick={this.handleClickOnNavItem}>Home</Link>,
-            <a className="nav-link" href="#" onClick={this.handleLogOut}>Logout</a>,
           ];
-      }; // поправить нарушение DRY!!!
+      };
       return {
         [main]: <Link to={calendar} className="nav-link" onClick={this.handleClickOnNavItem}>Calendar</Link>,
         [calendar]: makeItemsByRights(),

@@ -4,8 +4,7 @@ import {
   closeModal,
   openNavMenu,
   closeNavMenu,
-  clickOnNavItem,
-  clickOnMenuBackLayout,
+  togglePopOver,
 } from '../actions/uiPopup';
 import resizeScreen from '../actions/uiScreen';
 import { initGlobalState } from './initGlobalState';
@@ -37,7 +36,7 @@ export const uiPopup = handleActions({
   [closeModal](state) {
     return { ...state, isModalShown: false, modalName: null };
   },
-  [clickOnMenuBackLayout](state) {
-    return { ...state, isNavElClicked: false };
+  [togglePopOver](state) {
+    return { ...state, isNavMenuOpen: false, isPopoverOpen: !state.isPopoverOpen };
   },
 }, initGlobalState.uiPopup);

@@ -8,8 +8,8 @@ import paths from '../../paths';
 
 const mapStateToProps = (state) => {
   const {
-    user: { isAuthenticated, isAdmin },
-    uiPopup: { isNavMenuOpen, isModalShown, navItem },
+    user: { name, isAuthenticated, isAdmin, imgUrl },
+    uiPopup: { isNavMenuOpen, isModalShown, isPopoverOpen },
     uiScreen: { isSmallScreen },
   } = state;
 
@@ -17,10 +17,12 @@ const mapStateToProps = (state) => {
 
   return {
     userStatus: mode,
+    name,
+    imgUrl,
     isAdmin,
     isModalShown,
+    isPopoverOpen,
     isNavMenuOpen,
-    navItem,
     isSmallScreen,
     paths,
   };

@@ -6,12 +6,14 @@ export const initGlobalState = ({
     isAuthenticated: false,
     name: null,
     isAdmin: null,
+    imgUrl: null,
     err: null,
   },
   uiPopup: {
     isNavMenuOpen: false,
     isModalShown: false,
     modalName: null,
+    isPopoverOpen: false,
   },
   uiScreen: {
     isSmallScreen: mediaQueryList.matches,

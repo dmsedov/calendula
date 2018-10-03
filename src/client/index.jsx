@@ -27,9 +27,9 @@ mediaQueryList.addListener((mq) => {
 
 if (localStorage.getItem('user')) {
   const userData = decodeJwt(jwt);
-  const { name, isAdmin } = userData;
+  const { name, isAdmin, imgUrl } = userData;
 
-  store.dispatch(loginUserSuccess({ name, isAdmin, isAuthenticated: true }));
+  store.dispatch(loginUserSuccess({ name, imgUrl, isAdmin, isAuthenticated: true }));
 }
 
 

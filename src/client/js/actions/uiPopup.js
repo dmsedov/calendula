@@ -8,6 +8,4 @@ export const openNavMenu = createAction('MENU_OPEN');
 
 export const closeNavMenu = createAction('MENU_CLOSE');
 
-export const clickOnNavItem = createAction('NAV_ITEM_CLICK');
-
-export const clickOnMenuBackLayout = createAction('BACK_LAYOUT_CLICK');
+export const togglePopOver = createAction('TOGGLE_POPOVER');

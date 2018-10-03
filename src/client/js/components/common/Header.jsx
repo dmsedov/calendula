@@ -3,6 +3,7 @@ import React from 'react';
 import { Navbar, NavbarToggler, NavbarBrand, Collapse } from 'reactstrap';
 import Menu from '../content/Menu';
 import Search from '../content/Search';
+import UserBio from '../popovers/UserBio';
 
 export default class Header extends React.Component {
   toggleNavBar = () => {
@@ -39,12 +40,17 @@ export default class Header extends React.Component {
 
   render() {
     const {
+      name,
+      imgUrl,
       location: { pathname },
       isNavMenuOpen,
       renderNavMenu,
       handleOpenModal,
+      isPopoverOpen,
       isSmallScreen,
       paths: { main, calendar },
+      togglePopOver,
+      handleLogOut,
     } = this.props;
 
     return (
@@ -62,10 +68,19 @@ export default class Header extends React.Component {
             </Collapse>
           </Navbar>
           {isNavMenuOpen ? this.renderLayout() : null}
-          <Search
-            openModal={handleOpenModal}
-            show={pathname === calendar}
-          />
+          <div className="pos-container">
+            <Search
+              openModal={handleOpenModal}
+              show={pathname === calendar}
+            />
+            <UserBio
+              name={name}
+              imgUrl={imgUrl}
+              handleLogOut={handleLogOut}
+              isPopoverOpen={isPopoverOpen}
+              togglePopOver={togglePopOver}
+            />
+          </div>
         </div>
       </header>
     );
