@@ -1,9 +1,27 @@
+// geometry
 $basisWidth: 100%;
+$maxContentWidth: 1230px;
 $headerHeight: 3.5rem;
 
+//colors
 $black: #000;
-$silver: #c0c0c0;
+$c0c0c0: #c0c0c0;
 $red: #f00;
 $blue: #00f;
 $white: #fff;
-$darkgrey: #a9a9a9;
+$d8d8d8: #d8d8d8;
+$f7f7f7: #f7f7f7;
+$ebebeb: #ebebeb;
+$a9a9a9: #a9a9a9;
+$oo7bff: #007bff;
+
+// path to icons
+$baseUrl: '/src/client/images';
+$icons: '/icons';
+
+$facebookLogo: '#{$baseUrl}#{$icons}/facebook-32px.png';
+$googleLogo: '#{$baseUrl}#{$icons}/google-32px.png';
+$searchIcon: '#{$baseUrl}#{$icons}/search.png';
+$leftArrow: '#{$baseUrl}#{$icons}/left-arrow.png';
+$rightArrow: '#{$baseUrl}#{$icons}/right-arrow.png';
+$addEventBtn: '#{$baseUrl}#{$icons}/add-event-btn.png';

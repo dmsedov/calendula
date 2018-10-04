@@ -6,13 +6,14 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  z-index: -100;
 }
 
 .controls {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  margin: 2rem 0;
+  margin: 5rem 0 2rem;
   width: 300px;
 
   .nav-arrow {
@@ -21,11 +22,11 @@
     cursor: pointer;
 
     &.left {
-      background-image: url('/src/client/images/icons/left-arrow.png');
+      background-image: url($leftArrow);
     }
 
     &.right {
-      background-image: url('/src/client/images/icons/right-arrow.png');
+      background-image: url($rightArrow);
     }
   }
 
@@ -39,9 +40,9 @@
     bottom: 5%;
     width: 50px;
     height: 50px;
-    background: url('/src/client/images/icons/add-event-btn.png');
+    background: url($addEventBtn);
     cursor: pointer;
-    z-index: 1000;
+    z-index: -1;
   }
 }
 
@@ -58,7 +59,7 @@
     width: 600px;
   }
   @media (min-width: 1366px) {
-    width: 1230px;
+    width: $maxContentWidth;
   }
 }
 
@@ -71,7 +72,8 @@
   width: 80%;
   height: 200px;
   font-size: 12px;
-  border: 1px solid $silver;
+  border: 1px solid $c0c0c0;
+  z-index: -100;
   @media (max-width: 991px) {
     height: 300px;
     font-size: 1rem;
@@ -81,7 +83,7 @@
   }
 
   &.not-current {
-    background-color: $darkgrey;
+    background-color: $a9a9a9;
   }
 
   .day-of-week {

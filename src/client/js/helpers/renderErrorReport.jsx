@@ -5,5 +5,5 @@ export default (msg) => {
     fontSize: '19px',
   };
 
-  return <p style={stylesDescr}>{msg}</p>;
+  return msg ? <p style={stylesDescr}>{msg}</p> : null;
 };

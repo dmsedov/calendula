@@ -6,13 +6,15 @@ import noRequireAuth from '../hoc/noRequireAuth';
 import requireAuth from '../hoc/requireAuth';
 import Calendar from '../containers/content/Calendar';
 import NotFoundPage from '../components/content/NotFoundPage';
+import paths from '../paths';
 
+const { main, calendar, login } = paths;
 
 export default (
   <Switch>
-    <Route exact path="/" component={Home} />
-    <Route exact path="/calendar" component={requireAuth(Calendar)} />
-    <Route exact path="/login" component={noRequireAuth(Login)} />
+    <Route exact path={main} component={Home} />
+    <Route exact path={calendar} component={requireAuth(Calendar)} />
+    <Route exact path={login} component={noRequireAuth(Login)} />
     <Route component={NotFoundPage} />
   </Switch>
 );

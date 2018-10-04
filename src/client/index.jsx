@@ -9,16 +9,27 @@ import decodeJwt from 'jwt-decode';
 import createStore from './js/store';
 import rootReducer from './js/reducers';
 import { loginUserSuccess } from './js/actions/auth';
+import resizeScreen from './js/actions/uiScreen';
+import { closeNavMenu } from './js/actions/uiPopup';
 import App from './js/app';
+import { mediaQueryList } from './js/reducers/initGlobalState';
 
 const store = createStore(rootReducer);
 const jwt = localStorage.getItem('user');
 
+mediaQueryList.addListener((mq) => {
+  store.dispatch(resizeScreen({ isSmallScreen: mq.matches }));
+  const { uiPopup: { isNavMenuOpen } } = store.getState();
+  if (isNavMenuOpen) {
+    store.dispatch(closeNavMenu());
+  }
+});
+
 if (localStorage.getItem('user')) {
   const userData = decodeJwt(jwt);
-  const { name, isAdmin } = userData;
+  const { name, isAdmin, imgUrl } = userData;
 
-  store.dispatch(loginUserSuccess({ name, isAdmin, isAuthenticated: true }));
+  store.dispatch(loginUserSuccess({ name, imgUrl, isAdmin, isAuthenticated: true }));
 }
 
 

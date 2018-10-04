@@ -7,3 +7,5 @@ export const closeModal = createAction('MODAL_CLOSE');
 export const openNavMenu = createAction('MENU_OPEN');
 
 export const closeNavMenu = createAction('MENU_CLOSE');
+
+export const togglePopOver = createAction('TOGGLE_POPOVER');

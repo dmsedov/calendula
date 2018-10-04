@@ -19,10 +19,10 @@ export const login = (resp, history) => async (dispatch) => {
   try {
     // const res = await api.loginUser(resp); // заглушка
     setTimeout(() => {
-      const res = { data: { token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc0FkbWluIjp0cnVlLCJuYW1lIjoiRG1pdHJ5IFNlZG92IiwiaXNBdXRoZW50aWNhdGVkIjp0cnVlfQ.EbHdv0iY5Elh74jk5S2SCnWKvHYA-ODm4bFYdILkAuQ' } };
+      const res = { data: { token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRG1pdHJ5IFNlZG92IiwiaXNBZG1pbiI6dHJ1ZSwiaW1nVXJsIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tLy1WNkMyYXh4VWJQNC9BQUFBQUFBQUFBSS9BQUFBQUFBQUFBQS9BQU4zMURWZHp2VlJ0MmkxYk9od3NVNlg0dDM3MFdoakp3L3M5Ni1jL3Bob3RvLmpwZyJ9.CRyw1rNQV6O__UzBvsmZOJLquxGnDxutq7uJhZ1eRgM' } };
       localStorage.setItem('user', res.data.token);
-      const { name, isAdmin } = decodeJwt(res.data.token);
-      dispatch(loginUserSuccess({ name, isAdmin }));
+      const { name, isAdmin, imgUrl } = decodeJwt(res.data.token);
+      dispatch(loginUserSuccess({ name, isAdmin, imgUrl }));
       history.push('/calendar');
     }, 2000);
 

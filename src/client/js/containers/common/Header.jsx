@@ -2,24 +2,31 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Component from '../../components/common/Header';
 import { logout } from '../../actions/auth';
-import * as headerActions from '../../actions/header';
-import addFuncMenuTo from '../../hoc/addFuncMenu';
-import Search from '../modals/Search';
-import AccessForm from '../modals/AccessForm';
+import * as uiActions from '../../actions/uiPopup';
+import MenuSwitch from '../../hoc/MenuSwitch';
+import paths from '../../paths';
 
 const mapStateToProps = (state) => {
-  const { isAuthenticated, isAdmin } = state.user;
-  const { isExpandNavMenu, isModalShown, modalName } = state.header;
+  const {
+    user: { name, isAuthenticated, isAdmin, imgUrl },
+    uiPopup: { isNavMenuOpen, isModalShown, isPopoverOpen },
+    uiScreen: { isSmallScreen },
+  } = state;
+
   const mode = isAuthenticated ? 'authenticated' : 'guest';
 
   return {
     userStatus: mode,
+    name,
+    imgUrl,
     isAdmin,
     isModalShown,
-    modalName,
-    isExpandNavMenu,
+    isPopoverOpen,
+    isNavMenuOpen,
+    isSmallScreen,
+    paths,
   };
 };
 
 export default withRouter(connect(mapStateToProps,
-  { ...headerActions, logout })(addFuncMenuTo(Component, { Search, AccessForm })));
+  { ...uiActions, logout })(MenuSwitch(Component)));

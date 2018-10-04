@@ -33,7 +33,7 @@
     height: 40px;
     color: $black;
     text-align: center;
-    border: 1px solid $silver;
+    border: 1px solid $c0c0c0;
 
     &::before {
       position: absolute;
@@ -44,13 +44,13 @@
 
   .btn.facebook-social {
     &::before {
-      content: url('/src/client/images/icons/facebook-32px.png');
+      content: url($facebookLogo);
     }
   }
 
   .btn.google-social {
     &::before {
-      content: url('/src/client/images/icons/google-32px.png');
+      content: url($googleLogo);
     }
   }
 }

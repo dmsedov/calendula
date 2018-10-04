@@ -5,6 +5,7 @@ import { GOOGLE_CLIENT_ID, FACEBOOK_APP_ID } from '../../client_config.json';
 import makeUserDataByApiType from '../../helpers/makeUserDataByApiType';
 import renderPreloaderLayout from '../../helpers/renderPreloader';
 import renderErrorReport from '../../helpers/renderErrorReport';
+import { loginUserError } from '../../errors';
 
 
 export default class LoginPage extends React.Component {
@@ -20,6 +21,8 @@ export default class LoginPage extends React.Component {
   }
 
   failedGoogleResp = (resp) => {
+    const { loginUserFailure } = this.props;
+    loginUserFailure({ descr: resp.error });
     console.log(resp, 'failed resp');
   }
 
@@ -41,9 +44,9 @@ export default class LoginPage extends React.Component {
     return (
       <div id="auth-form-content">
         <div className="auth-form">
-          {requestStatus === 'requested' ? renderPreloaderLayout('Please wait') : null}
-          <h2>Entry</h2>
-          <p className="auth-tip">Login using below the represented services:</p>
+          {requestStatus === 'requested' ? renderPreloaderLayout('Аутентификация') : null}
+          <h2>Вход</h2>
+          <p className="auth-tip">Войти через соцсети:</p>
           <div className="list-sm">
             <GoogleLogin
               clientId={GOOGLE_CLIENT_ID}
@@ -51,7 +54,7 @@ export default class LoginPage extends React.Component {
               className="btn google-social"
               onRequest={this.handleRequestToForeignApi}
               onSuccess={this.successGoogleResp}
-              Failure={this.failedGoogleResp}
+              onFailure={this.failedGoogleResp}
             />
             <FacebookLogin
               appId={FACEBOOK_APP_ID}
@@ -62,7 +65,7 @@ export default class LoginPage extends React.Component {
               onClick={this.handleRequestToForeignApi}
             />
           </div>
-          {requestStatus === 'failure' ? renderErrorReport(err) : null}
+          {requestStatus === 'failure' ? renderErrorReport(loginUserError(err)) : null}
         </div>
       </div>
     );
