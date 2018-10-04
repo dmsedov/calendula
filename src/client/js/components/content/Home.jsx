@@ -5,7 +5,7 @@ const Main = (props) => {
 
   return (
     <div id="home-content">
-      <h1>Welcome to Calendula!</h1>
+      <h1>Приветствуем на Calendula!</h1>
       {children}
     </div>
   );

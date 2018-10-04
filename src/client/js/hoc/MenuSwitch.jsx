@@ -27,16 +27,16 @@ export default (Component) => {
       const { paths: { main, calendar } } = this.props;
       const makeItemsByRights = () => {
         return isAdmin ? [
-          <Link to={main} className="nav-link" onClick={this.handleClickOnNavItem}>Home</Link>,
-          <a className="nav-link" href="#" onClick={this.handleOpenModal('GenLink')}>Generate link</a>,
-          <a className="nav-link" href="#" onClick={this.handleOpenModal('AccessForm')}>Access settings</a>,
+          <Link to={main} className="nav-link" onClick={this.handleClickOnNavItem}>Главная</Link>,
+          <a className="nav-link" href="#" onClick={this.handleOpenModal('GenLink')}>Сгенерировать ссылку</a>,
+          <a className="nav-link" href="#" onClick={this.handleOpenModal('AccessForm')}>Управление доступом</a>,
         ] :
           [
-            <Link to={main} className="nav-link" onClick={this.handleClickOnNavItem}>Home</Link>,
+            <Link to={main} className="nav-link" onClick={this.handleClickOnNavItem}>Главная</Link>,
           ];
       };
       return {
-        [main]: <Link to={calendar} className="nav-link" onClick={this.handleClickOnNavItem}>Calendar</Link>,
+        [main]: <Link to={calendar} className="nav-link" onClick={this.handleClickOnNavItem}>Календарь</Link>,
         [calendar]: makeItemsByRights(),
       }[pathName];
     }
@@ -44,14 +44,14 @@ export default (Component) => {
     makeNotAuthMenu = (pathName) => {
       const { paths: { main, login } } = this.props;
       return {
-        [main]: <Link to={login} className="nav-link" onClick={this.handleClickOnNavItem}>Login</Link>,
-        [login]: <Link to={main} className="nav-link" onClick={this.handleClickOnNavItem}>Home</Link>,
+        [main]: <Link to={login} className="nav-link" onClick={this.handleClickOnNavItem}>Вход</Link>,
+        [login]: <Link to={main} className="nav-link" onClick={this.handleClickOnNavItem}>Главная</Link>,
       }[pathName];
     }
 
     makeNotFoundPageMenuItems = () => {
       const { paths: { main } } = this.props;
-      return <Link className="nav-link" to={main} onClick={this.handleClickOnNavItem}>Back to Home</Link>;
+      return <Link className="nav-link" to={main} onClick={this.handleClickOnNavItem}>Назад на главную страницу</Link>;
     }
 
     renderNavMenuByPathAndRights = () => {
@@ -69,6 +69,7 @@ export default (Component) => {
       return (
         <Component
           {...this.props}
+          handleLogOut={this.handleLogOut}
           handleOpenModal={this.handleOpenModal}
           renderNavMenu={this.renderNavMenuByPathAndRights}
         />

@@ -1,0 +1,26 @@
+.popover {
+  font-size: 14px;
+  @media (max-width: 992px) {
+    font-size: 14px;
+  }
+}
+
+.popover-header {
+  font-size: 1.2em;
+  text-align: center;
+}
+
+.popover-body {
+  padding: 0;
+}
+
+.popover-footer {
+  background-color: $f7f7f7;
+  border-top: 1px solid $ebebeb;
+}
+
+.bs-popover-bottom {
+  @media (min-width: 992px) {
+    margin-top: .75rem;
+  }
+}

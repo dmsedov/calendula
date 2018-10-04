@@ -7,14 +7,14 @@ export default class AccessForm extends React.Component {
 
     return (
       <div id="access-control">
-        <ModalHeader toggle={this.toggle}>Control of user access</ModalHeader>
+        <ModalHeader toggle={this.toggle}>Управление доступом</ModalHeader>
         <ModalBody>
           <form className="access-form d-flex flex-column" id="access-user-form">
             <div className="user-rights-fields d-flex justify-content-around align-items-center">
-              <div className="user-name"><span>Nickname</span></div>
-              <div className="user-rights">Read</div>
-              <div className="user-rights">Write and Read</div>
-              <div className="act-delete-user">Delete user</div>
+              <div className="user-name"><span>Логин</span></div>
+              <div className="user-rights">Чтение</div>
+              <div className="user-rights">Чтение и запись</div>
+              <div className="act-delete-user">Удалить</div>
             </div>
             <div className="form-check form-check-inline user-rights-fields d-flex">
               <div className="user-name">
@@ -33,7 +33,7 @@ export default class AccessForm extends React.Component {
                 <input id="1-rw" type="radio" name="Петя" value="rw" readOnly />
               </div>
               <div className="act-delete-user">
-                <button type="button" className="btn btn-primary btn-sm">Delete</button>
+                <input type="radio" name="Женя" value="rw" readOnly />
               </div>
             </div>
             <div className="form-check form-check-inline user-rights-fields d-flex">
@@ -47,7 +47,7 @@ export default class AccessForm extends React.Component {
                 <input type="radio" name="Женя" value="rw" readOnly />
               </div>
               <div className="act-delete-user">
-                <button type="button" className="btn btn-primary btn-sm">Delete</button>
+                <input type="radio" name="Женя" value="rw" readOnly />
               </div>
             </div>
             <div className="form-check form-check-inline user-rights-fields d-flex">
@@ -61,12 +61,12 @@ export default class AccessForm extends React.Component {
                 <input type="radio" name="Дима" value="rw" readOnly />
               </div>
               <div className="act-delete-user">
-                <button type="button" className="btn btn-primary btn-sm">Delete</button>
+                <input type="radio" name="Женя" value="rw" readOnly />
               </div>
             </div>
             <div className="form-controls">
-              <button type="submit" className="btn btn-primary btn-sm">Save</button>
-              <button type="button" className="btn btn-secondary btn-sm" data-dismiss="modal" onClick={toggle}>Close</button>
+              <button type="submit" className="btn btn-primary btn-sm">Сохранить</button>
+              <button type="button" className="btn btn-secondary btn-sm" data-dismiss="modal" onClick={toggle}>Закрыть</button>
             </div>
           </form>
         </ModalBody>

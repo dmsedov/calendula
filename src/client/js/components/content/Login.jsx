@@ -44,9 +44,9 @@ export default class LoginPage extends React.Component {
     return (
       <div id="auth-form-content">
         <div className="auth-form">
-          {requestStatus === 'requested' ? renderPreloaderLayout('Registration') : null}
-          <h2>Entry</h2>
-          <p className="auth-tip">Login using below the represented services:</p>
+          {requestStatus === 'requested' ? renderPreloaderLayout('Аутентификация') : null}
+          <h2>Вход</h2>
+          <p className="auth-tip">Войти через соцсети:</p>
           <div className="list-sm">
             <GoogleLogin
               clientId={GOOGLE_CLIENT_ID}

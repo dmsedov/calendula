@@ -7,6 +7,7 @@ import {
   togglePopOver,
 } from '../actions/uiPopup';
 import resizeScreen from '../actions/uiScreen';
+import { logoutUser } from '../actions/auth';
 import { initGlobalState } from './initGlobalState';
 
 
@@ -28,6 +29,7 @@ export const uiPopup = handleActions({
   },
   [openModal](state, { payload: { name } }) {
     return {
+      ...state,
       isNavMenuOpen: false,
       isModalShown: true,
       modalName: name,
@@ -38,5 +40,8 @@ export const uiPopup = handleActions({
   },
   [togglePopOver](state) {
     return { ...state, isNavMenuOpen: false, isPopoverOpen: !state.isPopoverOpen };
+  },
+  [logoutUser](state) {
+    return { ...state, isPopoverOpen: false };
   },
 }, initGlobalState.uiPopup);

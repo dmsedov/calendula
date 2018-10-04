@@ -22,7 +22,6 @@ const user = handleActions({
     return { ...state, err: null };
   },
   [actions.loginUserSuccess](state, { payload: { name, isAdmin, imgUrl } }) {
-    console.log(imgUrl, 'img');
     return { isAuthenticated: true, name, isAdmin, imgUrl, err: null };
   },
   [actions.loginUserFailure](state, { payload: { descr } }) {

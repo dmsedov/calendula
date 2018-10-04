@@ -1,12 +1,11 @@
 @import 'variables';
 @import '~bootstrap/scss/bootstrap';
+@import 'popover';
+@import 'buttons';
 
 html,
 body {
   min-height: 100vh;
-  @media (max-width: 992px) {
-    font-size: 12px;
-  }
 }
 
 #app {

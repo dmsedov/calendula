@@ -40,6 +40,7 @@ export default class Header extends React.Component {
 
   render() {
     const {
+      userStatus,
       name,
       imgUrl,
       location: { pathname },
@@ -74,6 +75,7 @@ export default class Header extends React.Component {
               show={pathname === calendar}
             />
             <UserBio
+              userStatus={userStatus}
               name={name}
               imgUrl={imgUrl}
               handleLogOut={handleLogOut}
