@@ -4,9 +4,6 @@ header {
   width: 100%;
   max-width: $maxContentWidth;
   height: $headerHeight;
-  @media (max-width: 768px) {
-    font-size: 12px;
-  }
 }
 
 #header-back {

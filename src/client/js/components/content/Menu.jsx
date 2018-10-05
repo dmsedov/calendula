@@ -4,11 +4,11 @@ import { Nav, NavItem } from 'reactstrap';
 
 export default class Menu extends React.PureComponent {
   componentDidUpdate(prevProps) {
-    console.log('updating');
+    // console.log('updating');
     const { navMenu, isNavMenuOpen, isSmallScreen } = prevProps;
     if (!isSmallScreen || isNavMenuOpen) {
       this.snapshotNavMenu = null;
-      console.log('condition update');
+      // console.log('condition update');
     } else if (!isNavMenuOpen) {
       this.snapshotNavMenu = navMenu;
     }

@@ -51,7 +51,7 @@ export default class LoginPage extends React.Component {
             <GoogleLogin
               clientId={GOOGLE_CLIENT_ID}
               buttonText="Google"
-              className="btn google-social"
+              className="btn-login google-social"
               onRequest={this.handleRequestToForeignApi}
               onSuccess={this.successGoogleResp}
               onFailure={this.failedGoogleResp}
@@ -60,7 +60,7 @@ export default class LoginPage extends React.Component {
               appId={FACEBOOK_APP_ID}
               fields="name,email,picture"
               textButton="Facebook"
-              cssClass="btn facebook-social"
+              cssClass="btn-login facebook-social"
               callback={this.successFbResp}
               onClick={this.handleRequestToForeignApi}
             />
