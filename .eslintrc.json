@@ -43,6 +43,7 @@
     "react/jsx-one-expression-per-line": "off",
     "react/prop-types": "off",
     "jsx-a11y/anchor-is-valid": "off",
-    "jsx-a11y/label-has-for": "off"
+    "jsx-a11y/label-has-for": "off",
+    "no-unused-expressions": ["error", { "allowShortCircuit": true }]
   }
 }

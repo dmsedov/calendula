@@ -12,7 +12,6 @@ export default class Header extends React.Component {
   handleClickOutside = ({ target }) => {
     if ((!this.menuWrapper || !this.menuWrapper.contains(target))) {
       const { closeNavMenu, isNavMenuOpen } = this.props;
-      console.log('toggling');
       isNavMenuOpen && closeNavMenu();
     }
   }
@@ -27,11 +26,6 @@ export default class Header extends React.Component {
     } else {
       openNavMenu();
     }
-  }
-
-  handleClickOnLayout = () => {
-    const { closeNavMenu } = this.props;
-    closeNavMenu();
   }
 
   setRefToNode = (node) => {

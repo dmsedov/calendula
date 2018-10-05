@@ -56,6 +56,7 @@ export default (Component) => {
 
     renderNavMenuByPathAndRights = () => {
       const { userStatus, isAdmin, location: { pathname } } = this.props;
+
       const menuItemsByUserStatus = {
         authenticated: this.makeAuthNavMenu,
         guest: this.makeNotAuthMenu,
