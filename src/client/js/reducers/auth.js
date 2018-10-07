@@ -10,7 +10,7 @@ const userFetchingProfileState = handleActions({
     return 'successed';
   },
   [actions.loginUserFailure]() {
-    return 'failure';
+    return 'failured';
   },
   [actions.logoutUser]() {
     return 'none';
