@@ -1,6 +1,4 @@
-export const mediaQueryList = window.matchMedia('(max-width: 767.98px)');
-
-export const initGlobalState = ({
+export default {
   userFetchingProfileState: 'none',
   user: {
     isAuthenticated: false,
@@ -16,6 +14,6 @@ export const initGlobalState = ({
     isPopoverOpen: false,
   },
   uiScreen: {
-    isSmallScreen: mediaQueryList.matches,
+    isSmallScreen: null,
   },
-});
+};
