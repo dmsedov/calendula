@@ -1,16 +1,19 @@
 import axios from 'axios';
-import { login } from './v1/paths';
+import urls from './v1/config';
+
+const baseUrl = 'http://calendula.me:8888';
+const { login } = urls;
 
 export const loginUser = (userData) => {
-  const { id, name, email, img } = userData;
+  const { id, name, img } = userData;
 
   return axios({
+    baseURL: baseUrl,
     method: 'post',
     url: login,
     data: {
       id,
       name,
-      email,
       img,
     },
   });
