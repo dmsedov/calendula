@@ -1,3 +1,5 @@
+const basePath = '/api/v1';
+
 export default {
-  login: '/api/v1/login',
+  login: `${basePath}/login`,
 };

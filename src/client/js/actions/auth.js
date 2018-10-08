@@ -3,6 +3,7 @@ import decodeJwt from 'jwt-decode';
 import * as api from '../api';
 import { loginUserError } from '../errors';
 import paths from '../paths';
+import responseHandler from '../helpers/responseHandler';
 
 
 export const loginUserRequest = createAction('LOGIN_USER_REQUEST');
@@ -20,11 +21,10 @@ export const logout = history => (dispatch) => {
 export const login = (resp, history) => async (dispatch) => {
   dispatch(loginUserRequest());
   try {
-    console.log('before');
     const res = await api.loginUser(resp);
-    localStorage.setItem('user', res.data.token);
-    console.log(res);
-    const { name, isAdmin, imgUrl } = decodeJwt(res.data.token);
+    const data = responseHandler(res);
+    localStorage.setItem('user', data.token);
+    const { name, isAdmin, imgUrl } = decodeJwt(data.token);
     dispatch(loginUserSuccess({ name, isAdmin, imgUrl }));
     history.push(paths.calendar);
     // setTimeout(() => {
@@ -37,8 +37,6 @@ export const login = (resp, history) => async (dispatch) => {
 
     // dispatch(loginUserSuccess(res));
   } catch (e) {
-    console.log(e);
-    const msg = loginUserError('fatal');
-    dispatch(loginUserFailure({ err: msg }));
+    dispatch(loginUserFailure({ err: e.message }));
   }
 };
