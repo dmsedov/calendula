@@ -12,10 +12,13 @@ import { loginUserSuccess } from './js/actions/auth';
 import resizeScreen from './js/actions/uiScreen';
 import { closeNavMenu } from './js/actions/uiPopup';
 import App from './js/app';
-import { mediaQueryList } from './js/reducers/initGlobalState';
+
 
 const store = createStore(rootReducer);
-const jwt = localStorage.getItem('user');
+
+const mediaQueryList = window.matchMedia('(max-width: 767.98px)');
+
+store.dispatch(resizeScreen({ isSmallScreen: mediaQueryList.matches }));
 
 mediaQueryList.addListener((mq) => {
   store.dispatch(resizeScreen({ isSmallScreen: mq.matches }));
@@ -24,6 +27,8 @@ mediaQueryList.addListener((mq) => {
     store.dispatch(closeNavMenu());
   }
 });
+
+const jwt = localStorage.getItem('user');
 
 if (localStorage.getItem('user')) {
   const userData = decodeJwt(jwt);

@@ -1,6 +1,6 @@
 import { handleActions } from 'redux-actions';
 import * as actions from '../actions/auth';
-import { initGlobalState } from './initGlobalState';
+import initGlobalState from './initGlobalState';
 
 const userFetchingProfileState = handleActions({
   [actions.loginUserRequest]() {
@@ -10,7 +10,7 @@ const userFetchingProfileState = handleActions({
     return 'successed';
   },
   [actions.loginUserFailure]() {
-    return 'failure';
+    return 'failured';
   },
   [actions.logoutUser]() {
     return 'none';

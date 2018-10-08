@@ -8,7 +8,7 @@ import {
 } from '../actions/uiPopup';
 import resizeScreen from '../actions/uiScreen';
 import { logoutUser } from '../actions/auth';
-import { initGlobalState } from './initGlobalState';
+import initGlobalState from './initGlobalState';
 
 
 export const uiScreen = handleActions({
