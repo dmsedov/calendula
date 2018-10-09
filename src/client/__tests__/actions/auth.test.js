@@ -38,9 +38,11 @@ describe('authentication actions', () => {
     });
 
     it('LOGIN_USER_FAILURE', () => {
-      expect(loginUserFailure())
+      const msg = 'something bad happened';
+      expect(loginUserFailure(msg))
         .toEqual({
           type: 'LOGIN_USER_FAILURE',
+          payload: msg,
         });
     });
 
@@ -79,12 +81,12 @@ describe('authentication actions', () => {
 
     it('login user with error', async () => {
       const store = mockStore({});
-      const msg = 'fatal error';
+      const msg = 'something bad happened';
       nock(host).post(urls.login).replyWithError(msg);
 
       const expectedActions = [
         loginUserRequest(),
-        loginUserFailure(),
+        loginUserFailure(msg),
       ];
       await store.dispatch(login({ id, ...userData }, mockHistory));
       expect(store.getActions()).toEqual(expectedActions);
