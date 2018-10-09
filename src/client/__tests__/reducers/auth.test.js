@@ -12,7 +12,6 @@ describe('Fetching user data reducers', () => {
     name: null,
     isAdmin: null,
     imgUrl: null,
-    err: null,
   };
 
   const userData = {
@@ -33,7 +32,7 @@ describe('Fetching user data reducers', () => {
     expect(userFetchingProfileState('none', loginUserRequest())).toEqual('requested');
 
     expect(user(initialState, loginUserRequest()))
-      .toEqual({ ...initialState });
+      .toEqual(initialState);
   });
 
   it('LOGIN_USER_SUCCESS', () => {
@@ -49,27 +48,15 @@ describe('Fetching user data reducers', () => {
     expect(userFetchingProfileState('requested', loginUserFailure())).toEqual('failured');
 
     const initialState = basisState;
-    const errMsg = 'fatal';
 
-    expect(user(initialState, loginUserFailure({ descr: errMsg })))
-      .toEqual({ ...initialState, err: errMsg });
+    expect(user(initialState, loginUserFailure()))
+      .toEqual(initialState);
   });
 
   it('LOGIN_USER_SUCCESS after failed attempt', () => {
     expect(userFetchingProfileState('failured', loginUserRequest())).toEqual('requested');
 
-    const initialState = {
-      ...basisState,
-      err: 'fatal',
-    };
-
-    expect(user(initialState, loginUserRequest()))
-      .toEqual({ ...initialState, err: null });
-
     expect(userFetchingProfileState('requested', loginUserSuccess())).toEqual('successed');
-
-    expect(user({ ...initialState, err: null }, loginUserSuccess(userData)))
-      .toEqual({ ...initialState, err: null, ...userData, isAuthenticated: true });
   });
 
   it('LOG_OUT_USER', () => {
@@ -78,7 +65,6 @@ describe('Fetching user data reducers', () => {
       name: 'test_user',
       isAdmin: true,
       imgUrl: 'some_img_url',
-      err: null,
     };
 
     const finalState = basisState;

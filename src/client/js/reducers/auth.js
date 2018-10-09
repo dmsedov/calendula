@@ -19,16 +19,16 @@ const userFetchingProfileState = handleActions({
 
 const user = handleActions({
   [actions.loginUserRequest](state) {
-    return { ...state, err: null };
+    return state;
   },
   [actions.loginUserSuccess](state, { payload: { name, isAdmin, imgUrl } }) {
-    return { isAuthenticated: true, name, isAdmin, imgUrl, err: null };
+    return { isAuthenticated: true, name, isAdmin, imgUrl };
   },
-  [actions.loginUserFailure](state, { payload: { descr } }) {
-    return { ...state, isAuthenticated: false, isAdmin: null, err: descr };
+  [actions.loginUserFailure](state) {
+    return { ...state, isAuthenticated: false, isAdmin: null };
   },
   [actions.logoutUser]() {
-    return { isAuthenticated: false, name: null, isAdmin: null, imgUrl: null, err: null };
+    return { isAuthenticated: false, name: null, isAdmin: null, imgUrl: null };
   },
 }, initGlobalState.user);
 

@@ -5,7 +5,6 @@ export default {
     name: null,
     isAdmin: null,
     imgUrl: null,
-    err: null,
   },
   uiPopup: {
     isNavMenuOpen: false,
