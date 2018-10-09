@@ -21,6 +21,12 @@ describe('Fetching user data reducers', () => {
     imgUrl: 'some_img_url',
   };
 
+  it('should return the initial state', () => {
+    const initialState = basisState;
+    expect(user(undefined, {})).toEqual(initialState);
+    expect(userFetchingProfileState(undefined, {})).toEqual('none');
+  });
+
   it('LOGIN_USER_REQUEST', () => {
     const initialState = basisState;
 
