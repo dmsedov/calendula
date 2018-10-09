@@ -1,41 +1,26 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"net/http"
 
+	"calendula/src/api/controller"
 	"github.com/gorilla/mux"
 )
 
-// func init() {
-// 	pathPtr := flag.String("config", defaultConfigPath, "Path for configuration file")
-// 	flag.Parse()
-
-// 	if *pathPtr == "" {
-// 		panic("No config path")
-// 	}
-
-// 	bytes, err := ioutil.ReadFile(*pathPtr)
-// 	if err != nil {
-// 		panic("Read config file error")
-// 	}
-
-// 	config = new(api.Config)
-
-// 	if err = json.Unmarshal(bytes, config); err != nil {
-// 		panic("unmarshal config file error: " + err.Error())
-// 	}
-// }
+const (
+	server = ":8888"
+)
 
 func main() {
 	r := mux.NewRouter()
+	//app := iris.New()
 
 	// Handle API routes
-	api := r.PathPrefix("/api/").Subrouter()
-	api.HandleFunc("/hello", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintln(w, "hello from api")
-	})
+	ctrl := controller.CreateApiController()
+	api := r.PathPrefix("/api/v1").Subrouter()
+	api.HandleFunc("/hello", ctrl.Hello)
+	api.HandleFunc("/login", ctrl.Login).Methods("POST")
 
 	// Serve static files
 	// r.PathPrefix("/public/").Handler(http.StripPrefix("/public/", http.FileServer(http.Dir("public"))))
@@ -47,26 +32,9 @@ func main() {
 		http.ServeFile(w, r, "static/index.html")
 	})
 
-	fmt.Println("http://localhost:8888")
-	log.Fatal(http.ListenAndServe(":8888", r))
+	log.Println("Server start on", server)
+
+	if err := http.ListenAndServe(server, api); err != nil {
+		panic("start server error: " + err.Error())
+	}
 }
-
-// func IndexHandler(w http.ResponseWriter, r *http.Request) {
-// 	http.ServeFile(w, r, "/static/index.html")
-// }
-
-// func main() {
-// 	router := mux.NewRouter()
-
-// 	// Configuring static content to be served.
-// 	router.Handle("/static/", http.FileServer(http.Dir("static/")))
-
-// 	// Routing to the Client-Side Application.
-// 	router.HandleFunc("/", IndexHandler).Methods("GET")
-
-// 	log.Printf(fmt.Sprintf("Starting HTTP Server on Host %s:%d.", "127.0.0.1", 8888))
-
-// 	if err := http.ListenAndServe(fmt.Sprintf("%s:%d", "127.0.0.1", 8888), router); err != nil {
-// 		log.Fatal(err)
-// 	}
-// }
