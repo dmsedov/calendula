@@ -3,12 +3,13 @@ import decodeJwt from 'jwt-decode';
 import * as api from '../api';
 import { loginUserError } from '../errors';
 import paths from '../paths';
+import resetErrorMsg from './error';
 import responseHandler from '../helpers/responseHandler';
 
 
 export const loginUserRequest = createAction('LOGIN_USER_REQUEST');
-export const loginUserSuccess = createAction('LOGIN__USER_SUCCESS');
-export const loginUserFailure = createAction('LOGIN__USER_FAILURE');
+export const loginUserSuccess = createAction('LOGIN_USER_SUCCESS');
+export const loginUserFailure = createAction('LOGIN_USER_FAILURE');
 
 export const logoutUser = createAction('LOGOUT_USER');
 
@@ -37,6 +38,6 @@ export const login = (resp, history) => async (dispatch) => {
 
     // dispatch(loginUserSuccess(res));
   } catch (e) {
-    dispatch(loginUserFailure({ err: e.message }));
+    dispatch(loginUserFailure());
   }
 };

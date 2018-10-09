@@ -32,17 +32,15 @@ describe('authentication actions', () => {
     it('LOGIN_USER_SUCCESS', () => {
       expect(loginUserSuccess({ ...userData, isAdmin: true }))
         .toEqual({
-          type: 'LOGIN__USER_SUCCESS',
+          type: 'LOGIN_USER_SUCCESS',
           payload: { ...userData, isAdmin: true },
         });
     });
 
     it('LOGIN_USER_FAILURE', () => {
-      const errorData = { err: 'fatal' };
-      expect(loginUserFailure(errorData))
+      expect(loginUserFailure())
         .toEqual({
-          type: 'LOGIN__USER_FAILURE',
-          payload: errorData,
+          type: 'LOGIN_USER_FAILURE',
         });
     });
 
@@ -86,7 +84,7 @@ describe('authentication actions', () => {
 
       const expectedActions = [
         loginUserRequest(),
-        loginUserFailure({ err: msg }),
+        loginUserFailure(),
       ];
       await store.dispatch(login({ id, ...userData }, mockHistory));
       expect(store.getActions()).toEqual(expectedActions);
