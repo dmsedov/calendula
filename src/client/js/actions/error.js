@@ -1,5 +1,5 @@
 import { createAction } from 'redux-actions';
 
-const errorReport = createAction('RESET_ERROR_MESSAGE');
+const resetErrorMsg = createAction('RESET_ERROR_MESSAGE');
 
-export default errorReport;
+export default resetErrorMsg;
