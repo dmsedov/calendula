@@ -38,6 +38,6 @@ export const login = (resp, history) => async (dispatch) => {
 
     // dispatch(loginUserSuccess(res));
   } catch (e) {
-    dispatch(loginUserFailure());
+    dispatch(loginUserFailure(e.errMsg || 'something bad happened'));
   }
 };
