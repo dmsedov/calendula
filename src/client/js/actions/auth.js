@@ -4,7 +4,7 @@ import * as api from '../api';
 import { loginUserError } from '../errors';
 import paths from '../paths';
 import resetErrorMsg from './error';
-import responseHandler from '../helpers/responseHandler';
+import errorHandler from '../helpers/errorHandler';
 
 
 export const loginUserRequest = createAction('LOGIN_USER_REQUEST');
@@ -22,8 +22,7 @@ export const logout = history => (dispatch) => {
 export const login = (resp, history) => async (dispatch) => {
   dispatch(loginUserRequest());
   try {
-    const res = await api.loginUser(resp);
-    const data = responseHandler(res);
+    const { data: { data } } = await api.loginUser(resp);
     localStorage.setItem('user', data.token);
     const { name, isAdmin, imgUrl } = decodeJwt(data.token);
     dispatch(loginUserSuccess({ name, isAdmin, imgUrl }));
@@ -38,6 +37,6 @@ export const login = (resp, history) => async (dispatch) => {
 
     // dispatch(loginUserSuccess(res));
   } catch (e) {
-    dispatch(loginUserFailure(e.errMsg || 'something bad happened'));
+    dispatch(loginUserFailure(errorHandler(e)));
   }
 };
