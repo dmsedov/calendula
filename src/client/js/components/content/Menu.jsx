@@ -1,6 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
-import { Nav, NavItem } from 'reactstrap';
+import { Nav } from 'reactstrap';
 
 export default class Menu extends React.PureComponent {
   componentDidUpdate(prevProps) {
