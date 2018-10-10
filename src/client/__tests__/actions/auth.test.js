@@ -54,7 +54,7 @@ describe('authentication actions', () => {
   describe('async action', () => {
     axios.defaults.adapter = httpAdapter;
     nock.disableNetConnect();
-    const host = 'http://calendula.me:8888';
+    const host = 'http://localhost';
     const mockHistory = [];
     const id = '123456789';
     const secret = 'xxx';
