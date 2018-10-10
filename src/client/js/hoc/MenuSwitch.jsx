@@ -28,7 +28,7 @@ export default (Component) => {
       const makeItemsByRights = () => {
         return isAdmin ? [
           <Link to={main} className="nav-link" onClick={this.handleClickOnNavItem}>Главная</Link>,
-          <a className="nav-link" href="#" onClick={this.handleOpenModal('AccessLink')}>Сгенерировать ссылку</a>,
+          <a className="nav-link" href="#" onClick={this.handleOpenModal('AccessLink')}>Cсылка для доступа</a>,
           <a className="nav-link" href="#" onClick={this.handleOpenModal('AccessForm')}>Управление доступом</a>,
         ] :
           [
