@@ -17,7 +17,7 @@ export default class Menu extends React.PureComponent {
     return (
       <Nav navbar>
         {React.Children.map(this.snapshotNavMenu || navMenu, item => (
-          <NavItem key={_.uniqueId()}>{item}</NavItem>
+          <div key={_.uniqueId()}>{item}</div>
         ))}
       </Nav>
     );

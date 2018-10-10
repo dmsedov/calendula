@@ -1,5 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import {
+  UncontrolledDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+  NavItem,
+} from 'reactstrap';
 
 export default (Component) => {
   return class DynamicMenuBuilder extends React.Component {
@@ -27,16 +34,38 @@ export default (Component) => {
       const { paths: { main, calendar } } = this.props;
       const makeItemsByRights = () => {
         return isAdmin ? [
-          <Link to={main} className="nav-link" onClick={this.handleClickOnNavItem}>Главная</Link>,
-          <a className="nav-link" href="#" onClick={this.handleOpenModal('AccessLink')}>Cсылка для доступа</a>,
-          <a className="nav-link" href="#" onClick={this.handleOpenModal('AccessForm')}>Управление доступом</a>,
+          <NavItem>
+            <Link to={main} className="nav-link" onClick={this.handleClickOnNavItem}>Главная</Link>
+          </NavItem>,
+          <NavItem>
+            <a className="nav-link" href="#" onClick={this.handleOpenModal('AccessLink')}>Cсылка для доступа</a>
+          </NavItem>,
+          <NavItem>
+            <a className="nav-link" href="#" onClick={this.handleOpenModal('AccessForm')}>Управление доступом</a>
+          </NavItem>,
         ] :
           [
-            <Link to={main} className="nav-link" onClick={this.handleClickOnNavItem}>Главная</Link>,
+            <NavItem>
+              <Link to={main} className="nav-link" onClick={this.handleClickOnNavItem}>Главная</Link>
+            </NavItem>,
           ];
       };
       return {
-        [main]: <Link to={calendar} className="nav-link" onClick={this.handleClickOnNavItem}>Календарь</Link>,
+        [main]: [
+          <UncontrolledDropdown nav inNavbar>
+            <DropdownToggle nav caret>
+               Календари
+            </DropdownToggle>
+            <DropdownMenu right>
+              <DropdownItem>
+                <Link to={calendar} className="nav-link" onClick={this.handleClickOnNavItem}>Мой календарь</Link>
+              </DropdownItem>
+              <DropdownItem>
+                <Link to={calendar} className="nav-link" onClick={this.handleClickOnNavItem}>календарь</Link>
+              </DropdownItem>
+            </DropdownMenu>
+          </UncontrolledDropdown>,
+        ],
         [calendar]: makeItemsByRights(),
       }[pathName];
     }
