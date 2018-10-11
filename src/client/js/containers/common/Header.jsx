@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { withAlert } from 'react-alert';
 import { withRouter } from 'react-router-dom';
 import Component from '../../components/common/Header';
 import { logout } from '../../actions/auth';
@@ -28,5 +29,5 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default withRouter(connect(mapStateToProps,
-  { ...uiActions, logout })(MenuSwitch(Component)));
+export default withAlert(withRouter(connect(mapStateToProps,
+  { ...uiActions, logout })(MenuSwitch(Component))));

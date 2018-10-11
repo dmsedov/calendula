@@ -22,7 +22,8 @@ export default class LoginPage extends React.Component {
 
   failedGoogleResp = (resp) => {
     const { loginUserFailure } = this.props;
-    loginUserFailure({ descr: resp.error });
+    loginUserFailure({ error: resp.error });
+    this.props.alert.show(resp.error);// DELETE IN FUTURE!!!
     console.log(resp, 'failed resp');
   }
 

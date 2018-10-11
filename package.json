@@ -64,6 +64,8 @@
     "lodash": "^4.17.10",
     "popper.js": "^1.14.3",
     "react": "^16.4.1",
+    "react-alert": "^4.0.4",
+    "react-alert-template-basic": "^1.0.0",
     "react-copy-to-clipboard": "^5.0.1",
     "react-dom": "^16.4.1",
     "react-facebook-login": "^4.0.1",

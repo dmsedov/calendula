@@ -37,8 +37,13 @@ header {
 .dropdown-menu {
   background-color: $blue;
   @media (min-width: 768px) {
-    top: 2.8rem;
+    // top: 2.8rem;
     border-radius: 0;
+  }
+  .dropdown-item {
+    &:hover {
+      background-color: #0061ff;
+    }
   }
 }
 

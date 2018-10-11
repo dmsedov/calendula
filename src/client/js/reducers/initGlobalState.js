@@ -15,5 +15,5 @@ export default {
   uiScreen: {
     isSmallScreen: null,
   },
-  error: null,
+  errMsg: null,
 };
