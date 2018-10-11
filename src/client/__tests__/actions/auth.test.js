@@ -5,6 +5,7 @@ import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import jwtGen from 'jwt-simple';
 import * as authActions from '../../js/actions/auth';
+import resetErrorMsg from '../../js/actions/error';
 import urls from '../../js/api/v1/config';
 
 const middlewares = [thunk];
@@ -76,6 +77,7 @@ describe('authentication actions', () => {
       const expectedActions = [
         loginUserRequest(),
         loginUserSuccess({ ...userData, isAdmin: true }),
+        resetErrorMsg(),
       ];
       await store.dispatch(login({ id, ...userData }, mockHistory));
       expect(store.getActions()).toEqual(expectedActions);
