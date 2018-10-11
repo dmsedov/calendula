@@ -1,7 +1,6 @@
-import { createAction } from 'redux-actions';
 import error from '../../js/reducers/error';
 import resetErrorMsg from '../../js/actions/error';
-import { loginUserFailure } from '../../js/actions/auth';
+import { loginUserSuccess, loginUserFailure } from '../../js/actions/auth';
 
 describe('error reducer', () => {
   it('should reset error message', () => {
@@ -14,5 +13,11 @@ describe('error reducer', () => {
     const errMsg = 'failure_test';
     const action = loginUserFailure({ error: errMsg });
     expect(error(initState, action)).toEqual(errMsg);
+  });
+
+  it('should not modify state for undefined payload', () => {
+    const initState = 'failure test';
+
+    expect(error(initState, loginUserSuccess())).toEqual(initState);
   });
 });
