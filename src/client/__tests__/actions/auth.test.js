@@ -39,10 +39,12 @@ describe('authentication actions', () => {
 
     it('LOGIN_USER_FAILURE', () => {
       const msg = 'something_bad_happened';
-      expect(loginUserFailure(msg))
+      expect(loginUserFailure({ error: msg }))
         .toEqual({
           type: 'LOGIN_USER_FAILURE',
-          payload: msg,
+          payload: {
+            error: msg,
+          },
         });
     });
 

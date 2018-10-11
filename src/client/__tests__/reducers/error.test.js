@@ -1,5 +1,7 @@
+import { createAction } from 'redux-actions';
 import error from '../../js/reducers/error';
 import resetErrorMsg from '../../js/actions/error';
+import { loginUserFailure } from '../../js/actions/auth';
 
 describe('error reducer', () => {
   it('should reset error message', () => {
@@ -9,12 +11,8 @@ describe('error reducer', () => {
 
   it('should set error message', () => {
     const initState = null;
-
-    const action = {
-      type: 'TEST_FAILURE',
-      payload: 'failure_test',
-    };
-
-    expect(error(initState, action)).toEqual(action.payload);
+    const errMsg = 'failure_test';
+    const action = loginUserFailure({ error: errMsg });
+    expect(error(initState, action)).toEqual(errMsg);
   });
 });
