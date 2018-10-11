@@ -5,7 +5,12 @@
 
 html,
 body {
+  padding-right: 0px!important;
   min-height: 100vh;
+}
+
+.modal-open {
+  overflow: visible;
 }
 
 #app {
