@@ -38,7 +38,7 @@ describe('authentication actions', () => {
     });
 
     it('LOGIN_USER_FAILURE', () => {
-      const msg = 'something bad happened';
+      const msg = 'something_bad_happened';
       expect(loginUserFailure(msg))
         .toEqual({
           type: 'LOGIN_USER_FAILURE',
@@ -81,7 +81,7 @@ describe('authentication actions', () => {
 
     it('login user with error', async () => {
       const store = mockStore({});
-      const msg = 'something bad happened';
+      const msg = 'something_bad_happened';
       nock(host).post(urls.login).replyWithError(msg);
 
       const expectedActions = [
