@@ -14,7 +14,7 @@ import { loginUserSuccess } from './js/actions/auth';
 import resizeScreen from './js/actions/uiScreen';
 import { closeNavMenu } from './js/actions/uiPopup';
 import App from './js/app';
-
+import ErrorReport from './js/components/alerts/ErrorReport';
 
 const store = createStore(rootReducer);
 
