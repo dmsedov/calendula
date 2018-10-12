@@ -23,8 +23,7 @@ export default (Component) => {
       }
     }
 
-    handleLogOut = (e) => {
-      e.preventDefault();
+    handleLogOut = () => {
       const { closeNavMenu, logout, history } = this.props;
       closeNavMenu();
       logout(history);
