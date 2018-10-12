@@ -8,6 +8,8 @@ export default class UserBio extends React.PureComponent {
 
   toggle = () => {
     const { isOpen } = this.state;
+    const { isNavMenuOpen, closeNavMenu } = this.props;
+    isNavMenuOpen && closeNavMenu();
     this.setState({ isOpen: !isOpen });
   };
 

@@ -41,11 +41,10 @@ export default class Header extends React.Component {
       isNavMenuOpen,
       renderNavMenu,
       handleOpenModal,
-      isPopoverOpen,
       isSmallScreen,
       paths: { main, calendar },
-      togglePopOver,
       handleLogOut,
+      closeNavMenu,
     } = this.props;
 
     return (
@@ -73,8 +72,8 @@ export default class Header extends React.Component {
                 name={name}
                 imgUrl={imgUrl}
                 handleLogOut={handleLogOut}
-                isPopoverOpen={isPopoverOpen}
-                togglePopOver={togglePopOver}
+                isNavMenuOpen={isNavMenuOpen}
+                closeNavMenu={closeNavMenu}
               />
             </div>
           </div>

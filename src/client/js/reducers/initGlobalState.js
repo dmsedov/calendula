@@ -10,7 +10,6 @@ export default {
     isNavMenuOpen: false,
     isModalShown: false,
     modalName: null,
-    isPopoverOpen: false,
   },
   uiScreen: {
     isSmallScreen: null,

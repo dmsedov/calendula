@@ -4,10 +4,8 @@ import {
   closeModal,
   openNavMenu,
   closeNavMenu,
-  togglePopOver,
 } from '../actions/uiPopup';
 import resizeScreen from '../actions/uiScreen';
-import { logoutUser } from '../actions/auth';
 import initGlobalState from './initGlobalState';
 
 
@@ -37,11 +35,5 @@ export const uiPopup = handleActions({
   },
   [closeModal](state) {
     return { ...state, isModalShown: false, modalName: null };
-  },
-  [togglePopOver](state) {
-    return { ...state, isNavMenuOpen: false, isPopoverOpen: !state.isPopoverOpen };
-  },
-  [logoutUser](state) {
-    return { ...state, isPopoverOpen: false };
   },
 }, initGlobalState.uiPopup);

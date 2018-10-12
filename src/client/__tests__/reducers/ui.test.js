@@ -1,10 +1,8 @@
-import { logoutUser } from '../../js/actions/auth';
 import {
   openModal,
   closeModal,
   openNavMenu,
   closeNavMenu,
-  togglePopOver,
 } from '../../js/actions/uiPopup';
 import resizeScreen from '../../js/actions/uiScreen';
 import { uiScreen, uiPopup } from '../../js/reducers/ui';
@@ -15,7 +13,6 @@ describe('ui reducers', () => {
       isNavMenuOpen: false,
       isModalShown: false,
       modalName: null,
-      isPopoverOpen: false,
     };
 
     it('should return the initial state', () => {
@@ -55,36 +52,6 @@ describe('ui reducers', () => {
         .toEqual({
           ...initUiPopupState,
           isNavMenuOpen: false,
-        });
-    });
-
-    it('TOGGLE_POPOVER', () => {
-      expect(uiPopup(initUiPopupState, togglePopOver()))
-        .toEqual({
-          ...initUiPopupState,
-          isNavMenuOpen: false,
-          isPopoverOpen: true,
-        });
-
-      expect(uiPopup({
-        ...initUiPopupState,
-        isNavMenuOpen: false,
-        isPopoverOpen: true,
-      }, togglePopOver()))
-        .toEqual({
-          ...initUiPopupState,
-          isNavMenuOpen: false,
-          isPopoverOpen: false,
-        });
-    });
-
-    it('LOGOUT_USER', () => {
-      expect(uiPopup({
-        ...initUiPopupState,
-        isPopoverOpen: true,
-      }, logoutUser()))
-        .toEqual({
-          ...initUiPopupState,
         });
     });
   });

@@ -3,7 +3,6 @@ import {
   closeModal,
   openNavMenu,
   closeNavMenu,
-  togglePopOver,
 } from '../../js/actions/uiPopup';
 import resizeScreen from '../../js/actions/uiScreen';
 
@@ -22,10 +21,6 @@ describe('ui actions', () => {
 
   it('MENU_CLOSE', () => {
     expect(closeNavMenu()).toEqual({ type: 'MENU_CLOSE' });
-  });
-
-  it('TOGGLE_POPOVER', () => {
-    expect(togglePopOver()).toEqual({ type: 'TOGGLE_POPOVER' });
   });
 });
 
