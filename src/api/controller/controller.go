@@ -1,67 +1,66 @@
 package controller
 
 import (
-	"calendula/src/api/model"
+	"calendula/src/api/models"
+	"calendula/src/api/service"
 	"encoding/json"
-	"fmt"
-	"github.com/jinzhu/gorm"
-	_ "github.com/jinzhu/gorm/dialects/postgres"
+	"github.com/kataras/iris"
 	"log"
-	"net/http"
 )
-
-const (
-	connectionString = "host=localhost port=54322 user=postgres dbname=calendula sslmode=disable password=postgres"
-)
-
-var mySigningKey = []byte("very_secret_token")
 
 type ApiController struct {
-	Db *gorm.DB
+	config  *models.Config
+	service *service.CalendulaService
 }
 
-func CreateApiController() *ApiController {
+func CreateApiController(config *models.Config) *ApiController {
 	ctrl := new(ApiController)
-	ctrl.Db = getDb()
+	ctrl.config = config
+	ctrl.service = service.CreateCalendulaService(config)
 	return ctrl
 }
 
-func (ctrl ApiController) Hello(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "Hello world")
-}
+func (ctrl ApiController) Login(ctx iris.Context) {
+	rawJSON := ctx.FormValue("data")
 
-func (ctrl ApiController) Login(w http.ResponseWriter, r *http.Request) {
-	data := r.FormValue("data")
+	auth := new(models.User)
 
-	loginData := new(model.LoginData)
-	if err := json.Unmarshal([]byte(data), loginData); err != nil {
-		log.Println("invalid json ", err)
+	if err := json.Unmarshal([]byte(rawJSON), auth); err != nil {
+		log.Println("invalid json", err)
 
-		w.WriteHeader(http.StatusBadRequest)
-		w.Write([]byte(`{
-			"status": "failed",
-			"errMsg":` + "ОШИБКА!!!" + "}"))
-
+		createError(ctx, iris.StatusBadRequest, "Invalid json")
 		return
 	}
 
-	// сформировать jwt
-	w.Write([]byte(`{
-		"status": "ok",
-		"data": {
-			"token": "1asdagadggasdfasdfasdfasdfasdf",
-			"srcLink": "/api/v1/calendar?adassdagasg123bui32f2o3ebdu234bh2bhg2dF2j3f2f2"
+	if auth.UUID != "" {
+		jwtString, err := ctrl.service.Login(auth)
+
+		// if jwt generated correct without errors
+		if err == nil {
+			ctx.JSON(iris.Map{
+				"status": "Ok",
+				"data": iris.Map{
+					"jwt": jwtString,
+				},
+			})
+			return
 		}
-	}`))
-}
-
-func getDb() *gorm.DB {
-	db, err := gorm.Open("postgres", connectionString)
-
-	if err != nil {
-		log.Println("open db error:", err)
-		return nil
 	}
 
-	return db
+	createError(ctx, iris.StatusInternalServerError, "Problem")
+}
+
+func (ctrl ApiController) GetCalendar(ctx iris.Context) {
+
+	ctx.Writef("%+v", "Токен заебись, можно продолжать!")
+
+}
+
+func createError(ctx iris.Context, code int, msg string) {
+	ctx.StatusCode(code)
+	ctx.JSON(iris.Map{
+		"status": "failed",
+		"code":   code,
+		"errMsg": msg,
+	})
 }

@@ -1,40 +1,65 @@
 package main
 
 import (
-	"log"
-	"net/http"
-
 	"calendula/src/api/controller"
-	"github.com/gorilla/mux"
+	"calendula/src/api/models"
+	"encoding/json"
+	"flag"
+	"github.com/kataras/iris"
+	"io/ioutil"
 )
 
 const (
-	server = ":8888"
+	defaultConfigPath = "config.json"
 )
 
-func main() {
-	r := mux.NewRouter()
-	//app := iris.New()
+var config *models.Config
 
-	// Handle API routes
-	ctrl := controller.CreateApiController()
-	api := r.PathPrefix("/api/v1").Subrouter()
-	api.HandleFunc("/hello", ctrl.Hello)
-	api.HandleFunc("/login", ctrl.Login).Methods("POST")
+func init() {
+	pathPtr := flag.String("config", defaultConfigPath, "Path for configuration file")
+	flag.Parse()
+
+	bytes, err := ioutil.ReadFile(*pathPtr)
+
+	if err != nil {
+		panic("Read config file error")
+	}
+
+	config = new(models.Config)
+
+	if err = json.Unmarshal(bytes, config); err != nil {
+		panic("unmarshal config file error: " + err.Error())
+	}
+}
+
+func newApp(debugMode bool) *iris.Application {
+	app := iris.New()
+	if debugMode {
+		app.Logger().SetLevel("debug")
+	}
 
 	// Serve static files
-	// r.PathPrefix("/public/").Handler(http.StripPrefix("/public/", http.FileServer(http.Dir("public"))))
-	r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("static/"))))
-	r.PathPrefix("/src/client/images/").Handler(http.StripPrefix("/src/client/images/", http.FileServer(http.Dir("src/client/images/"))))
+	app.StaticWeb("/static/", "static/")
+	app.StaticWeb("/src/client/images/", "src/client/images/")
 
-	// Serve index page on all unhandled routes
-	r.PathPrefix("/").HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		http.ServeFile(w, r, "static/index.html")
+	app.Get("/", func(ctx iris.Context) {
+		ctx.ServeFile("static/index.html", false)
 	})
 
-	log.Println("Server start on", server)
+	return app
+}
 
-	if err := http.ListenAndServe(server, api); err != nil {
-		panic("start server error: " + err.Error())
-	}
+func main() {
+	app := newApp(true)
+
+	ctrl := controller.CreateApiController(config)
+	// Handle API routes
+	apiRouter := app.Party("/api/v1")
+
+	// POST: /login
+	apiRouter.Post("/login", ctrl.Login)
+
+	apiRouter.Get("/calendar", ctrl.AuthMiddleware, ctrl.GetCalendar)
+
+	app.Run(iris.Addr(config.Address))
 }
