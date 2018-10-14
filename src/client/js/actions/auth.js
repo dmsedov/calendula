@@ -3,7 +3,7 @@ import decodeJwt from 'jwt-decode';
 import * as api from '../api';
 import { loginUserError } from '../errors';
 import paths from '../paths';
-import resetErrorMsg from './error';
+import { resetErrorMsg } from './error';
 import errorHandler from '../helpers/errorHandler';
 
 
@@ -21,30 +21,30 @@ export const logout = history => (dispatch) => {
 
 export const login = (resp, history) => async (dispatch) => {
   dispatch(loginUserRequest());
-  try {
-    const {
-      data: {
-        data: { jwt },
-      }
-    } = await api.loginUser(resp);
-    localStorage.setItem('userData', jwt);
-    const {
-      user,
-      calendar: { id },
-    } = decodeJwt(jwt);
-    dispatch(loginUserSuccess({ ...user, c_id: id }));
-    dispatch(resetErrorMsg());
-    history.push(paths.calendar);
+  // try {
+  //   const {
+  //     data: {
+  //       data: { jwt },
+  //     }
+  //   } = await api.loginUser(resp);
+  //   localStorage.setItem('userData', jwt);
+  //   const {
+  //     user,
+  //     calendar: { id },
+  //   } = decodeJwt(jwt);
+  //   dispatch(loginUserSuccess({ ...user, c_id: id }));
+  //   dispatch(resetErrorMsg());
+  //   history.push(paths.calendar);
 
-    // setTimeout(() => {
-    //   const res = { data: { token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRG1pdHJ5IFNlZG92IiwiaXNBZG1pbiI6dHJ1ZSwiaW1nVXJsIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tLy1WNkMyYXh4VWJQNC9BQUFBQUFBQUFBSS9BQUFBQUFBQUFBQS9BQU4zMURWZHp2VlJ0MmkxYk9od3NVNlg0dDM3MFdoakp3L3M5Ni1jL3Bob3RvLmpwZyJ9.CRyw1rNQV6O__UzBvsmZOJLquxGnDxutq7uJhZ1eRgM' } };
-    //   localStorage.setItem('user', res.data.token);
-    //   const { name, isAdmin, imgUrl } = decodeJwt(res.data.token);
-    //   dispatch(loginUserSuccess({ name, isAdmin, imgUrl }));
-    //   dispatch(resetErrorMsg());
-    //   history.push('/calendar');
-    // }, 2000);
-  } catch (e) {
-    dispatch(loginUserFailure(errorHandler(e)));
-  }
+    setTimeout(() => {
+      const res = { data: { jwt: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InV1aWQiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkRtaXRyeSBTZWRvdiIsImVtYWlsIjoiZG1zZWRvdjkyQGdtYWlsLmNvbSIsImltZ1VybCI6Imh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS8tVjZDMmF4eFViUDQvQUFBQUFBQUFBQUkvQUFBQUFBQUFBQUEvQUFOMzFEVmR6dlZSdDJpMWJPaHdzVTZYNHQzNzBXaGpKdy9zOTYtYy9waG90by5qcGcifSwiY2FsZW5kYXIiOnsiaWQiOjEyM319.DuqxRXEMk0R-3huOlaQ_SU8Fb-4UuQ1nRXd_R5cuBY0' } };
+      localStorage.setItem('user', res.data.jwt);
+      const { user, calendar: { id } } = decodeJwt(res.data.jwt);
+      dispatch(loginUserSuccess({ ...user, id }));
+      dispatch(resetErrorMsg());
+      history.push('/calendar');
+    }, 2000);
+  // } catch (e) {
+  //   dispatch(loginUserFailure(errorHandler(e)));
+  // }
 };

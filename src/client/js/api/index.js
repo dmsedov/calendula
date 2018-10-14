@@ -17,3 +17,16 @@ export const loginUser = (userData) => {
     },
   });
 };
+
+export const genAccessLink = (id) => {
+  return axios({
+    method: 'post',
+    url: generateLink,
+    data: {
+      calendar_id: id,
+    },
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('userData')}`,
+    },
+  });
+};

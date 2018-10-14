@@ -30,13 +30,15 @@ mediaQueryList.addListener((mq) => {
   }
 });
 
-const jwt = localStorage.getItem('user');
+const jwt = localStorage.getItem('userData');
 
-if (localStorage.getItem('user')) {
-  const userData = decodeJwt(jwt);
-  const { name, isAdmin, imgUrl } = userData;
+if (jwt) {
+  const {
+    user,
+    calendar: { id },
+  } = decodeJwt(jwt);
 
-  store.dispatch(loginUserSuccess({ name, imgUrl, isAdmin, isAuthenticated: true }));
+  store.dispatch(loginUserSuccess({ ...user, c_id: id }));
 }
 
 const options = {

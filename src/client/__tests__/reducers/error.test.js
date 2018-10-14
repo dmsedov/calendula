@@ -1,5 +1,5 @@
 import error from '../../js/reducers/error';
-import resetErrorMsg from '../../js/actions/error';
+import { resetErrorMsg } from '../../js/actions/error';
 import { loginUserSuccess, loginUserFailure } from '../../js/actions/auth';
 
 describe('error reducer', () => {

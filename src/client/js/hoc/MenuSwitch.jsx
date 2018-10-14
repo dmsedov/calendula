@@ -82,8 +82,9 @@ export default (Component) => {
     }
 
     renderNavMenuByPathAndRights = () => {
-      const { userStatus, isAdmin, location: { pathname } } = this.props;
-
+      const { userStatus, location: { pathname } } = this.props;
+      // MOCK user isAdmin cause id in path /calendar/id === c_id
+      const isAdmin = true; // delete
       const menuItemsByUserStatus = {
         authenticated: this.makeAuthNavMenu,
         guest: this.makeNotAuthMenu,

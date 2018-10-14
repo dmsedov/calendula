@@ -5,7 +5,7 @@ import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import jwtGen from 'jwt-simple';
 import * as authActions from '../../js/actions/auth';
-import resetErrorMsg from '../../js/actions/error';
+import { resetErrorMsg } from '../../js/actions/error';
 import urls from '../../js/api/v1/config';
 
 const middlewares = [thunk];
