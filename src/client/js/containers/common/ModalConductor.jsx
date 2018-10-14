@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Modal } from 'reactstrap';
-import AccessLink from '../../components/modals/AccessLink';
+import AccessLink from '../modals/AccessLink';
 import AccessForm from '../modals/AccessForm';
 import Search from '../modals/Search';
 import * as uiActions from '../../actions/uiPopup';

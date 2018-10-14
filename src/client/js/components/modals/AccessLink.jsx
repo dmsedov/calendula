@@ -2,6 +2,7 @@ import React from 'react';
 import { ModalHeader, ModalBody, Button } from 'reactstrap';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { genAccessLink } from '../../api';
+import errorHandler from '../../helpers/errorHandler';
 
 export default class AccessLink extends React.Component {
   state = {
@@ -17,11 +18,12 @@ export default class AccessLink extends React.Component {
   handleGenAccessLink = async () => {
     const { c_id, resetErrorMsg, genLinkError } = this.props;
     try {
-      const { link } = await genAccessLink(c_id);
+      // const { link } = await genAccessLink(c_id);
+      const link = 'http://localhost:3000/calendar?c_id=1235'; // mock of link delete in future!!!
       this.setState({ value: link });
       resetErrorMsg();
     } catch (e) {
-      genLinkError();
+      genLinkError(errorHandler(e));
     }
   }
 

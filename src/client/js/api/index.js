@@ -19,6 +19,7 @@ export const loginUser = (userData) => {
 };
 
 export const genAccessLink = (id) => {
+  console.log(localStorage.getItem('userData'));
   return axios({
     method: 'post',
     url: generateLink,
