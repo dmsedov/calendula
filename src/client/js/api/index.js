@@ -1,18 +1,19 @@
 import axios from 'axios';
 import urls from './v1/config';
 
-const { login } = urls;
+const { login, generateLink } = urls;
 
 export const loginUser = (userData) => {
-  const { id, name, img } = userData;
+  const { uuid, name, email, imgUrl } = userData;
 
   return axios({
     method: 'post',
     url: login,
     data: {
-      id,
+      uuid,
       name,
-      img,
+      email,
+      imgUrl,
     },
   });
 };

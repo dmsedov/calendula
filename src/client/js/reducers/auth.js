@@ -21,14 +21,14 @@ const user = handleActions({
   [actions.loginUserRequest](state) {
     return state;
   },
-  [actions.loginUserSuccess](state, { payload: { name, isAdmin, imgUrl } }) {
-    return { isAuthenticated: true, name, isAdmin, imgUrl };
+  [actions.loginUserSuccess](state, { payload }) {
+    return { isAuthenticated: true, ...payload };
   },
-  [actions.loginUserFailure](state) {
-    return { ...state, isAuthenticated: false, isAdmin: null };
+  [actions.loginUserFailure]() {
+    return initGlobalState.user;
   },
   [actions.logoutUser]() {
-    return { isAuthenticated: false, name: null, isAdmin: null, imgUrl: null };
+    return initGlobalState.user;
   },
 }, initGlobalState.user);
 

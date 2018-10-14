@@ -19,9 +19,11 @@ const {
   login,
 } = authActions;
 
-const userData = {
+const user = {
+  uuid: 'test_uuid',
   name: 'test_user',
-  imgUrl: 'some_img_url',
+  email: 'test_email',
+  imgUrl: 'test_img_url',
 };
 
 describe('authentication actions', () => {
@@ -31,10 +33,11 @@ describe('authentication actions', () => {
     });
 
     it('LOGIN_USER_SUCCESS', () => {
-      expect(loginUserSuccess({ ...userData, isAdmin: true }))
+      const payload = { ...user, c_id: 'test_c_id' };
+      expect(loginUserSuccess(payload))
         .toEqual({
           type: 'LOGIN_USER_SUCCESS',
-          payload: { ...userData, isAdmin: true },
+          payload,
         });
     });
 
@@ -59,9 +62,9 @@ describe('authentication actions', () => {
     nock.disableNetConnect();
     const host = 'http://localhost';
     const mockHistory = [];
-    const id = '123456789';
+    const id = '000000000';
     const secret = 'xxx';
-    const payload = { ...userData, isAdmin: true, id };
+    const payload = { user, calendar: { id } };
     const testJwtToken = jwtGen.encode(payload, secret);
 
     it('login user success', async () => {
@@ -70,16 +73,16 @@ describe('authentication actions', () => {
         .reply('200', {
           status: 'ok',
           data: {
-            token: testJwtToken,
+            jwt: testJwtToken,
           },
         });
 
       const expectedActions = [
         loginUserRequest(),
-        loginUserSuccess({ ...userData, isAdmin: true }),
+        loginUserSuccess({ ...user, c_id: id }),
         resetErrorMsg(),
       ];
-      await store.dispatch(login({ id, ...userData }, mockHistory));
+      await store.dispatch(login(user, mockHistory));
       expect(store.getActions()).toEqual(expectedActions);
     });
 
@@ -92,7 +95,7 @@ describe('authentication actions', () => {
         loginUserRequest(),
         loginUserFailure(msg),
       ];
-      await store.dispatch(login({ id, ...userData }, mockHistory));
+      await store.dispatch(login(user, mockHistory));
       expect(store.getActions()).toEqual(expectedActions);
     });
   });

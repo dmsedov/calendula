@@ -7,28 +7,28 @@ import {
 import { userFetchingProfileState, user } from '../../js/reducers/auth';
 
 describe('Fetching user data reducers', () => {
-  const basisState = {
+  const initialState = {
     isAuthenticated: false,
+    uuid: null,
     name: null,
-    isAdmin: null,
     imgUrl: null,
+    email: null,
   };
 
   const userData = {
+    uuid: 'tets_uuid',
     name: 'test_user',
-    isAdmin: true,
+    email: 'test_email',
     imgUrl: 'some_img_url',
+    c_id: 'test_c_id',
   };
 
   it('should return the initial state', () => {
-    const initialState = basisState;
     expect(user(undefined, {})).toEqual(initialState);
     expect(userFetchingProfileState(undefined, {})).toEqual('none');
   });
 
   it('LOGIN_USER_REQUEST', () => {
-    const initialState = basisState;
-
     expect(userFetchingProfileState('none', loginUserRequest())).toEqual('requested');
 
     expect(user(initialState, loginUserRequest()))
@@ -38,16 +38,12 @@ describe('Fetching user data reducers', () => {
   it('LOGIN_USER_SUCCESS', () => {
     expect(userFetchingProfileState('requested', loginUserSuccess())).toEqual('successed');
 
-    const initialState = basisState;
-
     expect(user(initialState, loginUserSuccess(userData)))
-      .toEqual({ ...initialState, ...userData, isAuthenticated: true });
+      .toEqual({ ...userData, isAuthenticated: true });
   });
 
   it('LOGIN_USER_FAILURE', () => {
     expect(userFetchingProfileState('requested', loginUserFailure())).toEqual('failured');
-
-    const initialState = basisState;
 
     expect(user(initialState, loginUserFailure()))
       .toEqual(initialState);
@@ -60,18 +56,9 @@ describe('Fetching user data reducers', () => {
   });
 
   it('LOG_OUT_USER', () => {
-    const initialState = {
-      isAuthenticated: true,
-      name: 'test_user',
-      isAdmin: true,
-      imgUrl: 'some_img_url',
-    };
-
-    const finalState = basisState;
-
     expect(userFetchingProfileState('successed', logoutUser())).toEqual('none');
 
-    expect(user(initialState, logoutUser()))
-      .toEqual(finalState);
+    expect(user({ ...userData, isAuthenticated: true }, logoutUser()))
+      .toEqual(initialState);
   });
 });

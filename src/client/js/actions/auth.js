@@ -22,10 +22,17 @@ export const logout = history => (dispatch) => {
 export const login = (resp, history) => async (dispatch) => {
   dispatch(loginUserRequest());
   try {
-    const { data: { data } } = await api.loginUser(resp);
-    localStorage.setItem('user', data.token);
-    const { name, isAdmin, imgUrl } = decodeJwt(data.token);
-    dispatch(loginUserSuccess({ name, isAdmin, imgUrl }));
+    const {
+      data: {
+        data: { jwt },
+      }
+    } = await api.loginUser(resp);
+    localStorage.setItem('userData', jwt);
+    const {
+      user,
+      calendar: { id },
+    } = decodeJwt(jwt);
+    dispatch(loginUserSuccess({ ...user, c_id: id }));
     dispatch(resetErrorMsg());
     history.push(paths.calendar);
 

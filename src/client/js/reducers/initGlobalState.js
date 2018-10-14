@@ -2,8 +2,9 @@ export default {
   userFetchingProfileState: 'none',
   user: {
     isAuthenticated: false,
+    uuid: null,
     name: null,
-    isAdmin: null,
+    email: null,
     imgUrl: null,
   },
   uiPopup: {
