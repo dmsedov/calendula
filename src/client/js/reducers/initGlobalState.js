@@ -15,5 +15,7 @@ export default {
   uiScreen: {
     isSmallScreen: null,
   },
+  accessLinkFetchingState: 'none',
+  accessLink: null,
   errMsg: null,
 };
