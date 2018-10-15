@@ -29,7 +29,15 @@ describe('accessLink actions', () => {
     });
 
     it('FETCH_LINK_FAILURE', () => {
-      expect(fetchLinkFailure()).toEqual({ type: 'FETCH_LINK_FAILURE' });
+      const msg = 'failed_get_link';
+
+      expect(fetchLinkFailure({ error: msg }))
+        .toEqual({
+          type: 'FETCH_LINK_FAILURE',
+          payload: {
+            error: msg,
+          },
+        });
     });
   });
 
