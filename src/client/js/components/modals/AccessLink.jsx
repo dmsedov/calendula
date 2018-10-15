@@ -27,13 +27,15 @@ export default class AccessLink extends React.Component {
         </ModalHeader>
         <ModalBody>
           <div className="content">
-            <p className="description">Нажмите Скопировать для копирования ссылки в буфер</p>
+            <p className="description">Сгенерируйте ссылку для доступа в Ваш календарь.</p>
             <input className="access-link" type="text" name="accessLink" value={accessLink} readOnly />
             <CopyToClipboard
               text={accessLink}
               onCopy={() => { this.setState({ copied: !this.state.copied }); }}
             >
-              <Button disabled={!accessLink} onClick={this.handleCloseModal} color="primary" size="sm">Буфер</Button>
+              <Button disabled={!accessLink} onClick={this.handleCloseModal} color="primary" size="sm">
+                <i className="fa fa-clipboard"></i>
+              </Button>
             </CopyToClipboard>
             <Button onClick={this.handleGenAccessLink} color="primary" size="sm">Сгенерировать ссылку</Button>
           </div>
