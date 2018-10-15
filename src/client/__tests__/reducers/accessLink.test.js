@@ -6,7 +6,7 @@ import {
 import { accessLinkFetching, accessLink } from '../../js/reducers/accessLink';
 
 describe('Fetching accessLink reducers', () => {
-  const initLinkState = null;
+  const initLinkState = '';
 
   it('should return the initial state', () => {
     expect(accessLink(undefined, {})).toEqual(initLinkState);
