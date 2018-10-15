@@ -16,6 +16,6 @@ export default {
     isSmallScreen: null,
   },
   accessLinkFetchingState: 'none',
-  accessLink: null,
+  accessLink: '',
   errMsg: null,
 };
