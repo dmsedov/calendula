@@ -3,8 +3,6 @@ import urls from './v1/config';
 
 const { login, generateLink } = urls;
 
-const token = localStorage.getItem('userData') || '';
-
 const loginUser = (userData) => {
   const { uuid, name, email, imgUrl } = userData;
 
@@ -28,7 +26,7 @@ const getAccessLink = (id) => {
       calendar_id: id,
     },
     headers: {
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${localStorage.getItem('userData')}`,
     },
   });
 };

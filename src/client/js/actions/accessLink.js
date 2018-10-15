@@ -16,7 +16,7 @@ export const genAccessLink = id => async (dispatch) => {
     const {
       data: { link },
     } = await getAccessLink(id);
-    dispatch(fetchLinkSuccess({ accessLink: link }));
+    dispatch(fetchLinkSuccess({ link }));
     dispatch(resetErrorMsg());
   } catch (e) {
     dispatch(fetchLinkFailure(errorHandler(e)));
