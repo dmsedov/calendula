@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import { userFetchingProfileState, user } from './auth';
 import { uiPopup, uiScreen } from './ui';
+import { accessLinkFetching, accessLink } from './accessLink';
 import error from './error';
 
 export default combineReducers({
@@ -8,5 +9,7 @@ export default combineReducers({
   user,
   uiPopup,
   uiScreen,
+  accessLinkFetching,
+  accessLink,
   error,
 });

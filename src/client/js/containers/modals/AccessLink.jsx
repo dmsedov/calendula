@@ -1,10 +1,15 @@
 import { connect } from 'react-redux';
 import Component from '../../components/modals/AccessLink';
-import * as errorsAction from '../../actions/error';
+import { genAccessLink } from '../../actions/accessLink';
 
 const mapStateToProps = (state) => {
-  const { user: { c_id } } = state;
-  return { c_id };
+  const {
+    user: { c_id },
+    accessLinkFetching,
+    accessLink,
+  } = state;
+
+  return { c_id, accessLinkFetching, accessLink };
 };
 
-export default connect(mapStateToProps, errorsAction)(Component);
+export default connect(mapStateToProps, { genAccessLink })(Component);

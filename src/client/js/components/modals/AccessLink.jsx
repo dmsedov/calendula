@@ -1,12 +1,9 @@
 import React from 'react';
 import { ModalHeader, ModalBody, Button } from 'reactstrap';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-import { genAccessLink } from '../../api';
-import errorHandler from '../../helpers/errorHandler';
 
 export default class AccessLink extends React.Component {
   state = {
-    value: '',
     copied: false,
   };
 
@@ -16,19 +13,12 @@ export default class AccessLink extends React.Component {
   }
 
   handleGenAccessLink = async () => {
-    const { c_id, resetErrorMsg, genLinkError } = this.props;
-    try {
-      // const { link } = await genAccessLink(c_id);
-      const link = 'http://localhost:3000/calendar?c_id=1235'; // mock of link delete in future!!!
-      this.setState({ value: link });
-      resetErrorMsg();
-    } catch (e) {
-      genLinkError(errorHandler(e));
-    }
+    const { c_id, accessLinkFetching, genAccessLink } = this.props;
+    genAccessLink(c_id);
   }
 
   render() {
-    const { value } = this.state;
+    const { accessLink } = this.props;
 
     return (
       <div id="access-link">
@@ -38,12 +28,12 @@ export default class AccessLink extends React.Component {
         <ModalBody>
           <div className="content">
             <p className="description">Нажмите Скопировать для копирования ссылки в буфер</p>
-            <input className="access-link" type="text" name="accessLink" value={value} readOnly />
+            <input className="access-link" type="text" name="accessLink" value={accessLink} readOnly />
             <CopyToClipboard
-              text={value}
+              text={accessLink}
               onCopy={() => { this.setState({ copied: !this.state.copied }); }}
             >
-              <Button onClick={this.handleCloseModal} color="primary" size="sm" />
+              <Button disabled={!accessLink} onClick={this.handleCloseModal} color="primary" size="sm">Буфер</Button>
             </CopyToClipboard>
             <Button onClick={this.handleGenAccessLink} color="primary" size="sm">Сгенерировать ссылку</Button>
           </div>
