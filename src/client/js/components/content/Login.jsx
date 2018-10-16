@@ -1,13 +1,10 @@
 import React from 'react';
 import GoogleLogin from 'react-google-login';
 import FacebookLogin from 'react-facebook-login';
-import Alert from 'react-s-alert';
 import { GOOGLE_CLIENT_ID, FACEBOOK_APP_ID } from '../../client_config.json';
 import makeUserDataByApiType from '../../helpers/makeUserDataByApiType';
 import renderPreloaderLayout from '../../helpers/renderPreloader';
 // import renderErrorReport from '../../helpers/renderErrorReport';
-import { loginUserError } from '../../errors';
-
 
 export default class Login extends React.Component {
   handleRequestToForeignApi = () => {
@@ -24,7 +21,7 @@ export default class Login extends React.Component {
   failedGoogleResp = (resp) => {
     const { loginUserFailure } = this.props;
     loginUserFailure({ error: resp.error });
-    Alert.error(resp.error);// DELETE IN FUTURE!!!
+    // DELETE IN FUTURE!!!
     console.log(resp, 'failed resp');
   }
 
@@ -67,7 +64,6 @@ export default class Login extends React.Component {
               onClick={this.handleRequestToForeignApi}
             />
           </div>
-          {requestStatus === 'failure' ? Alert.error(loginUserError(err)) : null}
         </div>
       </div>
     );

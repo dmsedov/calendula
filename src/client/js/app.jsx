@@ -14,7 +14,12 @@ const App = () => {
         {routes}
       </Main>
       <ModalConductor />
-      <Alert stack={{ limit: 1 }} />
+      <Alert
+        timeout={5000}
+        position="bottom"
+        offset={100}
+        effect="scale"
+      />
     </div>
   );
 };
