@@ -12,13 +12,13 @@ export const fetchLinkFailure = createAction('FETCH_LINK_FAILURE');
 export const genAccessLink = id => async (dispatch) => {
   const { getAccessLink } = apiCall.private;
   dispatch(fetchLinkRequest());
+  dispatch(resetErrorMsg());
   try {
-    // const {
-    //   data: { link },
-    // } = await getAccessLink(id);
-    const link = 'http://localhost:3000/calendar?c_id=123456';
+    const {
+      data: { link },
+    } = await getAccessLink(id);
+    // const link = 'http://localhost:3000/calendar?c_id=123456';
     dispatch(fetchLinkSuccess({ link }));
-    dispatch(resetErrorMsg());
   } catch (e) {
     dispatch(fetchLinkFailure(errorHandler(e)));
   }
