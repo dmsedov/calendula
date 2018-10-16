@@ -68,8 +68,8 @@ describe('accessLink actions', () => {
 
       const expectedActions = [
         fetchLinkRequest(),
-        fetchLinkSuccess({ link: testLink }),
         resetErrorMsg(),
+        fetchLinkSuccess({ link: testLink }),
       ];
       await store.dispatch(genAccessLink(c_id));
       expect(store.getActions()).toEqual(expectedActions);
@@ -82,6 +82,7 @@ describe('accessLink actions', () => {
 
       const expectedActions = [
         fetchLinkRequest(),
+        resetErrorMsg(),
         fetchLinkFailure(msg),
       ];
       await store.dispatch(genAccessLink(c_id, testJwtToken));

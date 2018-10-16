@@ -79,8 +79,8 @@ describe('authentication actions', () => {
 
       const expectedActions = [
         loginUserRequest(),
-        loginUserSuccess({ ...user, c_id: id }),
         resetErrorMsg(),
+        loginUserSuccess({ ...user, c_id: id }),
       ];
       await store.dispatch(login(user, mockHistory));
       expect(store.getActions()).toEqual(expectedActions);
@@ -93,6 +93,7 @@ describe('authentication actions', () => {
 
       const expectedActions = [
         loginUserRequest(),
+        resetErrorMsg(),
         loginUserFailure(msg),
       ];
       await store.dispatch(login(user, mockHistory));
