@@ -1,7 +1,9 @@
 @import 'variables';
 @import '~bootstrap/scss/bootstrap';
-@import 'popover';
-@import 'buttons';
+@import 'libs/s-alert';
+@import 'libs/s-alert-effects';
+@import 'components/popover';
+@import 'components/buttons';
 
 html,
 body {
@@ -32,7 +34,7 @@ body {
   }
 }
 
-@import 'header';
+@import 'components/header';
 
 main {
   display: flex;
@@ -43,7 +45,7 @@ main {
   }
 }
 
-@import 'authForm';
-@import 'eventEditor';
-@import 'eventBio';
-@import 'calendar';
+@import 'components/authForm';
+@import 'components/eventEditor';
+@import 'components/eventBio';
+@import 'components/calendar';

@@ -5,8 +5,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { Provider as AlertProvider } from 'react-alert';
-import AlertTemplate from 'react-alert-template-basic';
 import decodeJwt from 'jwt-decode';
 import createStore from './js/store';
 import rootReducer from './js/reducers';
@@ -14,7 +12,6 @@ import { loginUserSuccess } from './js/actions/auth';
 import resizeScreen from './js/actions/uiScreen';
 import { closeNavMenu } from './js/actions/uiPopup';
 import App from './js/app';
-import ErrorReport from './js/components/alerts/ErrorReport';
 
 const store = createStore(rootReducer);
 
@@ -51,9 +48,7 @@ const options = {
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
-      <AlertProvider template={AlertTemplate} {...options}>
-        <App />
-      </AlertProvider>
+      <App />
     </BrowserRouter>
   </Provider>,
   document.getElementById('app'),
