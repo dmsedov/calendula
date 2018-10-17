@@ -5,18 +5,17 @@ import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import jwtGen from 'jwt-simple';
 import * as authActions from '../../js/actions/auth';
-import { resetErrorMsg } from '../../js/actions/error';
-import urls from '../../js/api/v1/config';
+import urls from '../../js/api/urls';
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
 
 const {
-  loginUserRequest,
-  loginUserSuccess,
-  loginUserFailure,
-  logoutUser,
-  login,
+  signinUserRequest,
+  signinUserSuccess,
+  signinUserFailure,
+  signinUser,
+  signout,
 } = authActions;
 
 const user = {
@@ -28,32 +27,32 @@ const user = {
 
 describe('authentication actions', () => {
   describe('sync actions', () => {
-    it('LOGIN_USER_REQUEST', () => {
-      expect(loginUserRequest()).toEqual({ type: 'LOGIN_USER_REQUEST' });
+    it('SIGN_IN_USER_REQUEST', () => {
+      expect(signinUserRequest()).toEqual({ type: 'SIGN_IN_USER_REQUEST' });
     });
 
-    it('LOGIN_USER_SUCCESS', () => {
+    it('SIGN_IN_USER_SUCCESS', () => {
       const payload = { ...user, c_id: 'test_c_id' };
-      expect(loginUserSuccess(payload))
+      expect(signinUserSuccess(payload))
         .toEqual({
-          type: 'LOGIN_USER_SUCCESS',
+          type: 'SIGN_IN_USER_SUCCESS',
           payload,
         });
     });
 
-    it('LOGIN_USER_FAILURE', () => {
+    it('SIGN_IN_USER_FAILURE', () => {
       const msg = 'something_bad_happened';
-      expect(loginUserFailure({ error: msg }))
+      expect(signinUserFailure({ error: msg }))
         .toEqual({
-          type: 'LOGIN_USER_FAILURE',
+          type: 'SIGN_IN_USER_FAILURE',
           payload: {
             error: msg,
           },
         });
     });
 
-    it('LOGOUT_USER', () => {
-      expect(logoutUser()).toEqual({ type: 'LOGOUT_USER' });
+    it('SIGN_OUT_USER', () => {
+      expect(signout()).toEqual({ type: 'SIGN_OUT_USER' });
     });
   });
 
@@ -67,9 +66,9 @@ describe('authentication actions', () => {
     const payload = { user, calendar: { id } };
     const testJwtToken = jwtGen.encode(payload, secret);
 
-    it('login user success', async () => {
+    it('sign in user success', async () => {
       const store = mockStore({});
-      nock(host).post(urls.login)
+      nock(host).post(urls.signin)
         .reply('200', {
           status: 'ok',
           data: {
@@ -78,25 +77,23 @@ describe('authentication actions', () => {
         });
 
       const expectedActions = [
-        loginUserRequest(),
-        resetErrorMsg(),
-        loginUserSuccess({ ...user, c_id: id }),
+        signinUserRequest(),
+        signinUserSuccess({ ...user, c_id: id }),
       ];
-      await store.dispatch(login(user, mockHistory));
+      await store.dispatch(signinUser(user, mockHistory));
       expect(store.getActions()).toEqual(expectedActions);
     });
 
-    it('login user with error', async () => {
+    it('sign in user with error', async () => {
       const store = mockStore({});
       const msg = 'something_bad_happened';
-      nock(host).post(urls.login).replyWithError(msg);
+      nock(host).post(urls.signin).replyWithError(msg);
 
       const expectedActions = [
-        loginUserRequest(),
-        resetErrorMsg(),
-        loginUserFailure(msg),
+        signinUserRequest(),
+        signinUserFailure(msg),
       ];
-      await store.dispatch(login(user, mockHistory));
+      await store.dispatch(signinUser(user, mockHistory));
       expect(store.getActions()).toEqual(expectedActions);
     });
   });

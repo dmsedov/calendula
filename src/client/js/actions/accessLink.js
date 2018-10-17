@@ -9,10 +9,9 @@ export const fetchLinkSuccess = createAction('FETCH_LINK_SUCCESS');
 
 export const fetchLinkFailure = createAction('FETCH_LINK_FAILURE');
 
-export const genAccessLink = id => async (dispatch) => {
+export const fetchAccessLink = id => async (dispatch) => {
   const { getAccessLink } = apiCall.private;
   dispatch(fetchLinkRequest());
-  dispatch(resetErrorMsg());
   try {
     const {
       data: { link },

@@ -8,10 +8,9 @@ import {
   fetchLinkRequest,
   fetchLinkSuccess,
   fetchLinkFailure,
-  genAccessLink,
+  fetchAccessLink,
 } from '../../js/actions/accessLink';
-import { resetErrorMsg } from '../../js/actions/error';
-import urls from '../../js/api/v1/config';
+import urls from '../../js/api/urls';
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
@@ -56,11 +55,11 @@ describe('accessLink actions', () => {
     const payload = { user, calendar: { id: c_id } };
     const testJwtToken = jwtGen.encode(payload, secret);
 
-    describe('success genAccessLink', async () => {
+    describe('success fetchAccessLink', async () => {
       const store = mockStore({});
       const testLink = 'test_link';
       nock(host)
-        .post(urls.generateLink)
+        .post(urls.accesslink)
         .reply('200', {
           status: 'ok',
           link: testLink,
@@ -68,24 +67,22 @@ describe('accessLink actions', () => {
 
       const expectedActions = [
         fetchLinkRequest(),
-        resetErrorMsg(),
         fetchLinkSuccess({ link: testLink }),
       ];
-      await store.dispatch(genAccessLink(c_id));
+      await store.dispatch(fetchAccessLink(c_id));
       expect(store.getActions()).toEqual(expectedActions);
     });
 
-    describe('genAccessLink with error', async () => {
+    describe('fetchAccessLink with error', async () => {
       const store = mockStore({});
       const msg = 'something_bad_happened';
-      nock(host).post(urls.login).replyWithError(msg);
+      nock(host).post(urls.accesslink).replyWithError(msg);
 
       const expectedActions = [
         fetchLinkRequest(),
-        resetErrorMsg(),
-        fetchLinkFailure(msg),
+        fetchLinkFailure({ error: msg }),
       ];
-      await store.dispatch(genAccessLink(c_id, testJwtToken));
+      await store.dispatch(fetchAccessLink(c_id));
       expect(store.getActions()).toEqual(expectedActions);
     });
   });

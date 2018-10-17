@@ -1,14 +1,16 @@
 import axios from 'axios';
-import urls from './v1/config';
+import urls from './urls';
 
-const { login, generateLink } = urls;
+const makeAuthHeader = () => {
+  return `Bearer ${localStorage.getItem('userData')}`;
+};
 
-const loginUser = (userData) => {
+const signin = (userData) => {
   const { uuid, name, email, imgUrl } = userData;
 
   return axios({
     method: 'post',
-    url: login,
+    url: urls.signin,
     data: {
       uuid,
       name,
@@ -21,21 +23,23 @@ const loginUser = (userData) => {
 const getAccessLink = (id) => {
   return axios({
     method: 'post',
-    url: generateLink,
+    url: urls.accesslink,
     data: {
       calendar_id: id,
     },
     headers: {
-      Authorization: `Bearer ${localStorage.getItem('userData')}`,
+      Authorization: makeAuthHeader(),
     },
   });
 };
 
-export default {
-  public: {
-    loginUser,
-  },
-  private: {
-    getAccessLink,
-  },
-};
+export default (
+  {
+    public: {
+      signin,
+    },
+    private: {
+      getAccessLink,
+    },
+  }
+);
