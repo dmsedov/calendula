@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import Component from '../../components/content/Login';
-import { loginUserRequest, loginUserSuccess, loginUserFailure, login } from '../../actions/auth';
+import Component from '../../components/content/Signin';
+import * as authActions from '../../actions/auth';
 
 
 const mapStateToProps = (state) => {
@@ -12,16 +12,9 @@ const mapStateToProps = (state) => {
   };
 };
 
-const actions = {
-  loginUserRequest,
-  loginUserSuccess,
-  loginUserFailure,
-  login,
-};
-
 const Container = withRouter(connect(
   mapStateToProps,
-  actions,
+  authActions,
 )(Component));
 
 export default Container;

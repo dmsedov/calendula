@@ -13,7 +13,7 @@ export default class AccessLink extends React.Component {
   }
 
   handleGenAccessLink = async () => {
-    const { c_id, accessLinkFetching, genAccessLink } = this.props;
+    const { c_id, genAccessLink } = this.props;
     genAccessLink(c_id);
   }
 

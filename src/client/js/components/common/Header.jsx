@@ -43,7 +43,7 @@ export default class Header extends React.Component {
       handleOpenModal,
       isSmallScreen,
       paths: { main, calendar },
-      handleLogOut,
+      handleSignout,
       closeNavMenu,
     } = this.props;
 
@@ -71,7 +71,7 @@ export default class Header extends React.Component {
                 userStatus={userStatus}
                 name={name}
                 imgUrl={imgUrl}
-                handleLogOut={handleLogOut}
+                handleSignout={handleSignout}
                 isNavMenuOpen={isNavMenuOpen}
                 closeNavMenu={closeNavMenu}
               />

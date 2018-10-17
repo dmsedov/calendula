@@ -23,9 +23,9 @@ export default (Component) => {
       }
     }
 
-    handleLogOut = () => {
-      const { logout, history } = this.props;
-      logout(history);
+    handleSignout = () => {
+      const { signout, history } = this.props;
+      signout(history);
     }
 
     makeAuthNavMenu = (pathName, isAdmin) => {
@@ -69,10 +69,10 @@ export default (Component) => {
     }
 
     makeNotAuthMenu = (pathName) => {
-      const { paths: { main, login } } = this.props;
+      const { paths: { main, signin } } = this.props;
       return {
-        [main]: <Link to={login} className="nav-link" onClick={this.handleClickOnNavItem}>Вход</Link>,
-        [login]: <Link to={main} className="nav-link" onClick={this.handleClickOnNavItem}>Главная</Link>,
+        [main]: <Link to={signin} className="nav-link" onClick={this.handleClickOnNavItem}>Вход</Link>,
+        [signin]: <Link to={main} className="nav-link" onClick={this.handleClickOnNavItem}>Главная</Link>,
       }[pathName];
     }
 
@@ -98,7 +98,7 @@ export default (Component) => {
       return (
         <Component
           {...this.props}
-          handleLogOut={this.handleLogOut}
+          handleSignout={this.handleSignout}
           handleOpenModal={this.handleOpenModal}
           renderNavMenu={this.renderNavMenuByPathAndRights}
         />

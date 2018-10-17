@@ -2,6 +2,6 @@ export default (
   {
     main: '/',
     calendar: '/calendar',
-    login: '/login',
+    signin: '/signin',
   }
 );

@@ -1,9 +1,10 @@
 import React from 'react';
-import Alert from 'react-s-alert';
+// import Alert from 'react-s-alert';
 import Header from './containers/common/Header';
 import Main from './components/common/Main';
 import routes from './routes';
 import ModalConductor from './containers/common/ModalConductor';
+import ErrorReport from './containers/ErrorReport';
 // import ErrorContent from './js/components/alerts/ErrorContent';
 
 const App = () => {
@@ -14,12 +15,7 @@ const App = () => {
         {routes}
       </Main>
       <ModalConductor />
-      <Alert
-        timeout={5000}
-        position="bottom"
-        offset={100}
-        effect="scale"
-      />
+      <ErrorReport />
     </div>
   );
 };

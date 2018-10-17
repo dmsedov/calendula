@@ -14,9 +14,9 @@ export default class UserBio extends React.PureComponent {
   };
 
   handleExit = () => {
-    const { handleLogOut } = this.props;
+    const { handleSignout } = this.props;
     this.setState({ isOpen: false });
-    handleLogOut();
+    handleSignout();
   }
 
   render() {

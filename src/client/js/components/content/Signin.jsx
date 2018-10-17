@@ -6,11 +6,11 @@ import makeUserDataByApiType from '../../helpers/makeUserDataByApiType';
 import renderPreloaderLayout from '../../helpers/renderPreloader';
 // import renderErrorReport from '../../helpers/renderErrorReport';
 
-export default class Login extends React.Component {
+export default class Signin extends React.Component {
   handleRequestToForeignApi = () => {
-    const { loginUserRequest } = this.props;
+    const { signinUserRequest } = this.props;
 
-    loginUserRequest();
+    signinUserRequest();
   }
 
   successGoogleResp = (resp) => {
@@ -19,8 +19,8 @@ export default class Login extends React.Component {
   }
 
   failedGoogleResp = (resp) => {
-    const { loginUserFailure } = this.props;
-    loginUserFailure({ error: resp.error });
+    const { signinUserFailure } = this.props;
+    signinUserFailure({ error: resp.error });
     // DELETE IN FUTURE!!!
     console.log(resp, 'failed resp');
   }
@@ -31,14 +31,14 @@ export default class Login extends React.Component {
   }
 
   signUp = (type, resp) => {
-    const { history, login } = this.props;
+    const { history, signout } = this.props;
 
     const userData = makeUserDataByApiType(type)(resp);
-    login(userData, history);
+    signout(userData, history);
   }
 
   render() {
-    const { requestStatus, user: { err } } = this.props;
+    const { requestStatus } = this.props;
 
     return (
       <div id="auth-form-content">

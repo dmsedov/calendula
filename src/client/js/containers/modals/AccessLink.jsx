@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Component from '../../components/modals/AccessLink';
-import { genAccessLink } from '../../actions/accessLink';
+import { fetchAccessLink } from '../../actions/accessLink';
 
 const mapStateToProps = (state) => {
   const {
@@ -12,4 +12,4 @@ const mapStateToProps = (state) => {
   return { c_id, accessLinkFetching, accessLink };
 };
 
-export default connect(mapStateToProps, { genAccessLink })(Component);
+export default connect(mapStateToProps, { fetchAccessLink })(Component);

@@ -8,7 +8,7 @@ import { Provider } from 'react-redux';
 import decodeJwt from 'jwt-decode';
 import createStore from './js/store';
 import rootReducer from './js/reducers';
-import { loginUserSuccess } from './js/actions/auth';
+import { signinUserSuccess } from './js/actions/auth';
 import resizeScreen from './js/actions/uiScreen';
 import { closeNavMenu } from './js/actions/uiPopup';
 import App from './js/app';
@@ -35,7 +35,7 @@ if (jwt) {
     calendar: { id },
   } = decodeJwt(jwt);
 
-  store.dispatch(loginUserSuccess({ ...user, c_id: id }));
+  store.dispatch(signinUserSuccess({ ...user, c_id: id }));
 }
 
 const options = {
