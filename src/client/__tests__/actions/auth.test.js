@@ -17,6 +17,7 @@ const {
   signinUserFailure,
   signinUser,
   signout,
+  foreignAuthUserRequest,
 } = authActions;
 
 const user = {
@@ -28,6 +29,10 @@ const user = {
 
 describe('authentication actions', () => {
   describe('sync actions', () => {
+    it('FOREIGN_AUTH_USER_REQUEST', () => {
+      expect(foreignAuthUserRequest()).toEqual({ type: 'FOREIGN_AUTH_USER_REQUEST' });
+    });
+
     it('SIGN_IN_USER_REQUEST', () => {
       expect(signinUserRequest()).toEqual({ type: 'SIGN_IN_USER_REQUEST' });
     });

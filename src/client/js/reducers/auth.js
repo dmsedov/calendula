@@ -3,6 +3,9 @@ import * as actions from '../actions/auth';
 import initGlobalState from './initGlobalState';
 
 const userFetchingProfileState = handleActions({
+  [actions.foreignAuthUserRequest]() {
+    return 'pending';
+  },
   [actions.signinUserRequest]() {
     return 'requested';
   },

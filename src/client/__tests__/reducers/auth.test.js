@@ -3,6 +3,7 @@ import {
   signinUserSuccess,
   signinUserFailure,
   signout,
+  foreignAuthUserRequest,
 } from '../../js/actions/auth';
 import { userFetchingProfileState, user } from '../../js/reducers/auth';
 
@@ -13,6 +14,7 @@ describe('Fetching user data reducers', () => {
     name: null,
     imgUrl: null,
     email: null,
+    c_id: null,
   };
 
   const userData = {
@@ -28,8 +30,16 @@ describe('Fetching user data reducers', () => {
     expect(userFetchingProfileState(undefined, {})).toEqual('none');
   });
 
+  it('FOREIGN_AUTH_USER_REQUEST', () => {
+    expect(userFetchingProfileState('none', foreignAuthUserRequest()))
+      .toEqual('pending');
+
+    expect(user(initialState, foreignAuthUserRequest()))
+      .toEqual(initialState);
+  });
+
   it('SIGN_IN_USER_REQUEST', () => {
-    expect(userFetchingProfileState('none', signinUserRequest())).toEqual('requested');
+    expect(userFetchingProfileState('pending', signinUserRequest())).toEqual('requested');
 
     expect(user(initialState, signinUserRequest()))
       .toEqual(initialState);
@@ -50,7 +60,9 @@ describe('Fetching user data reducers', () => {
   });
 
   it('SIGN_IN_USER_SUCCESS after failed attempt', () => {
-    expect(userFetchingProfileState('failured', signinUserRequest())).toEqual('requested');
+    expect(userFetchingProfileState('failured', foreignAuthUserRequest())).toEqual('pending');
+
+    expect(userFetchingProfileState('pending', signinUserRequest())).toEqual('requested');
 
     expect(userFetchingProfileState('requested', signinUserSuccess())).toEqual('successed');
   });
