@@ -6,6 +6,7 @@ export default {
     name: null,
     email: null,
     imgUrl: null,
+    c_id: null,
   },
   uiPopup: {
     isNavMenuOpen: false,

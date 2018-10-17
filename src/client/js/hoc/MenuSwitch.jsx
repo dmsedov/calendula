@@ -24,8 +24,8 @@ export default (Component) => {
     }
 
     handleSignout = () => {
-      const { signout, history } = this.props;
-      signout(history);
+      const { signoutUser, history } = this.props;
+      signoutUser(history);
     }
 
     makeAuthNavMenu = (pathName, isAdmin) => {

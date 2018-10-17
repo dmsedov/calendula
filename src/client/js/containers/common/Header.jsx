@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Component from '../../components/common/Header';
-import { signout } from '../../actions/auth';
+import { signoutUser } from '../../actions/auth';
 import * as uiActions from '../../actions/uiPopup';
 import MenuSwitch from '../../hoc/MenuSwitch';
 import paths from '../../paths';
@@ -29,4 +29,4 @@ const mapStateToProps = (state) => {
 };
 
 export default withRouter(connect(mapStateToProps,
-  { ...uiActions, signout })(MenuSwitch(Component)));
+  { ...uiActions, signoutUser })(MenuSwitch(Component)));
