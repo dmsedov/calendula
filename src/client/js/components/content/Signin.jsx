@@ -3,14 +3,14 @@ import GoogleLogin from 'react-google-login';
 import FacebookLogin from 'react-facebook-login';
 import { GOOGLE_CLIENT_ID, FACEBOOK_APP_ID } from '../../client_config.json';
 import makeUserDataByApiType from '../../helpers/makeUserDataByApiType';
-import renderPreloaderLayout from '../../helpers/renderPreloader';
+import LoaderLayout from '../../containers/informers/Loader';
 import errors from '../../errors';
 
 export default class Signin extends React.Component {
   handleRequestToForeignApi = () => {
-    const { signinUserRequest } = this.props;
+    const { foreignAuthUserRequest } = this.props;
 
-    signinUserRequest();
+    foreignAuthUserRequest();
   }
 
   successGoogleResp = (resp) => {
@@ -38,12 +38,10 @@ export default class Signin extends React.Component {
   }
 
   render() {
-    const { requestStatus } = this.props;
-
     return (
       <div id="auth-form-content">
         <div className="auth-form">
-          {requestStatus === 'requested' ? renderPreloaderLayout('Аутентификация') : null}
+          <LoaderLayout />
           <h2>Вход</h2>
           <p className="auth-tip">Войти через соцсети:</p>
           <div className="list-sm">

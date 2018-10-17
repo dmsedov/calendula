@@ -5,11 +5,8 @@ import * as authActions from '../../actions/auth';
 
 
 const mapStateToProps = (state) => {
-  const { userFetchingProfileState, user } = state;
-  return {
-    requestStatus: userFetchingProfileState,
-    user,
-  };
+  const { user } = state;
+  return { user };
 };
 
 const Container = withRouter(connect(
