@@ -19,6 +19,6 @@ export const fetchAccessLink = id => async (dispatch) => {
     // const link = 'http://localhost:3000/calendar?c_id=123456';
     dispatch(fetchLinkSuccess({ link }));
   } catch (e) {
-    dispatch(fetchLinkFailure(errorHandler(e)));
+    dispatch(fetchLinkFailure({ error: errorHandler(e) }));
   }
 };

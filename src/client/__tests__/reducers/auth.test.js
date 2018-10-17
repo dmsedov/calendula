@@ -1,8 +1,8 @@
 import {
-  loginUserRequest,
-  loginUserSuccess,
-  loginUserFailure,
-  logoutUser,
+  signinUserRequest,
+  signinUserSuccess,
+  signinUserFailure,
+  signout,
 } from '../../js/actions/auth';
 import { userFetchingProfileState, user } from '../../js/reducers/auth';
 
@@ -28,37 +28,37 @@ describe('Fetching user data reducers', () => {
     expect(userFetchingProfileState(undefined, {})).toEqual('none');
   });
 
-  it('LOGIN_USER_REQUEST', () => {
-    expect(userFetchingProfileState('none', loginUserRequest())).toEqual('requested');
+  it('SIGN_IN_USER_REQUEST', () => {
+    expect(userFetchingProfileState('none', signinUserRequest())).toEqual('requested');
 
-    expect(user(initialState, loginUserRequest()))
+    expect(user(initialState, signinUserRequest()))
       .toEqual(initialState);
   });
 
-  it('LOGIN_USER_SUCCESS', () => {
-    expect(userFetchingProfileState('requested', loginUserSuccess())).toEqual('successed');
+  it('SIGN_IN_USER_SUCCESS', () => {
+    expect(userFetchingProfileState('requested', signinUserSuccess())).toEqual('successed');
 
-    expect(user(initialState, loginUserSuccess(userData)))
+    expect(user(initialState, signinUserSuccess(userData)))
       .toEqual({ ...userData, isAuthenticated: true });
   });
 
-  it('LOGIN_USER_FAILURE', () => {
-    expect(userFetchingProfileState('requested', loginUserFailure())).toEqual('failured');
+  it('SIGN_IN_USER_FAILURE', () => {
+    expect(userFetchingProfileState('requested', signinUserFailure())).toEqual('failured');
 
-    expect(user(initialState, loginUserFailure()))
+    expect(user(initialState, signinUserFailure()))
       .toEqual(initialState);
   });
 
-  it('LOGIN_USER_SUCCESS after failed attempt', () => {
-    expect(userFetchingProfileState('failured', loginUserRequest())).toEqual('requested');
+  it('SIGN_IN_USER_SUCCESS after failed attempt', () => {
+    expect(userFetchingProfileState('failured', signinUserRequest())).toEqual('requested');
 
-    expect(userFetchingProfileState('requested', loginUserSuccess())).toEqual('successed');
+    expect(userFetchingProfileState('requested', signinUserSuccess())).toEqual('successed');
   });
 
-  it('LOG_OUT_USER', () => {
-    expect(userFetchingProfileState('successed', logoutUser())).toEqual('none');
+  it('SIGN_OUT_USER', () => {
+    expect(userFetchingProfileState('successed', signout())).toEqual('none');
 
-    expect(user({ ...userData, isAuthenticated: true }, logoutUser()))
+    expect(user({ ...userData, isAuthenticated: true }, signout()))
       .toEqual(initialState);
   });
 });

@@ -12,9 +12,6 @@ const accessLinkFetching = handleActions({
   [actions.fetchLinkFailure]() {
     return 'failured';
   },
-  [actions.logoutUser]() {
-    return 'none';
-  },
 }, initGlobalState.accessLinkFetchingState);
 
 const accessLink = handleActions({

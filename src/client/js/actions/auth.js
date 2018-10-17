@@ -42,6 +42,6 @@ export const signinUser = (resp, history) => async (dispatch) => {
     //   history.push('/calendar');
     // }, 2000);
   } catch (e) {
-    dispatch(signinUserFailure(errorHandler(e)));
+    dispatch(signinUserFailure({ error: errorHandler(e)}));
   }
 };

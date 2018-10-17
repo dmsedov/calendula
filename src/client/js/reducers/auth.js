@@ -3,31 +3,31 @@ import * as actions from '../actions/auth';
 import initGlobalState from './initGlobalState';
 
 const userFetchingProfileState = handleActions({
-  [actions.loginUserRequest]() {
+  [actions.signinUserRequest]() {
     return 'requested';
   },
-  [actions.loginUserSuccess]() {
+  [actions.signinUserSuccess]() {
     return 'successed';
   },
-  [actions.loginUserFailure]() {
+  [actions.signinUserFailure]() {
     return 'failured';
   },
-  [actions.logoutUser]() {
+  [actions.signout]() {
     return 'none';
   },
 }, initGlobalState.userFetchingProfileState);
 
 const user = handleActions({
-  [actions.loginUserRequest](state) {
+  [actions.signinUserRequest](state) {
     return state;
   },
-  [actions.loginUserSuccess](state, { payload }) {
+  [actions.signinUserSuccess](state, { payload }) {
     return { isAuthenticated: true, ...payload };
   },
-  [actions.loginUserFailure]() {
+  [actions.signinUserFailure]() {
     return initGlobalState.user;
   },
-  [actions.logoutUser]() {
+  [actions.signout]() {
     return initGlobalState.user;
   },
 }, initGlobalState.user);

@@ -91,7 +91,7 @@ describe('authentication actions', () => {
 
       const expectedActions = [
         signinUserRequest(),
-        signinUserFailure(msg),
+        signinUserFailure({ error: msg }),
       ];
       await store.dispatch(signinUser(user, mockHistory));
       expect(store.getActions()).toEqual(expectedActions);
