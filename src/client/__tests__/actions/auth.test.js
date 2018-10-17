@@ -6,6 +6,7 @@ import thunk from 'redux-thunk';
 import jwtGen from 'jwt-simple';
 import * as authActions from '../../js/actions/auth';
 import urls from '../../js/api/urls';
+import errors from '../../js/errors';
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
@@ -91,7 +92,7 @@ describe('authentication actions', () => {
 
       const expectedActions = [
         signinUserRequest(),
-        signinUserFailure({ error: msg }),
+        signinUserFailure({ error: errors[msg] }),
       ];
       await store.dispatch(signinUser(user, mockHistory));
       expect(store.getActions()).toEqual(expectedActions);

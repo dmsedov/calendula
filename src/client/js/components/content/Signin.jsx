@@ -4,7 +4,7 @@ import FacebookLogin from 'react-facebook-login';
 import { GOOGLE_CLIENT_ID, FACEBOOK_APP_ID } from '../../client_config.json';
 import makeUserDataByApiType from '../../helpers/makeUserDataByApiType';
 import renderPreloaderLayout from '../../helpers/renderPreloader';
-// import renderErrorReport from '../../helpers/renderErrorReport';
+import errors from '../../errors';
 
 export default class Signin extends React.Component {
   handleRequestToForeignApi = () => {
@@ -15,26 +15,26 @@ export default class Signin extends React.Component {
 
   successGoogleResp = (resp) => {
     console.log(resp);
-    this.signUp('google', resp);
+    this.signInBy('google', resp);
   }
 
   failedGoogleResp = (resp) => {
     const { signinUserFailure } = this.props;
-    signinUserFailure({ error: resp.error });
+    signinUserFailure({ error: errors[resp.error] });
     // DELETE IN FUTURE!!!
     console.log(resp, 'failed resp');
   }
 
   successFbResp = (resp) => {
     console.log(resp, 'resp from Fb');
-    this.signUp('facebook', resp);
+    this.signInBy('facebook', resp);
   }
 
-  signUp = (type, resp) => {
-    const { history, signout } = this.props;
+  signInBy = (type, resp) => {
+    const { history, signinUser } = this.props;
 
     const userData = makeUserDataByApiType(type)(resp);
-    signout(userData, history);
+    signinUser(userData, history);
   }
 
   render() {

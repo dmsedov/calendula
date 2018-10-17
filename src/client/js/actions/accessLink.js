@@ -1,7 +1,7 @@
 import { createAction } from 'redux-actions';
 import apiCall from '../api';
-import { resetErrorMsg } from './error';
 import errorHandler from '../helpers/errorHandler';
+import errors from '../errors';
 
 export const fetchLinkRequest = createAction('FETCH_LINK_REQUEST');
 
@@ -19,6 +19,7 @@ export const fetchAccessLink = id => async (dispatch) => {
     // const link = 'http://localhost:3000/calendar?c_id=123456';
     dispatch(fetchLinkSuccess({ link }));
   } catch (e) {
-    dispatch(fetchLinkFailure({ error: errorHandler(e) }));
+    const errCode = errorHandler(e);
+    dispatch(fetchLinkFailure({ error: errors[errCode] }));
   }
 };

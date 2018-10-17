@@ -11,6 +11,7 @@ import {
   fetchAccessLink,
 } from '../../js/actions/accessLink';
 import urls from '../../js/api/urls';
+import errors from '../../js/errors';
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
@@ -80,7 +81,7 @@ describe('accessLink actions', () => {
 
       const expectedActions = [
         fetchLinkRequest(),
-        fetchLinkFailure({ error: msg }),
+        fetchLinkFailure({ error: errors[msg] }),
       ];
       await store.dispatch(fetchAccessLink(c_id));
       expect(store.getActions()).toEqual(expectedActions);

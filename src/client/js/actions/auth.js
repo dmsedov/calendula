@@ -3,7 +3,7 @@ import decodeJwt from 'jwt-decode';
 import apiCall from '../api';
 import paths from '../paths';
 import errorHandler from '../helpers/errorHandler';
-
+import errors from '../errors';
 
 export const signinUserRequest = createAction('SIGN_IN_USER_REQUEST');
 export const signinUserSuccess = createAction('SIGN_IN_USER_SUCCESS');
@@ -42,6 +42,7 @@ export const signinUser = (resp, history) => async (dispatch) => {
     //   history.push('/calendar');
     // }, 2000);
   } catch (e) {
-    dispatch(signinUserFailure({ error: errorHandler(e)}));
+    const errCode = errorHandler(e);
+    dispatch(signinUserFailure({ error: errors[errCode] }));
   }
 };
