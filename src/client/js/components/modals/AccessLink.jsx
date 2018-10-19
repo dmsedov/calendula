@@ -1,6 +1,7 @@
 import React from 'react';
 import { ModalHeader, ModalBody, Button } from 'reactstrap';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
+import { Icon } from 'antd';
 
 export default class AccessLink extends React.Component {
   state = {
@@ -13,8 +14,8 @@ export default class AccessLink extends React.Component {
   }
 
   handleGenAccessLink = async () => {
-    const { c_id, genAccessLink } = this.props;
-    genAccessLink(c_id);
+    const { c_id, fetchAccessLink } = this.props;
+    fetchAccessLink(c_id);
   }
 
   render() {
@@ -33,9 +34,7 @@ export default class AccessLink extends React.Component {
               text={accessLink}
               onCopy={() => { this.setState({ copied: !this.state.copied }); }}
             >
-              <Button disabled={!accessLink} onClick={this.handleCloseModal} color="primary" size="sm">
-                <i className="fa fa-clipboard"></i>
-              </Button>
+              <Icon type="copy" theme="twoTone" style={{ fontSize: '26px' }} onClick={this.handleCloseModal} />
             </CopyToClipboard>
             <Button onClick={this.handleGenAccessLink} color="primary" size="sm">Сгенерировать ссылку</Button>
           </div>
