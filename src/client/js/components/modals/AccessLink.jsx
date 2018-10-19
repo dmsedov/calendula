@@ -4,10 +4,6 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { Icon } from 'antd';
 
 export default class AccessLink extends React.Component {
-  state = {
-    copied: false,
-  };
-
   handleCloseModal = () => {
     const { toggle } = this.props;
     toggle();
@@ -20,6 +16,11 @@ export default class AccessLink extends React.Component {
 
   render() {
     const { accessLink } = this.props;
+    const iconStyle = {
+      fontSize: '1.5rem',
+      cursor: 'pointer',
+      pointerEvents: accessLink ? 'visiblePainted' : 'none',
+    };
 
     return (
       <div id="access-link">
@@ -32,9 +33,14 @@ export default class AccessLink extends React.Component {
             <input className="access-link" type="text" name="accessLink" value={accessLink} readOnly />
             <CopyToClipboard
               text={accessLink}
-              onCopy={() => { this.setState({ copied: !this.state.copied }); }}
             >
-              <Icon type="copy" theme="twoTone" style={{ fontSize: '26px' }} onClick={this.handleCloseModal} />
+              <Icon
+                type="copy"
+                theme="twoTone"
+                style={iconStyle}
+                twoToneColor="#00f"
+                onClick={this.handleCloseModal}
+              />
             </CopyToClipboard>
             <Button onClick={this.handleGenAccessLink} color="primary" size="sm">Сгенерировать ссылку</Button>
           </div>
