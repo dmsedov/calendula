@@ -36,6 +36,7 @@ const config = {
           loader: 'css-loader',
           options: {
             minimize: isProduction,
+            sourceMap: isProduction,
           },
         },
         {
@@ -44,11 +45,26 @@ const config = {
             plugins: function() {
               return [autoprefixer];
             },
+            sourceMap: isProduction,
           },
         },
         'sass-loader',
       ],
-    }],
+    },
+    {
+      test: /\.less$/,
+      use: [
+        {
+          loader: 'css-loader',
+          options: {
+            importLoaders: 1,
+            sourceMap: isProduction,
+          },
+        },
+        'less-loader',
+      ],
+    },
+  ],
   },
   plugins: [
     new MiniCssExtractPlugin({
