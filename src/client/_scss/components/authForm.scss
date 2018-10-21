@@ -26,7 +26,7 @@
   margin: 0;
   padding: 0;
 
-  .btn {
+  .btn-login {
     position: relative;
     margin-bottom: .5rem;
     width: 190px;
@@ -42,13 +42,13 @@
     }
   }
 
-  .btn.facebook-social {
+  .btn-login.facebook-social {
     &::before {
       content: url($facebookLogo);
     }
   }
 
-  .btn.google-social {
+  .btn-login.google-social {
     &::before {
       content: url($googleLogo);
     }

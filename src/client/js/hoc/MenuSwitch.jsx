@@ -1,5 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import {
+  UncontrolledDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+  NavItem,
+} from 'reactstrap';
 
 export default (Component) => {
   return class DynamicMenuBuilder extends React.Component {
@@ -16,36 +23,56 @@ export default (Component) => {
       }
     }
 
-    handleLogOut = (e) => {
-      e.preventDefault();
-      const { closeNavMenu, logout, history } = this.props;
-      closeNavMenu();
-      logout(history);
+    handleSignout = () => {
+      const { signoutUser, history } = this.props;
+      signoutUser(history);
     }
 
     makeAuthNavMenu = (pathName, isAdmin) => {
       const { paths: { main, calendar } } = this.props;
       const makeItemsByRights = () => {
         return isAdmin ? [
-          <Link to={main} className="nav-link" onClick={this.handleClickOnNavItem}>Главная</Link>,
-          <a className="nav-link" href="#" onClick={this.handleOpenModal('GenLink')}>Сгенерировать ссылку</a>,
-          <a className="nav-link" href="#" onClick={this.handleOpenModal('AccessForm')}>Управление доступом</a>,
+          <NavItem>
+            <Link to={main} className="nav-link" onClick={this.handleClickOnNavItem}>Главная</Link>
+          </NavItem>,
+          <NavItem>
+            <a className="nav-link" href="#" onClick={this.handleOpenModal('AccessLink')}>Cсылка для доступа</a>
+          </NavItem>,
+          <NavItem>
+            <a className="nav-link" href="#" onClick={this.handleOpenModal('AccessForm')}>Управление доступом</a>
+          </NavItem>,
         ] :
           [
-            <Link to={main} className="nav-link" onClick={this.handleClickOnNavItem}>Главная</Link>,
+            <NavItem>
+              <Link to={main} className="nav-link" onClick={this.handleClickOnNavItem}>Главная</Link>
+            </NavItem>,
           ];
       };
       return {
-        [main]: <Link to={calendar} className="nav-link" onClick={this.handleClickOnNavItem}>Календарь</Link>,
+        [main]: [
+          <UncontrolledDropdown nav inNavbar>
+            <DropdownToggle nav caret>
+               Календари
+            </DropdownToggle>
+            <DropdownMenu right>
+              <DropdownItem>
+                <Link to={calendar} className="nav-link" onClick={this.handleClickOnNavItem}>Мой календарь</Link>
+              </DropdownItem>
+              <DropdownItem>
+                <Link to={calendar} className="nav-link" onClick={this.handleClickOnNavItem}>календарь</Link>
+              </DropdownItem>
+            </DropdownMenu>
+          </UncontrolledDropdown>,
+        ],
         [calendar]: makeItemsByRights(),
       }[pathName];
     }
 
     makeNotAuthMenu = (pathName) => {
-      const { paths: { main, login } } = this.props;
+      const { paths: { main, signin } } = this.props;
       return {
-        [main]: <Link to={login} className="nav-link" onClick={this.handleClickOnNavItem}>Вход</Link>,
-        [login]: <Link to={main} className="nav-link" onClick={this.handleClickOnNavItem}>Главная</Link>,
+        [main]: <Link to={signin} className="nav-link" onClick={this.handleClickOnNavItem}>Вход</Link>,
+        [signin]: <Link to={main} className="nav-link" onClick={this.handleClickOnNavItem}>Главная</Link>,
       }[pathName];
     }
 
@@ -55,7 +82,9 @@ export default (Component) => {
     }
 
     renderNavMenuByPathAndRights = () => {
-      const { userStatus, isAdmin, location: { pathname } } = this.props;
+      const { userStatus, location: { pathname } } = this.props;
+      // MOCK user isAdmin cause id in path /calendar/id === c_id
+      const isAdmin = true; // delete
       const menuItemsByUserStatus = {
         authenticated: this.makeAuthNavMenu,
         guest: this.makeNotAuthMenu,
@@ -69,7 +98,7 @@ export default (Component) => {
       return (
         <Component
           {...this.props}
-          handleLogOut={this.handleLogOut}
+          handleSignout={this.handleSignout}
           handleOpenModal={this.handleOpenModal}
           renderNavMenu={this.renderNavMenuByPathAndRights}
         />

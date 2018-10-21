@@ -6,7 +6,6 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 // const ext = window.__REDUX_DEVTOOLS_EXTENSION__;
 // const devtoolMiddleware = ext && ext();
 /* eslint-enable */
-
 export default reducers => createStore(
   reducers,
   composeWithDevTools(

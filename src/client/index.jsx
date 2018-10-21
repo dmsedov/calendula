@@ -8,14 +8,16 @@ import { Provider } from 'react-redux';
 import decodeJwt from 'jwt-decode';
 import createStore from './js/store';
 import rootReducer from './js/reducers';
-import { loginUserSuccess } from './js/actions/auth';
+import { signinUserSuccess } from './js/actions/auth';
 import resizeScreen from './js/actions/uiScreen';
 import { closeNavMenu } from './js/actions/uiPopup';
 import App from './js/app';
-import { mediaQueryList } from './js/reducers/initGlobalState';
 
 const store = createStore(rootReducer);
-const jwt = localStorage.getItem('user');
+
+const mediaQueryList = window.matchMedia('(max-width: 767.98px)');
+
+store.dispatch(resizeScreen({ isSmallScreen: mediaQueryList.matches }));
 
 mediaQueryList.addListener((mq) => {
   store.dispatch(resizeScreen({ isSmallScreen: mq.matches }));
@@ -25,13 +27,23 @@ mediaQueryList.addListener((mq) => {
   }
 });
 
-if (localStorage.getItem('user')) {
-  const userData = decodeJwt(jwt);
-  const { name, isAdmin, imgUrl } = userData;
+const jwt = localStorage.getItem('userData');
 
-  store.dispatch(loginUserSuccess({ name, imgUrl, isAdmin, isAuthenticated: true }));
+if (jwt) {
+  const {
+    user,
+    calendar: { id },
+  } = decodeJwt(jwt);
+
+  store.dispatch(signinUserSuccess({ ...user, c_id: id }));
 }
 
+const options = {
+  position: 'bottom center',
+  timeout: 5000,
+  offset: '30px',
+  transition: 'scale',
+};
 
 ReactDOM.render(
   <Provider store={store}>

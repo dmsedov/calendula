@@ -1,34 +1,37 @@
 import { handleActions } from 'redux-actions';
 import * as actions from '../actions/auth';
-import { initGlobalState } from './initGlobalState';
+import initGlobalState from './initGlobalState';
 
 const userFetchingProfileState = handleActions({
-  [actions.loginUserRequest]() {
+  [actions.foreignAuthUserRequest]() {
+    return 'pending';
+  },
+  [actions.signinUserRequest]() {
     return 'requested';
   },
-  [actions.loginUserSuccess]() {
+  [actions.signinUserSuccess]() {
     return 'successed';
   },
-  [actions.loginUserFailure]() {
-    return 'failure';
+  [actions.signinUserFailure]() {
+    return 'failured';
   },
-  [actions.logoutUser]() {
+  [actions.signout]() {
     return 'none';
   },
 }, initGlobalState.userFetchingProfileState);
 
 const user = handleActions({
-  [actions.loginUserRequest](state) {
-    return { ...state, err: null };
+  [actions.signinUserRequest](state) {
+    return state;
   },
-  [actions.loginUserSuccess](state, { payload: { name, isAdmin, imgUrl } }) {
-    return { isAuthenticated: true, name, isAdmin, imgUrl, err: null };
+  [actions.signinUserSuccess](state, { payload }) {
+    return { isAuthenticated: true, ...payload };
   },
-  [actions.loginUserFailure](state, { payload: { descr } }) {
-    return { ...state, isAuthenticated: false, isAdmin: null, err: descr };
+  [actions.signinUserFailure]() {
+    return initGlobalState.user;
   },
-  [actions.logoutUser]() {
-    return { isAuthenticated: false, name: null, isAdmin: null, imgUrl: null, err: null };
+  [actions.signout]() {
+    return initGlobalState.user;
   },
 }, initGlobalState.user);
 

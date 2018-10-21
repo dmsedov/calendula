@@ -1,21 +1,22 @@
-export const mediaQueryList = window.matchMedia('(max-width: 767.98px)');
-
-export const initGlobalState = ({
+export default {
   userFetchingProfileState: 'none',
   user: {
     isAuthenticated: false,
+    uuid: null,
     name: null,
-    isAdmin: null,
+    email: null,
     imgUrl: null,
-    err: null,
+    c_id: null,
   },
   uiPopup: {
     isNavMenuOpen: false,
     isModalShown: false,
     modalName: null,
-    isPopoverOpen: false,
   },
   uiScreen: {
-    isSmallScreen: mediaQueryList.matches,
+    isSmallScreen: null,
   },
-});
+  accessLinkFetchingState: 'none',
+  accessLink: '',
+  errMsg: null,
+};

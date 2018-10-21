@@ -3,55 +3,52 @@ import GoogleLogin from 'react-google-login';
 import FacebookLogin from 'react-facebook-login';
 import { GOOGLE_CLIENT_ID, FACEBOOK_APP_ID } from '../../client_config.json';
 import makeUserDataByApiType from '../../helpers/makeUserDataByApiType';
-import renderPreloaderLayout from '../../helpers/renderPreloader';
-import renderErrorReport from '../../helpers/renderErrorReport';
-import { loginUserError } from '../../errors';
+import LoaderLayout from '../../containers/informers/Loader';
+import errors from '../../errors';
 
-
-export default class LoginPage extends React.Component {
+export default class Signin extends React.Component {
   handleRequestToForeignApi = () => {
-    const { loginUserRequest } = this.props;
+    const { foreignAuthUserRequest } = this.props;
 
-    loginUserRequest();
+    foreignAuthUserRequest();
   }
 
   successGoogleResp = (resp) => {
     console.log(resp);
-    this.signUp('google', resp);
+    this.signInBy('google', resp);
   }
 
   failedGoogleResp = (resp) => {
-    const { loginUserFailure } = this.props;
-    loginUserFailure({ descr: resp.error });
+    const { signinUserFailure } = this.props;
+    signinUserFailure({ error: errors[resp.error] });
+    // DELETE IN FUTURE!!!
     console.log(resp, 'failed resp');
   }
 
   successFbResp = (resp) => {
     console.log(resp, 'resp from Fb');
-    this.signUp('facebook', resp);
+    this.signInBy('facebook', resp);
   }
 
-  signUp = (type, resp) => {
-    const { history, login } = this.props;
+  signInBy = (type, resp) => {
+    const { history, signinUser } = this.props;
 
     const userData = makeUserDataByApiType(type)(resp);
-    login(userData, history);
+    signinUser(userData, history);
   }
 
   render() {
-    const { requestStatus, user: { err } } = this.props;
-
     return (
       <div id="auth-form-content">
         <div className="auth-form">
-          {requestStatus === 'requested' ? renderPreloaderLayout('Аутентификация') : null}
+          <LoaderLayout />
           <h2>Вход</h2>
           <p className="auth-tip">Войти через соцсети:</p>
           <div className="list-sm">
             <GoogleLogin
               clientId={GOOGLE_CLIENT_ID}
               buttonText="Google"
-              className="btn google-social"
+              className="btn-login google-social"
               onRequest={this.handleRequestToForeignApi}
               onSuccess={this.successGoogleResp}
               onFailure={this.failedGoogleResp}
@@ -60,12 +57,11 @@ export default class LoginPage extends React.Component {
               appId={FACEBOOK_APP_ID}
               fields="name,email,picture"
               textButton="Facebook"
-              cssClass="btn facebook-social"
+              cssClass="btn-login facebook-social"
               callback={this.successFbResp}
               onClick={this.handleRequestToForeignApi}
             />
           </div>
-          {requestStatus === 'failure' ? renderErrorReport(loginUserError(err)) : null}
         </div>
       </div>
     );

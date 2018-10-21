@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Modal } from 'reactstrap';
+import AccessLink from '../modals/AccessLink';
 import AccessForm from '../modals/AccessForm';
 import Search from '../modals/Search';
 import * as uiActions from '../../actions/uiPopup';
@@ -16,6 +17,7 @@ class ModalConductor extends React.Component {
     const { isModalShown, modalName } = this.props;
 
     const modals = {
+      AccessLink,
       Search,
       AccessForm,
     };

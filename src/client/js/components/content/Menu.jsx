@@ -1,16 +1,14 @@
 import React from 'react';
 import _ from 'lodash';
-import { Nav, NavItem } from 'reactstrap';
+import { Nav } from 'reactstrap';
 
 export default class Menu extends React.PureComponent {
   componentDidUpdate(prevProps) {
-    console.log('updating');
-    const { navMenu, isNavMenuOpen, isSmallScreen } = prevProps;
-    if (!isSmallScreen || isNavMenuOpen) {
-      this.snapshotNavMenu = null;
-      console.log('condition update');
-    } else if (!isNavMenuOpen) {
+    const { navMenu, isSmallScreen } = prevProps;
+    if (this.props.isNavMenuOpen && isSmallScreen) {
       this.snapshotNavMenu = navMenu;
+    } else {
+      this.snapshotNavMenu = null;
     }
   }
 
@@ -19,7 +17,7 @@ export default class Menu extends React.PureComponent {
     return (
       <Nav navbar>
         {React.Children.map(this.snapshotNavMenu || navMenu, item => (
-          <NavItem key={_.uniqueId()}>{item}</NavItem>
+          <div key={_.uniqueId()}>{item}</div>
         ))}
       </Nav>
     );

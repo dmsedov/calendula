@@ -7,4 +7,5 @@ const mapStateToProps = (state) => {
   return state.user;
 };
 
-export default withRouter(connect(mapStateToProps, actionCreators)(Component));
+export default withRouter(
+  connect(mapStateToProps, actionCreators)(Component));

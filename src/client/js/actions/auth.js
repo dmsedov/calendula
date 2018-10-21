@@ -1,34 +1,48 @@
 import { createAction } from 'redux-actions';
 import decodeJwt from 'jwt-decode';
-import * as api from '../api';
-import { loginUserError } from '../errors';
+import apiCall from '../api';
+import paths from '../paths';
+import errorHandler from '../helpers/errorHandler';
+import errors from '../errors';
 
-export const loginUserRequest = createAction('LOGIN_USER_REQUEST');
-export const loginUserSuccess = createAction('LOGIN__USER_SUCCESS');
-export const loginUserFailure = createAction('LOGIN__USER_FAILURE');
+export const signinUserRequest = createAction('SIGN_IN_USER_REQUEST');
+export const signinUserSuccess = createAction('SIGN_IN_USER_SUCCESS');
+export const signinUserFailure = createAction('SIGN_IN_USER_FAILURE');
+export const foreignAuthUserRequest = createAction('FOREIGN_AUTH_USER_REQUEST');
+export const signout = createAction('SIGN_OUT_USER');
 
-export const logoutUser = createAction('LOGOUT_USER');
-
-export const logout = history => (dispatch) => {
+export const signoutUser = history => (dispatch) => {
   localStorage.removeItem('user');
-  dispatch(logoutUser());
-  history.push('/login');
+  dispatch(signout());
+  history.push(paths.login);
 };
 
-export const login = (resp, history) => async (dispatch) => {
+export const signinUser = (resp, history) => async (dispatch) => {
+  dispatch(signinUserRequest());
+  const { public: { signin } } = apiCall;
   try {
-    // const res = await api.loginUser(resp); // заглушка
-    setTimeout(() => {
-      const res = { data: { token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRG1pdHJ5IFNlZG92IiwiaXNBZG1pbiI6dHJ1ZSwiaW1nVXJsIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tLy1WNkMyYXh4VWJQNC9BQUFBQUFBQUFBSS9BQUFBQUFBQUFBQS9BQU4zMURWZHp2VlJ0MmkxYk9od3NVNlg0dDM3MFdoakp3L3M5Ni1jL3Bob3RvLmpwZyJ9.CRyw1rNQV6O__UzBvsmZOJLquxGnDxutq7uJhZ1eRgM' } };
-      localStorage.setItem('user', res.data.token);
-      const { name, isAdmin, imgUrl } = decodeJwt(res.data.token);
-      dispatch(loginUserSuccess({ name, isAdmin, imgUrl }));
-      history.push('/calendar');
-    }, 2000);
+    const {
+      data: {
+        data: { jwt },
+      },
+    } = await signin(resp);
+    localStorage.setItem('userData', jwt);
+    const {
+      user,
+      calendar: { id },
+    } = decodeJwt(jwt);
+    dispatch(signinUserSuccess({ ...user, c_id: id }));
+    history.push(paths.calendar);
 
-    // dispatch(loginUserSuccess(res));
+    // setTimeout(() => {
+    //   const res = { data: { jwt: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InV1aWQiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkRtaXRyeSBTZWRvdiIsImVtYWlsIjoiZG1zZWRvdjkyQGdtYWlsLmNvbSIsImltZ1VybCI6Imh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS8tVjZDMmF4eFViUDQvQUFBQUFBQUFBQUkvQUFBQUFBQUFBQUEvQUFOMzFEVmR6dlZSdDJpMWJPaHdzVTZYNHQzNzBXaGpKdy9zOTYtYy9waG90by5qcGcifSwiY2FsZW5kYXIiOnsiaWQiOjEyM319.DuqxRXEMk0R-3huOlaQ_SU8Fb-4UuQ1nRXd_R5cuBY0' } };
+    //   localStorage.setItem('userData', res.data.jwt);
+    //   const { user, calendar: { id } } = decodeJwt(res.data.jwt);
+    //   dispatch(signinUserSuccess({ ...user, c_id: id }));
+    //   history.push('/calendar');
+    // }, 2000);
   } catch (e) {
-    const msg = loginUserError('fatal');
-    dispatch(loginUserFailure({ err: msg }));
+    const errCode = errorHandler(e);
+    dispatch(signinUserFailure({ error: errors[errCode] }));
   }
 };
