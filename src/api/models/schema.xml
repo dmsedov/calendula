@@ -37,46 +37,31 @@
             <type label="SET" length="1" sql="SET" quote=""/>
             <type label="Bit" length="0" sql="bit" quote=""/>
         </group>
-    </datatypes><table x="868" y="114" name="Year">
+    </datatypes><table x="905" y="94" name="Month">
     <row name="id" null="1" autoincrement="1">
         <datatype>INTEGER</datatype>
         <default>NULL</default></row>
-    <row name="leap_year" null="1" autoincrement="0">
-        <datatype>bit</datatype>
+    <row name="id_Month_Info" null="1" autoincrement="0">
+        <datatype>INTEGER</datatype>
+        <default>NULL</default><relation table="Month_Info" row="id" />
+    </row>
+    <row name="year" null="1" autoincrement="0">
+        <datatype>INTEGER</datatype>
         <default>NULL</default></row>
     <key type="PRIMARY" name="">
         <part>id</part>
     </key>
 </table>
-    <table x="688" y="115" name="Month">
+    <table x="715" y="79" name="Day">
         <row name="id" null="1" autoincrement="1">
             <datatype>INTEGER</datatype>
             <default>NULL</default></row>
-        <row name="id_Year" null="1" autoincrement="0">
-            <datatype>INTEGER</datatype>
-            <default>NULL</default><relation table="Year" row="id" />
-        </row>
-        <row name="name" null="1" autoincrement="0">
-            <datatype>VARCHAR</datatype>
-            <default>NULL</default></row>
-        <row name="quantity_days" null="1" autoincrement="0">
-            <datatype>INTEGER</datatype>
-            <default>NULL</default></row>
-        <key type="PRIMARY" name="">
-            <part>id</part>
-        </key>
-    </table>
-    <table x="532" y="115" name="Day">
-        <row name="id" null="1" autoincrement="1">
+        <row name="number" null="1" autoincrement="0">
             <datatype>INTEGER</datatype>
             <default>NULL</default></row>
         <row name="week_name" null="1" autoincrement="0">
             <datatype>VARCHAR</datatype>
             <default>NULL</default></row>
-        <row name="id_Events" null="1" autoincrement="0">
-            <datatype>INTEGER</datatype>
-            <default>NULL</default><relation table="Events" row="id" />
-        </row>
         <row name="id_Month" null="1" autoincrement="0">
             <datatype>INTEGER</datatype>
             <default>NULL</default><relation table="Month" row="id" />
@@ -107,14 +92,11 @@
         <row name="update_at" null="1" autoincrement="0">
             <datatype>DATETIME</datatype>
             <default>NULL</default></row>
-        <row name="src_network" null="1" autoincrement="0">
-            <datatype>VARCHAR</datatype>
-            <default>NULL</default></row>
         <key type="PRIMARY" name="">
             <part>id</part>
         </key>
     </table>
-    <table x="328" y="82" name="Events">
+    <table x="519" y="50" name="Events">
         <row name="id" null="1" autoincrement="1">
             <datatype>INTEGER</datatype>
             <default>NULL</default></row>
@@ -128,6 +110,10 @@
             <datatype>INTEGER</datatype>
             <default>NULL</default><relation table="Users" row="id" />
         </row>
+        <row name="id_Day" null="1" autoincrement="0">
+            <datatype>INTEGER</datatype>
+            <default>NULL</default><relation table="Day" row="id" />
+        </row>
         <row name="create_at" null="1" autoincrement="0">
             <datatype>DATETIME</datatype>
             <default>NULL</default></row>
@@ -138,7 +124,7 @@
             <part>id</part>
         </key>
     </table>
-    <table x="440" y="386" name="Month_Days">
+    <table x="1108" y="104" name="Month_Info">
         <row name="id" null="1" autoincrement="1">
             <datatype>INTEGER</datatype>
             <default>NULL</default></row>
@@ -154,6 +140,37 @@
         <row name="quantity_non_leap" null="1" autoincrement="0">
             <datatype>INTEGER</datatype>
             <default>NULL</default></row>
+        <key type="PRIMARY" name="">
+            <part>id</part>
+        </key>
+    </table>
+    <table x="297" y="325" name="Calendar">
+        <row name="id" null="1" autoincrement="1">
+            <datatype>INTEGER</datatype>
+            <default>NULL</default></row>
+        <row name="id_Users" null="1" autoincrement="0">
+            <datatype>INTEGER</datatype>
+            <default>NULL</default><relation table="Users" row="id" />
+        </row>
+        <key type="PRIMARY" name="">
+            <part>id</part>
+        </key>
+    </table>
+    <table x="528" y="252" name="Guests">
+        <row name="id" null="1" autoincrement="1">
+            <datatype>INTEGER</datatype>
+            <default>NULL</default></row>
+        <row name="uuid_link" null="1" autoincrement="0">
+            <datatype>VARCHAR</datatype>
+            <default>NULL</default></row>
+        <row name="id_Users" null="1" autoincrement="0">
+            <datatype>INTEGER</datatype>
+            <default>NULL</default><relation table="Users" row="id" />
+        </row>
+        <row name="id_Calendar" null="1" autoincrement="0">
+            <datatype>INTEGER</datatype>
+            <default>NULL</default><relation table="Calendar" row="id" />
+        </row>
         <key type="PRIMARY" name="">
             <part>id</part>
         </key>

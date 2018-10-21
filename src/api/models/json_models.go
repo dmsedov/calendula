@@ -19,3 +19,16 @@ type Config struct {
 	DB        string `json:"db"`
 	SecretKey string `json:"secret_key"`
 }
+
+type CalendarJSON struct {
+	PreviousMonth     Month  `json:"previous_month"`
+	CurrentMonth      Month  `json:"current_month"`
+	NextMonth         Month  `json:"next_month"`
+	PreviousMonthDays []*Day `json:"previous_month_days"`
+	CurrentMonthDays  []*Day `json:"current_month_days"`
+	NextMonthDays     []*Day `json:"next_month_days"`
+}
+
+//type CalendarFilter struct {
+//	MonthID
+//}

@@ -1,11 +1,14 @@
 package controller
 
 import (
+	"encoding/json"
+	"fmt"
+	"log"
+
 	"calendula/src/api/models"
 	"calendula/src/api/service"
-	"encoding/json"
+
 	"github.com/kataras/iris"
-	"log"
 )
 
 type ApiController struct {
@@ -20,7 +23,7 @@ func CreateApiController(config *models.Config) *ApiController {
 	return ctrl
 }
 
-func (ctrl ApiController) Login(ctx iris.Context) {
+func (ctrl ApiController) SignUp(ctx iris.Context) {
 	rawJSON := ctx.FormValue("data")
 
 	auth := new(models.User)
@@ -33,7 +36,7 @@ func (ctrl ApiController) Login(ctx iris.Context) {
 	}
 
 	if auth.UUID != "" {
-		jwtString, err := ctrl.service.Login(auth)
+		jwtString, err := ctrl.service.SigUp(auth)
 
 		// if jwt generated correct without errors
 		if err == nil {
@@ -51,9 +54,20 @@ func (ctrl ApiController) Login(ctx iris.Context) {
 }
 
 func (ctrl ApiController) GetCalendar(ctx iris.Context) {
+	calendar := ctrl.service.Calendar.Get("")
 
-	ctx.Writef("%+v", "Токен заебись, можно продолжать!")
+	bytes, err := json.Marshal(calendar)
+	if err != nil {
+		log.Println("marshal calendar error: ", err)
+	}
 
+	ctx.Write(bytes)
+}
+
+func (ctrl ApiController) GenerateGuestLink(ctx iris.Context) {
+	jwtData := ctrl.service.ParseJWT(ctrl.GetJwtString(ctx))
+
+	ctrl.service.Guest.CreateGuestLink(jwtData)
 }
 
 func createError(ctx iris.Context, code int, msg string) {

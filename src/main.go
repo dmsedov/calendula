@@ -1,12 +1,15 @@
 package main
 
 import (
-	"calendula/src/api/controller"
-	"calendula/src/api/models"
 	"encoding/json"
 	"flag"
-	"github.com/kataras/iris"
 	"io/ioutil"
+
+	"calendula/src/api"
+	"calendula/src/api/controller"
+	"calendula/src/api/models"
+
+	"github.com/kataras/iris"
 )
 
 const (
@@ -32,34 +35,18 @@ func init() {
 	}
 }
 
-func newApp(debugMode bool) *iris.Application {
-	app := iris.New()
-	if debugMode {
-		app.Logger().SetLevel("debug")
-	}
-
-	// Serve static files
-	app.StaticWeb("/static/", "static/")
-	app.StaticWeb("/src/client/images/", "src/client/images/")
-
-	app.Get("/", func(ctx iris.Context) {
-		ctx.ServeFile("static/index.html", false)
-	})
-
-	return app
-}
-
 func main() {
-	app := newApp(true)
+	app := api.NewApp(config.DebugMode)
 
 	ctrl := controller.CreateApiController(config)
 	// Handle API routes
 	apiRouter := app.Party("/api/v1")
 
-	// POST: /login
-	apiRouter.Post("/login", ctrl.Login)
+	// REST api routes
+	apiRouter.Post("/signup", ctrl.SignUp) // get jwt
 
 	apiRouter.Get("/calendar", ctrl.AuthMiddleware, ctrl.GetCalendar)
+	apiRouter.Get("/guest_link", ctrl.AuthMiddleware, ctrl.GenerateGuestLink)
 
 	app.Run(iris.Addr(config.Address))
 }

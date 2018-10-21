@@ -1,18 +1,18 @@
 package service
 
 import (
-	"errors"
-	"log"
-
 	"calendula/src/api/models"
-
+	"errors"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
+	"log"
 )
 
 type CalendulaService struct {
-	config *models.Config
+	config   *models.Config
+	Calendar *CalendarService
+	Guest *GuestService
 }
 
 func CreateCalendulaService(config *models.Config) *CalendulaService {
@@ -21,14 +21,22 @@ func CreateCalendulaService(config *models.Config) *CalendulaService {
 
 	db.AutoMigrate(&models.User{})
 	db.AutoMigrate(&models.Calendar{})
+	db.AutoMigrate(&models.MonthInfo{})
+	db.AutoMigrate(&models.Month{})
+	db.AutoMigrate(&models.Day{})
+	db.AutoMigrate(&models.Event{})
+	db.AutoMigrate(&models.Year{})
+	db.AutoMigrate(&models.Guest{})
 
 	srv := new(CalendulaService)
+	srv.Calendar = CreateCalendarService(config)
+	srv.Guest = CreateGuestService(config)
 	srv.config = config
 
 	return srv
 }
 
-func (srv *CalendulaService) Login(authData *models.User) (string, error) {
+func (srv *CalendulaService) SigUp(authData *models.User) (string, error) {
 	db := getDb(srv.config)
 	if db == nil {
 		return "", errors.New("db failed")
@@ -124,4 +132,17 @@ func getDb(config *models.Config) *gorm.DB {
 	}
 
 	return db
+}
+
+func (srv *CalendulaService) ParseJWT(tokenStr string) *models.JWTData {
+	token, err := jwt.ParseWithClaims(tokenStr, &models.JWTData{}, func(token *jwt.Token) (interface{}, error) {
+		return []byte(srv.config.SecretKey), nil
+	})
+
+	if claims, ok := token.Claims.(*models.JWTData); ok && token.Valid {
+		return claims
+	} else {
+		log.Println(err)
+		return nil
+	}
 }

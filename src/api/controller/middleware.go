@@ -8,7 +8,7 @@ import (
 )
 
 func (ctrl ApiController) AuthMiddleware(ctx iris.Context) {
-	jwtString := getJwtString(ctx)
+	jwtString := ctrl.GetJwtString(ctx)
 
 	jwtData := new(models.JWTData)
 	token, _ := jwt.ParseWithClaims(jwtString, jwtData, func(token *jwt.Token) (interface{}, error) {
@@ -24,7 +24,7 @@ func (ctrl ApiController) AuthMiddleware(ctx iris.Context) {
 	}
 }
 
-func getJwtString(ctx iris.Context) string {
+func (ctrl ApiController) GetJwtString(ctx iris.Context) string {
 	headerValue := string(ctx.GetHeader(models.AuthHeader))
 
 	if !strings.HasPrefix(headerValue, models.Bearer) {
