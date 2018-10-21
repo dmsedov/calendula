@@ -1,72 +1,52 @@
 package main
 
 import (
-	"fmt"
-	"log"
-	"net/http"
+	"encoding/json"
+	"flag"
+	"io/ioutil"
 
-	"github.com/gorilla/mux"
+	"calendula/src/api"
+	"calendula/src/api/controller"
+	"calendula/src/api/models"
+
+	"github.com/kataras/iris"
 )
 
-// func init() {
-// 	pathPtr := flag.String("config", defaultConfigPath, "Path for configuration file")
-// 	flag.Parse()
+const (
+	defaultConfigPath = "config.json"
+)
 
-// 	if *pathPtr == "" {
-// 		panic("No config path")
-// 	}
+var config *models.Config
 
-// 	bytes, err := ioutil.ReadFile(*pathPtr)
-// 	if err != nil {
-// 		panic("Read config file error")
-// 	}
+func init() {
+	pathPtr := flag.String("config", defaultConfigPath, "Path for configuration file")
+	flag.Parse()
 
-// 	config = new(api.Config)
+	bytes, err := ioutil.ReadFile(*pathPtr)
 
-// 	if err = json.Unmarshal(bytes, config); err != nil {
-// 		panic("unmarshal config file error: " + err.Error())
-// 	}
-// }
+	if err != nil {
+		panic("Read config file error")
+	}
 
-func main() {
-	r := mux.NewRouter()
+	config = new(models.Config)
 
-	// Handle API routes
-	api := r.PathPrefix("/api/").Subrouter()
-	api.HandleFunc("/hello", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintln(w, "hello from api")
-	})
-
-	// Serve static files
-	// r.PathPrefix("/public/").Handler(http.StripPrefix("/public/", http.FileServer(http.Dir("public"))))
-	r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("static/"))))
-	r.PathPrefix("/src/client/images/").Handler(http.StripPrefix("/src/client/images/", http.FileServer(http.Dir("src/client/images/"))))
-
-	// Serve index page on all unhandled routes
-	r.PathPrefix("/").HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		http.ServeFile(w, r, "static/index.html")
-	})
-
-	fmt.Println("http://localhost:8888")
-	log.Fatal(http.ListenAndServe(":8888", r))
+	if err = json.Unmarshal(bytes, config); err != nil {
+		panic("unmarshal config file error: " + err.Error())
+	}
 }
 
-// func IndexHandler(w http.ResponseWriter, r *http.Request) {
-// 	http.ServeFile(w, r, "/static/index.html")
-// }
+func main() {
+	app := api.NewApp(config.DebugMode)
 
-// func main() {
-// 	router := mux.NewRouter()
+	ctrl := controller.CreateApiController(config)
+	// Handle API routes
+	apiRouter := app.Party("/api/v1")
 
-// 	// Configuring static content to be served.
-// 	router.Handle("/static/", http.FileServer(http.Dir("static/")))
+	// REST api routes
+	apiRouter.Post("/signup", ctrl.SignUp) // get jwt
 
-// 	// Routing to the Client-Side Application.
-// 	router.HandleFunc("/", IndexHandler).Methods("GET")
+	apiRouter.Get("/calendar", ctrl.AuthMiddleware, ctrl.GetCalendar)
+	apiRouter.Get("/guest_link", ctrl.AuthMiddleware, ctrl.GenerateGuestLink)
 
-// 	log.Printf(fmt.Sprintf("Starting HTTP Server on Host %s:%d.", "127.0.0.1", 8888))
-
-// 	if err := http.ListenAndServe(fmt.Sprintf("%s:%d", "127.0.0.1", 8888), router); err != nil {
-// 		log.Fatal(err)
-// 	}
-// }
+	app.Run(iris.Addr(config.Address))
+}
