@@ -40,13 +40,13 @@ func main() {
 
 	ctrl := controller.CreateApiController(config)
 	// Handle API routes
-	apiRouter := app.Party("/api/v1")
+	apiRouter := app.Party("/api")
 
 	// REST api routes
-	apiRouter.Post("/signup", ctrl.SignUp) // get jwt
+	apiRouter.Post("/signin", ctrl.SignIn) // get jwt
 
 	apiRouter.Get("/calendar", ctrl.AuthMiddleware, ctrl.GetCalendar)
-	apiRouter.Get("/guest_link", ctrl.AuthMiddleware, ctrl.GenerateGuestLink)
+	apiRouter.Get("/access_link", ctrl.AuthMiddleware, ctrl.GenerateGuestLink)
 
 	app.Run(iris.Addr(config.Address))
 }

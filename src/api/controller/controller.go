@@ -2,7 +2,6 @@ package controller
 
 import (
 	"encoding/json"
-	"fmt"
 	"log"
 
 	"calendula/src/api/models"
@@ -23,7 +22,7 @@ func CreateApiController(config *models.Config) *ApiController {
 	return ctrl
 }
 
-func (ctrl ApiController) SignUp(ctx iris.Context) {
+func (ctrl ApiController) SignIn(ctx iris.Context) {
 	rawJSON := ctx.FormValue("data")
 
 	auth := new(models.User)
@@ -67,7 +66,7 @@ func (ctrl ApiController) GetCalendar(ctx iris.Context) {
 func (ctrl ApiController) GenerateGuestLink(ctx iris.Context) {
 	jwtData := ctrl.service.ParseJWT(ctrl.GetJwtString(ctx))
 
-	ctrl.service.Guest.CreateGuestLink(jwtData)
+	ctrl.service.Guest.CreateGuestLink(*jwtData)
 }
 
 func createError(ctx iris.Context, code int, msg string) {

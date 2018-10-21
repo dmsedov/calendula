@@ -2,6 +2,7 @@ package service
 
 import (
 	"calendula/src/api/models"
+	"fmt"
 	"github.com/satori/go.uuid"
 
 	_ "github.com/jinzhu/gorm/dialects/postgres"
@@ -25,7 +26,7 @@ func CreateGuestService(config *models.Config) *GuestService {
 func (srv *GuestService) CreateGuestLink(data models.JWTData) {
 	uuidLink := uuid.NewV4()
 
-	
+	fmt.Println(uuidLink)
 
 
 }
