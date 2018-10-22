@@ -8,7 +8,6 @@ import (
 	"calendula/src/api/controller"
 	"calendula/src/api/models"
 
-	"github.com/gin-gonic/contrib/static"
 	"github.com/gin-gonic/gin"
 )
 
@@ -44,7 +43,7 @@ func main() {
 	router.Static("/src/client/images", "src/client/images/")
 
 	// Serve frontend static files
-	router.Use(static.Serve("/", static.LocalFile("./views", true)))
+	router.StaticFile("/", "static/index.html")
 
 	ctrl := controller.CreateApiController(config)
 
