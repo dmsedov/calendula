@@ -1,4 +1,6 @@
-db:
+version: '3'
+
+  db:
     image: postgres:alpine
     container_name: calendula-postgres
     volumes:
