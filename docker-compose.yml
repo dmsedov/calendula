@@ -1,0 +1,7 @@
+db:
+    image: postgres:alpine
+    container_name: calendula-postgres
+    volumes:
+      - /private/var/lib/postgresql/data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
