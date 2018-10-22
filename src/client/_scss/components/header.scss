@@ -12,18 +12,19 @@ header {
   height: $headerHeight;
 }
 
+.navbar_bg-color_yellow {
+  background-color: yellow;
+}
 .menu-position {
   height: inherit;
   z-index: 1040;
 }
-
 .navbar {
   background-color: $blue;
 }
-
 .navbar-expand-lg {
   position: relative;
-  background-color: inherit;
+  // background-color: inherit;
   @media (min-width: 1230px) {
     width: $maxContentWidth;
   }

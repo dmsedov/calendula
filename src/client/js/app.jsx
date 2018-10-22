@@ -8,7 +8,8 @@ import ErrorReport from './containers/ErrorReport';
 // import ErrorContent from './js/components/alerts/ErrorContent';
 
 const App = () => {
-  return (
+  return [
+    <div id="header-back" className="bg-primary" />,
     <div id="wrapper">
       <Header />
       <Main>
@@ -17,7 +18,7 @@ const App = () => {
       <ModalConductor />
       <ErrorReport />
     </div>
-  );
+  ];
 };
 
 export default App;

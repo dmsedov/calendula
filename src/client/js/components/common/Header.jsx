@@ -48,34 +48,32 @@ export default class Header extends React.Component {
     } = this.props;
 
     return (
-      <header>
+      <header className="header">
         <div className="menu-position">
-          <div ref={this.setRefToNode} className="menu-wrapper">
-            <Navbar dark expand="md">
-              <NavbarBrand href={main}>Calendula</NavbarBrand>
-              <NavbarToggler className="mr-2" onClick={this.toggleNavBar} />
-              <Collapse isOpen={isNavMenuOpen} exit={isSmallScreen} navbar>
-                <Menu
-                  isNavMenuOpen={isNavMenuOpen}
-                  navMenu={renderNavMenu()}
-                  isSmallScreen={isSmallScreen}
-                />
-              </Collapse>
-            </Navbar>
-            <div className="pos-container">
-              <Search
-                openModal={handleOpenModal}
-                show={pathname === calendar}
-              />
-              <UserBio
-                userStatus={userStatus}
-                name={name}
-                imgUrl={imgUrl}
-                handleSignout={handleSignout}
+          <Navbar dark expand="md" className="navbar_bg-color_yellow">
+            <NavbarBrand href={main}>Calendula</NavbarBrand>
+            <NavbarToggler className="mr-2" onClick={this.toggleNavBar} />
+            <Collapse isOpen={isNavMenuOpen} exit={isSmallScreen} navbar>
+              <Menu
                 isNavMenuOpen={isNavMenuOpen}
-                closeNavMenu={closeNavMenu}
+                navMenu={renderNavMenu()}
+                isSmallScreen={isSmallScreen}
               />
-            </div>
+            </Collapse>
+          </Navbar>
+          <div className="pos-container">
+            <Search
+              openModal={handleOpenModal}
+              show={pathname === calendar}
+            />
+            <UserBio
+              userStatus={userStatus}
+              name={name}
+              imgUrl={imgUrl}
+              handleSignout={handleSignout}
+              isNavMenuOpen={isNavMenuOpen}
+              closeNavMenu={closeNavMenu}
+            />
           </div>
         </div>
       </header>
