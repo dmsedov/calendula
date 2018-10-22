@@ -2,30 +2,36 @@ package controller
 
 import (
 	"calendula/src/api/models"
-	"github.com/dgrijalva/jwt-go"
-	"github.com/kataras/iris"
+	"net/http"
 	"strings"
+
+	jwt "github.com/dgrijalva/jwt-go"
+	"github.com/gin-gonic/gin"
 )
 
-func (ctrl ApiController) AuthMiddleware(ctx iris.Context) {
-	jwtString := ctrl.GetJwtString(ctx)
+func (ctrl ApiController) AuthMiddleware() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		jwtString := ctrl.GetJwtString(c)
 
-	jwtData := new(models.JWTData)
-	token, _ := jwt.ParseWithClaims(jwtString, jwtData, func(token *jwt.Token) (interface{}, error) {
-		return []byte(ctrl.config.SecretKey), nil
-	})
+		jwtData := new(models.JWTData)
+		token, _ := jwt.ParseWithClaims(jwtString, jwtData, func(token *jwt.Token) (interface{}, error) {
+			return []byte(ctrl.config.SecretKey), nil
+		})
 
-	if token.Valid {
-		ctx.Next()
-	}
+		if token.Valid {
+			c.Next()
+		}
 
-	if !token.Valid {
-		createError(ctx, iris.StatusUnauthorized, "Unauthorized")
+		if !token.Valid {
+			c.Abort()
+			createError(c, http.StatusUnauthorized, "Unauthorized")
+			return
+		}
 	}
 }
 
-func (ctrl ApiController) GetJwtString(ctx iris.Context) string {
-	headerValue := string(ctx.GetHeader(models.AuthHeader))
+func (ctrl ApiController) GetJwtString(c *gin.Context) string {
+	headerValue := string(c.GetHeader(models.AuthHeader))
 
 	if !strings.HasPrefix(headerValue, models.Bearer) {
 		return ""

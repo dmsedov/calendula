@@ -5,11 +5,11 @@ import (
 	"flag"
 	"io/ioutil"
 
-	"calendula/src/api"
 	"calendula/src/api/controller"
 	"calendula/src/api/models"
 
-	"github.com/kataras/iris"
+	"github.com/gin-gonic/contrib/static"
+	"github.com/gin-gonic/gin"
 )
 
 const (
@@ -36,17 +36,27 @@ func init() {
 }
 
 func main() {
-	app := api.NewApp(config.DebugMode)
+	gin.SetMode(gin.ReleaseMode)
+	router := gin.Default()
+
+	// Serve static files
+	router.Static("/static", "static/")
+	router.Static("/src/client/images", "src/client/images/")
+
+	// Serve frontend static files
+	router.Use(static.Serve("/", static.LocalFile("./views", true)))
 
 	ctrl := controller.CreateApiController(config)
-	// Handle API routes
-	apiRouter := app.Party("/api")
 
-	// REST api routes
-	apiRouter.Post("/signin", ctrl.SignIn) // get jwt
+	// Setup route group for the API
+	api := router.Group("/api")
+	{
+		api.POST("/sigin", ctrl.SignIn)
 
-	apiRouter.Get("/calendar", ctrl.AuthMiddleware, ctrl.GetCalendar)
-	apiRouter.Get("/access_link", ctrl.AuthMiddleware, ctrl.GenerateGuestLink)
+		api.Use(ctrl.AuthMiddleware())
+		api.GET("/calendar", ctrl.GetCalendar)
+		// apiRouter.Get("/access_link", ctrl.AuthMiddleware, ctrl.GenerateGuestLink)
+	}
 
-	app.Run(iris.Addr(config.Address))
+	router.Run(config.Address)
 }

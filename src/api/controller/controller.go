@@ -2,12 +2,14 @@ package controller
 
 import (
 	"encoding/json"
+	"fmt"
 	"log"
+	"net/http"
 
 	"calendula/src/api/models"
 	"calendula/src/api/service"
 
-	"github.com/kataras/iris"
+	"github.com/gin-gonic/gin"
 )
 
 type ApiController struct {
@@ -22,15 +24,16 @@ func CreateApiController(config *models.Config) *ApiController {
 	return ctrl
 }
 
-func (ctrl ApiController) SignIn(ctx iris.Context) {
-	rawJSON := ctx.FormValue("data")
+func (ctrl ApiController) SignIn(c *gin.Context) {
+	rawJSON := c.Query("data")
+	fmt.Println("Хуй пизда")
 
 	auth := new(models.User)
 
 	if err := json.Unmarshal([]byte(rawJSON), auth); err != nil {
 		log.Println("invalid json", err)
 
-		createError(ctx, iris.StatusBadRequest, "Invalid json")
+		createError(c, http.StatusBadRequest, "Invalid json")
 		return
 	}
 
@@ -39,9 +42,9 @@ func (ctrl ApiController) SignIn(ctx iris.Context) {
 
 		// if jwt generated correct without errors
 		if err == nil {
-			ctx.JSON(iris.Map{
+			c.JSON(200, gin.H{
 				"status": "Ok",
-				"data": iris.Map{
+				"data": gin.H{
 					"jwt": jwtString,
 				},
 			})
@@ -49,31 +52,29 @@ func (ctrl ApiController) SignIn(ctx iris.Context) {
 		}
 	}
 
-	createError(ctx, iris.StatusInternalServerError, "Problem")
+	createError(c, http.StatusInternalServerError, "Problem")
 }
 
-func (ctrl ApiController) GetCalendar(ctx iris.Context) {
+func (ctrl ApiController) GetCalendar(c *gin.Context) {
 	calendar := ctrl.service.Calendar.Get("")
 
 	bytes, err := json.Marshal(calendar)
 	if err != nil {
 		log.Println("marshal calendar error: ", err)
 	}
-
-	ctx.Write(bytes)
+	c.Writer.Write(bytes)
 }
 
-func (ctrl ApiController) GenerateGuestLink(ctx iris.Context) {
-	jwtData := ctrl.service.ParseJWT(ctrl.GetJwtString(ctx))
+// func (ctrl ApiController) GenerateGuestLink(ctx iris.Context) {
+// 	jwtData := ctrl.service.ParseJWT(ctrl.GetJwtString(ctx))
 
-	ctrl.service.Guest.CreateGuestLink(*jwtData)
-}
+// 	ctrl.service.Guest.CreateGuestLink(*jwtData)
+// }
 
-func createError(ctx iris.Context, code int, msg string) {
-	ctx.StatusCode(code)
-	ctx.JSON(iris.Map{
+func createError(c *gin.Context, code int, msg string) {
+	c.Writer.WriteHeader(http.StatusUnauthorized)
+	c.JSON(code, gin.H{
 		"status": "failed",
-		"code":   code,
-		"errMsg": msg,
+		"error":  msg,
 	})
 }
