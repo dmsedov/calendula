@@ -1,6 +1,7 @@
 dev:
 	npm install && npm run build-dev
 
+    source ~/.profile
 	curl https://glide.sh/get | sh
 	glide up -v srv/
 	go build src/main.go
