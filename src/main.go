@@ -42,10 +42,10 @@ func main() {
 	router.Static("/static", "static/")
 	router.Static("/src/client/images", "src/client/images/")
 
-	// Serve frontend static files
-	router.StaticFile("/", "static/index.html")
-
 	ctrl := controller.CreateApiController(config)
+
+	// Serve frontend static files
+	router.NoRoute(ctrl.React)
 
 	// Setup route group for the API
 	api := router.Group("/api")

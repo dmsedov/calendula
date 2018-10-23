@@ -24,6 +24,10 @@ func CreateApiController(config *models.Config) *ApiController {
 	return ctrl
 }
 
+func (ctrl ApiController) React(c *gin.Context) {
+	c.File("./static/index.html")
+}
+
 func (ctrl ApiController) SignIn(c *gin.Context) {
 	body := c.Request.Body
 	bytes, err := ioutil.ReadAll(body)
