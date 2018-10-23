@@ -50,7 +50,7 @@ func main() {
 	// Setup route group for the API
 	api := router.Group("/api")
 	{
-		api.POST("/sigin", ctrl.SignIn)
+		api.POST("/signin", ctrl.SignIn)
 
 		api.Use(ctrl.AuthMiddleware())
 		api.GET("/calendar", ctrl.GetCalendar)
