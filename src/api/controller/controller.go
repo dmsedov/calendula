@@ -2,7 +2,6 @@ package controller
 
 import (
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -26,15 +25,15 @@ func CreateApiController(config *models.Config) *ApiController {
 }
 
 func (ctrl ApiController) SignIn(c *gin.Context) {
-	rawJSON := c.Query("data")
 	body := c.Request.Body
-	bytes, _ := ioutil.ReadAll(body)
-	fmt.Println("rawJSON: ", rawJSON)
-	fmt.Println("body: ", string(bytes))
+	bytes, err := ioutil.ReadAll(body)
+	if err != nil {
+		log.Println("read html body is failed, ", err)
+	}
 
 	auth := new(models.User)
 
-	if err := json.Unmarshal([]byte(rawJSON), auth); err != nil {
+	if err := json.Unmarshal(bytes, auth); err != nil {
 		log.Println("invalid json", err)
 
 		createError(c, http.StatusBadRequest, "Invalid json")
