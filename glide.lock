@@ -1,5 +1,5 @@
 hash: 533ee11b716a3f81036739440cf44bda5aed31e3c6f67b3d701e6820b14ef34f
-updated: 2018-10-22T22:03:12.440280791+03:00
+updated: 2018-10-23T09:43:34.218817575+03:00
 imports:
 - name: github.com/buaazp/fasthttprouter
   version: ade4e2031af3aed7fffd241084aad80a58faf421
@@ -18,7 +18,7 @@ imports:
   - json
   - render
 - name: github.com/golang/protobuf
-  version: 7be3631955993a734965532f776bad7093f6fc9d
+  version: d7fc20193620986259ffb1f9b9da752114ee14a4
   subpackages:
   - proto
 - name: github.com/jinzhu/gorm
@@ -49,13 +49,15 @@ imports:
 - name: github.com/satori/go.uuid
   version: f58768cc1a7a7e77a3bd49e98cdd21419399b6a3
 - name: github.com/ugorji/go
-  version: 405bbdfe11881d6262358d04dec2f89429a6eab2
+  version: e5e69e061d4f7ee3a69b793cf9c1b41afe21918e
   subpackages:
   - codec
 - name: github.com/valyala/fasthttp
   version: e5f51c11919d4f66400334047b897ef0a94c6f3c
-- name: golang.org/x/sys/unix
+- name: golang.org/x/sys
   version: 8a28ead16f52c8aaeffbf79239b251dfdf6c4f96
+  subpackages:
+  - unix
 - name: gopkg.in/go-playground/validator.v8
   version: 5f1438d3fca68893a817e4a66806cea46a9e4ebf
 - name: gopkg.in/yaml.v2

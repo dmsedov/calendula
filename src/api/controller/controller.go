@@ -3,6 +3,7 @@ package controller
 import (
 	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"log"
 	"net/http"
 
@@ -26,8 +27,10 @@ func CreateApiController(config *models.Config) *ApiController {
 
 func (ctrl ApiController) SignIn(c *gin.Context) {
 	rawJSON := c.Query("data")
-	message := c.PostForm("data")
-	fmt.Println("Хуй пизда", rawJSON, message)
+	body := c.Request.Body
+	bytes, _ := ioutil.ReadAll(body)
+	fmt.Println("rawJSON: ", rawJSON)
+	fmt.Println("body: ", string(bytes))
 
 	auth := new(models.User)
 
