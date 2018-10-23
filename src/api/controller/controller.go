@@ -26,7 +26,8 @@ func CreateApiController(config *models.Config) *ApiController {
 
 func (ctrl ApiController) SignIn(c *gin.Context) {
 	rawJSON := c.Query("data")
-	fmt.Println("Хуй пизда")
+	message := c.PostForm("data")
+	fmt.Println("Хуй пизда", rawJSON, message)
 
 	auth := new(models.User)
 
