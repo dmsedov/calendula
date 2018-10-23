@@ -1,7 +1,8 @@
 // geometry
 $basisWidth: 100%;
-$maxContentWidth: 1230px;
-$headerHeight: 3.5rem;
+$width-wrapper: 1230px;
+$width-main: 1366px;
+$height-header: 3.5rem;
 
 //colors
 $black: #000;
@@ -14,6 +15,9 @@ $f7f7f7: #f7f7f7;
 $ebebeb: #ebebeb;
 $a9a9a9: #a9a9a9;
 $oo7bff: #007bff;
+$header-bg-color: #0072ff;
+$header-dropdown-menu: $header-bg-color;
+$header-dropdown-item: $header-bg-color;
 
 // path to icons
 $baseUrl: '/src/client/images';
@@ -26,3 +30,10 @@ $leftArrow: '#{$baseUrl}#{$icons}/left-arrow.png';
 $rightArrow: '#{$baseUrl}#{$icons}/right-arrow.png';
 $addEventBtn: '#{$baseUrl}#{$icons}/add-event-btn.png';
 $copyLinkBtn: '#{$baseUrl}#{$icons}/copy-link-btn.png';
+
+// screens
+$screen-xs: 0;
+$screen-sm: 480px;
+$screen-md: 768px;
+$screen-lg: 992px;
+$screen-xl: 1230px;

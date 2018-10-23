@@ -1,0 +1,33 @@
+html,
+body {
+  padding-right: 0 !important;
+  min-height: 100vh;
+}
+
+#app {
+  display: flex;
+  width: 100%;
+  min-height: inherit;
+  @media (min-width: $screen-xl) {
+    justify-content: center;
+  }
+}
+
+.app-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  @media (min-width: $screen-xl) {
+    width: $width-wrapper;
+  }
+}
+
+main {
+  display: flex;
+  padding-bottom: 2rem;
+  min-height: 700px;
+  @media (min-width: $width-main) {
+    justify-content: center;
+  }
+}

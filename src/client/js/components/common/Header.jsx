@@ -48,11 +48,12 @@ export default class Header extends React.Component {
     } = this.props;
 
     return (
-      <header className="header">
-        <div className="menu-position">
-          <Navbar dark expand="md" className="navbar_bg-color_yellow">
+      <header className="header header_bg-color">
+        <div className="header__back-layer" />
+        <div ref={this.setRefToNode} className="navbar header__content">
+          <Navbar dark expand="md">
             <NavbarBrand href={main}>Calendula</NavbarBrand>
-            <NavbarToggler className="mr-2" onClick={this.toggleNavBar} />
+            <NavbarToggler onClick={this.toggleNavBar} />
             <Collapse isOpen={isNavMenuOpen} exit={isSmallScreen} navbar>
               <Menu
                 isNavMenuOpen={isNavMenuOpen}

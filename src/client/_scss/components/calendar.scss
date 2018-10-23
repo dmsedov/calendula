@@ -59,7 +59,7 @@
     width: 600px;
   }
   @media (min-width: 1366px) {
-    width: $maxContentWidth;
+    width: $width-wrapper;
   }
 }
 

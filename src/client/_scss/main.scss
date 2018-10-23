@@ -2,48 +2,25 @@
 @import '~bootstrap/scss/bootstrap';
 @import 'libs/s-alert';
 @import 'libs/s-alert-effects';
+@import 'skeleton';
+@import 'blocks/header';
+@import 'blocks/bootstrap/navbar';
 @import 'components/popover';
 @import 'components/buttons';
 
-html,
-body {
-  padding-right: 0!important;
-  min-height: 100vh;
-}
+
 
 .modal-open {
   overflow: visible;
 }
 
-#app {
-  display: flex;
-  width: 100%;
-  min-height: inherit;
-  @media (min-width: 1230px) {
-    justify-content: center;
-  }
-}
 
-#wrapper {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
 
-  @media (min-width: 1230px) {
-    width: $maxContentWidth;
-  }
-}
+
 
 @import 'components/header';
 
-main {
-  display: flex;
-  margin-bottom: 2rem;
-  min-height: 1000px;
-  @media (min-width: 1366px) {
-    justify-content: center;
-  }
-}
+
 
 @import 'components/authForm';
 @import 'components/eventEditor';

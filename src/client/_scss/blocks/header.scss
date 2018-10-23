@@ -1,0 +1,24 @@
+.header {
+  position: fixed;
+  flex: 0 0 auto;
+  width: inherit;
+
+  &__back-layer {
+    position: fixed;
+    left: 0;
+    width: 100%;
+    height: $height-header;
+    background-color: inherit;
+  }
+
+  &__content {
+    position: relative;
+    max-width: $width-wrapper;
+    height: $height-header;
+    background-color: inherit;
+  }
+
+  &_bg-color {
+    background-color: $header-bg-color;
+  }
+}

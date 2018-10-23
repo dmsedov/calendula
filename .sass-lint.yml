@@ -51,14 +51,14 @@ rules:
   force-pseudo-nesting: 1
 
   # Name Formats
-  class-name-format: 1
+  class-name-format: 0
   function-name-format: 1
   id-name-format: 0
   mixin-name-format: 1
   placeholder-name-format: 1
   variable-name-format:
     - allow-leading-underscore: false
-    - convention: camelcase
+    - convention: hyphenatedlowercase
 
   # Style Guide
   attribute-quotes: 1
