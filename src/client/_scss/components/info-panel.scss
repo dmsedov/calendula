@@ -1,0 +1,53 @@
+.info-panel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: inherit;
+
+  &__search-btn {
+    margin-right: .5rem;
+    width: 32px;
+    height: 32px;
+    color: $white;
+    background-color: $control-search-btn;
+    background-image: url($search-icon);
+  }
+
+  &__user-profile {
+    display: inline-block;
+    height: 32px;
+  }
+
+  &__user-avatar {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &__user-bio {
+    width: 250px;
+  }
+
+  &__user-data {
+    padding: .5rem;
+    height: 6rem;
+    line-height: 4.5rem;
+    text-align: center;
+    box-sizing: border-box;
+
+    img {
+      margin-right: .5rem;
+    }
+  }
+
+  &__account-controls {
+    padding: 1rem;
+    text-align: center;
+  }
+
+  &__logout-btn {
+    width: 5rem;
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+}

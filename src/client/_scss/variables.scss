@@ -18,6 +18,11 @@ $oo7bff: #007bff;
 $header-bg-color: #0072ff;
 $header-dropdown-menu: $header-bg-color;
 $header-dropdown-item: $header-bg-color;
+$control-search-btn: $header-bg-color;
+$popover-footer: #f7f7f7;
+$popover-footer-border: #ebebeb;
+
+//font-sizes
 
 // path to icons
 $baseUrl: '/src/client/images';
@@ -25,7 +30,7 @@ $icons: '/icons';
 
 $facebookLogo: '#{$baseUrl}#{$icons}/facebook-32px.png';
 $googleLogo: '#{$baseUrl}#{$icons}/google-32px.png';
-$searchIcon: '#{$baseUrl}#{$icons}/search.png';
+$search-icon: '#{$baseUrl}#{$icons}/search.png';
 $leftArrow: '#{$baseUrl}#{$icons}/left-arrow.png';
 $rightArrow: '#{$baseUrl}#{$icons}/right-arrow.png';
 $addEventBtn: '#{$baseUrl}#{$icons}/add-event-btn.png';

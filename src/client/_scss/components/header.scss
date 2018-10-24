@@ -1,3 +1,31 @@
+.header {
+  position: fixed;
+  flex: 0 0 auto;
+  width: inherit;
+  height: $height-header;
 
-@import 'accessForm';
-@import 'accessLink';
+  &__back-layer {
+    position: fixed;
+    left: 0;
+    width: 100%;
+    height: inherit;
+    background-color: inherit;
+  }
+
+  &__content {
+    position: relative;
+    max-width: $width-wrapper;
+    height: $height-header;
+    background-color: inherit;
+  }
+
+  &__item-position {
+    position: absolute;
+    top: 0;
+    right: 5rem;
+  }
+
+  &_bg-color {
+    background-color: $header-bg-color;
+  }
+}

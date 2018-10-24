@@ -62,20 +62,20 @@ export default class Header extends React.Component {
               />
             </Collapse>
           </Navbar>
-          <div className="pos-container">
-            <Search
-              openModal={handleOpenModal}
-              show={pathname === calendar}
-            />
-            <UserBio
-              userStatus={userStatus}
-              name={name}
-              imgUrl={imgUrl}
-              handleSignout={handleSignout}
-              isNavMenuOpen={isNavMenuOpen}
-              closeNavMenu={closeNavMenu}
-            />
-          </div>
+        </div>
+        <div className="info-panel header__item-position">
+          <Search
+            openModal={handleOpenModal}
+            show={pathname === calendar}
+          />
+          <UserBio
+            userStatus={userStatus}
+            name={name}
+            imgUrl={imgUrl}
+            handleSignout={handleSignout}
+            isNavMenuOpen={isNavMenuOpen}
+            closeNavMenu={closeNavMenu}
+          />
         </div>
       </header>
     );

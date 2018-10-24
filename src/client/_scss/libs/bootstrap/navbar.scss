@@ -1,0 +1,48 @@
+.navbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: inherit;
+}
+
+.navbar-brand {
+  height: 2.5rem;
+  line-height: 1.3;
+}
+
+
+.dropdown-menu {
+  background-color: $header-dropdown-menu;
+  @media (min-width: 768px) {
+    border-radius: 0;
+  }
+
+  .dropdown-item {
+    &:hover {
+      background-color: $header-dropdown-item;
+    }
+  }
+}
+
+.navbar-toggler {
+  font-size: 1rem;
+}
+
+.navbar-collapse {
+  flex-grow: 0;
+}
+
+.nav-link {
+  color: $d8d8d8 !important;
+
+  &:hover {
+    color: $white !important;
+  }
+}
+
+.navbar-dark {
+  .navbar-toggler {
+    border: 1px solid $c0c0c0;
+  }
+}

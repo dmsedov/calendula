@@ -1,24 +1,26 @@
 @import 'variables';
 @import '~bootstrap/scss/bootstrap';
-@import 'libs/s-alert';
-@import 'libs/s-alert-effects';
+@import 'libs/antDesign/s-alert';
+@import 'libs/antDesign/s-alert-effects';
+@import 'libs/bootstrap/modals';
+@import 'libs/bootstrap/navbar';
+@import 'libs/bootstrap/btn';
+@import 'libs/bootstrap/popover';
 @import 'skeleton';
-@import 'blocks/header';
-@import 'blocks/bootstrap/navbar';
-@import 'components/popover';
-@import 'components/buttons';
-
-
-
-.modal-open {
-  overflow: visible;
-}
-
-
-
-
-
 @import 'components/header';
+@import 'components/info-panel';
+
+
+
+
+
+
+
+
+
+@import 'components/accessForm';
+@import 'components/accessLink';
+
 
 
 
