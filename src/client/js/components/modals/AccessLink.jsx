@@ -23,14 +23,14 @@ export default class AccessLink extends React.Component {
     };
 
     return (
-      <div id="access-link">
+      <div className="access-form">
         <ModalHeader>
           Ссылка доступа
         </ModalHeader>
         <ModalBody>
-          <div className="content">
-            <p className="description">Сгенерируйте ссылку для доступа в Ваш календарь.</p>
-            <input className="access-link" type="text" name="accessLink" value={accessLink} readOnly />
+          <div className="access-form__content">
+            <p className="access-form__info-text">Сгенерируйте ссылку для доступа в календарь.</p>
+            <input className="access-form__access-link" type="text" value={accessLink} readOnly />
             <CopyToClipboard
               text={accessLink}
             >
@@ -42,7 +42,7 @@ export default class AccessLink extends React.Component {
                 onClick={this.handleCloseModal}
               />
             </CopyToClipboard>
-            <Button onClick={this.handleGenAccessLink} color="primary" size="sm">Сгенерировать ссылку</Button>
+            <Button className="access-form__gen-link-btn" onClick={this.handleGenAccessLink}>Сгенерировать ссылку</Button>
           </div>
         </ModalBody>
       </div>
