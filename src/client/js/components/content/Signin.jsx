@@ -39,16 +39,16 @@ export default class Signin extends React.Component {
 
   render() {
     return (
-      <div id="auth-form-content">
-        <div className="auth-form">
+      <div className="auth-form">
+        <div className="auth-form__content">
           <LoaderLayout />
           <h2>Вход</h2>
-          <p className="auth-tip">Войти через соцсети:</p>
-          <div className="list-sm">
+          <p className="auth-form__auth-tip">Войти через соцсети:</p>
+          <div className="auth-form__list-social">
             <GoogleLogin
               clientId={GOOGLE_CLIENT_ID}
               buttonText="Google"
-              className="btn-login google-social"
+              className="auth-form__btn-login auth-form_btn-google"
               onRequest={this.handleRequestToForeignApi}
               onSuccess={this.successGoogleResp}
               onFailure={this.failedGoogleResp}
@@ -57,7 +57,7 @@ export default class Signin extends React.Component {
               appId={FACEBOOK_APP_ID}
               fields="name,email,picture"
               textButton="Facebook"
-              cssClass="btn-login facebook-social"
+              cssClass="auth-form__btn-login auth-form_btn-google"
               callback={this.successFbResp}
               onClick={this.handleRequestToForeignApi}
             />
