@@ -12,31 +12,48 @@ $blue: #00f;
 $white: #fff;
 
 
-$border-navbar-toggler: $white;
-$font-navbar: #d8d8d8;
-$font-navbar_hovered: #fff;
+
+
 $f7f7f7: #f7f7f7;
 $ebebeb: #ebebeb;
 $a9a9a9: #a9a9a9;
 $oo7bff: #007bff;
-$theme-bg-0072ff: #0072ff;
-$theme-bg-f7f7f7: #f7f7f7;
-$theme-bg-ebebeb: #ebebeb;
+
+// good names
+
+// -- themes
+
+$theme-bg-common: #0072ff;
+$popover-bg: #f7f7f7;
+$popover-border: #ebebeb;
+$navbar-toggler-border: $white;
+
+// --buttons
+
 $btn-hovered: #2886fb;
 
+// --fonts
+$text-navbar: #d8d8d8;
+$text-navbar-hovered: #fff;
 //font-sizes
 
+// text
+
+$text-common: #fff;
+
 // path to icons
-$baseUrl: '/src/client/images';
+$base-url: '/src/client/images';
 $icons: '/icons';
 
-$facebookLogo: '#{$baseUrl}#{$icons}/facebook-32px.png';
-$googleLogo: '#{$baseUrl}#{$icons}/google-32px.png';
-$search-icon: '#{$baseUrl}#{$icons}/search.png';
-$leftArrow: '#{$baseUrl}#{$icons}/left-arrow.png';
-$rightArrow: '#{$baseUrl}#{$icons}/right-arrow.png';
-$addEventBtn: '#{$baseUrl}#{$icons}/add-event-btn.png';
-$copyLinkBtn: '#{$baseUrl}#{$icons}/copy-link-btn.png';
+$facebook-logo: '#{$base-url}#{$icons}/facebook-32px.png';
+$google-logo: '#{$base-url}#{$icons}/google-32px.png';
+$search-icon: '#{$base-url}#{$icons}/search.png';
+
+
+$leftArrow: '#{$base-url}#{$icons}/left-arrow.png';
+$rightArrow: '#{$base-url}#{$icons}/right-arrow.png';
+$addEventBtn: '#{$base-url}#{$icons}/add-event-btn.png';
+$copyLinkBtn: '#{$base-url}#{$icons}/copy-link-btn.png';
 
 // screens
 $screen-xs: 0;

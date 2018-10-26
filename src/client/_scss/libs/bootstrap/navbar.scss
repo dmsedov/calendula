@@ -13,14 +13,14 @@
 
 
 .dropdown-menu {
-  background-color: $theme-bg-0072ff;
+  background-color: $theme-bg-common;
   @media (min-width: 768px) {
     border-radius: 0;
   }
 
   .dropdown-item {
     &:hover {
-      background-color: $theme-bg-0072ff;
+      background-color: $theme-bg-common;
     }
   }
 }
@@ -34,15 +34,15 @@
 }
 
 .nav-link {
-  color: $font-navbar !important;
+  color: $text-navbar !important;
 
   &:hover {
-    color: $font-navbar_hovered !important;
+    color: $text-navbar-hovered !important;
   }
 }
 
 .navbar-dark {
   .navbar-toggler {
-    border: 1px solid $border-navbar-toggler;
+    border: 1px solid $navbar-toggler-border;
   }
 }

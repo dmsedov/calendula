@@ -8,8 +8,6 @@
     margin-right: .5rem;
     width: 32px;
     height: 32px;
-    color: $white;
-    background-color: $theme-bg-0072ff;
     background-image: url($search-icon);
   }
 
@@ -47,7 +45,5 @@
 
   &__logout-btn {
     width: 5rem;
-    background-color: #007bff;
-    border-color: #007bff;
   }
 }

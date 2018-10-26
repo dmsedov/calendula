@@ -5,6 +5,7 @@
 .popover-header {
   font-size: 1.2em;
   text-align: center;
+  background-color: $popover-bg;
 }
 
 .popover-body {
@@ -12,8 +13,8 @@
 }
 
 .popover-footer {
-  background-color: $theme-bg-f7f7f7;
-  border-top: 1px solid $theme-bg-ebebeb;
+  background-color: $popover-bg;
+  border-top: 1px solid $popover-border;
 }
 
 .bs-popover-bottom {

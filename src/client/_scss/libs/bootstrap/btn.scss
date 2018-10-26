@@ -1,5 +1,14 @@
 .btn {
+  color: $text-common;
+  background-color: $theme-bg-common;
+  border-color: $theme-bg-common;
+
   &:focus {
     box-shadow: none;
+  }
+
+  &:hover {
+    background-color: $btn-hovered;
+    border-color: $theme-bg-common;
   }
 }
