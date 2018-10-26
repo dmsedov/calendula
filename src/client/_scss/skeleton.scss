@@ -2,6 +2,7 @@ html,
 body {
   padding-right: 0 !important;
   min-height: 100vh;
+  background-color: $bg-col-body;
 }
 
 #app {
@@ -27,6 +28,7 @@ main {
   display: flex;
   padding-bottom: 2rem;
   min-height: 700px;
+
   @media (min-width: $width-main) {
     justify-content: center;
   }

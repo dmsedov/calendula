@@ -1,8 +1,58 @@
 // geometry
+
 $basisWidth: 100%;
 $width-wrapper: 1230px;
 $width-main: 1366px;
 $height-header: 3.5rem;
+
+//colors
+
+// --layouts
+$bg-col-header: #0072ff;
+$bg-col-body: #f7f7f7;
+
+// --buttons
+$col-btn: $bg-col-header;
+$col-close-btn: #dfdfdf;//fix
+$col-btn-hovered: #2886fb;
+$col-social-btn: #dfdfdf;
+
+//items
+$col-li-hovered: $col-btn-hovered;
+$bg-col-item-common: bg-col-main;
+
+// --fonts
+$col-navbar-toggler: #fff;
+$col-navbar-text: #d8d8d8;
+$col-navbar-text-hovered: #fff;
+
+// text
+$col-header-text: #fff;
+$col-btn-text: $col-header-text;
+$col-btn-signin-text: #000;
+
+// path to icons
+$base-url: '/src/client/images';
+$icons: '/icons';
+
+$facebook-logo: '#{$base-url}#{$icons}/facebook-32px.png';
+$google-logo: '#{$base-url}#{$icons}/google-32px.png';
+$search-icon: '#{$base-url}#{$icons}/search.png';
+
+
+$leftArrow: '#{$base-url}#{$icons}/left-arrow.png';
+$rightArrow: '#{$base-url}#{$icons}/right-arrow.png';
+$addEventBtn: '#{$base-url}#{$icons}/add-event-btn.png';
+
+// screens
+$screen-xs: 0;
+$screen-sm: 480px;
+$screen-md: 768px;
+$screen-lg: 992px;
+$screen-xl: 1230px;
+
+
+
 
 //colors
 $black: #000;
@@ -18,49 +68,3 @@ $f7f7f7: #f7f7f7;
 $ebebeb: #ebebeb;
 $a9a9a9: #a9a9a9;
 $oo7bff: #007bff;
-
-// good names
-
-// -- themes
-
-$theme-bg-common: #0072ff;
-$theme-bg-common-layout: #f7f7f7;
-$social-btn: #dfdfdfa8;
-$popover-bg: #f7f7f7;
-$popover-border: #ebebeb;
-
-
-// --buttons
-
-$btn-hovered: #2886fb;
-
-// --fonts
-$navbar-toggler-border: $white;
-$text-navbar: #d8d8d8;
-$text-navbar-hovered: #fff;
-//font-sizes
-
-// text
-
-$text-common: #fff;
-
-// path to icons
-$base-url: '/src/client/images';
-$icons: '/icons';
-
-$facebook-logo: '#{$base-url}#{$icons}/facebook-32px.png';
-$google-logo: '#{$base-url}#{$icons}/google-32px.png';
-$search-icon: '#{$base-url}#{$icons}/search.png';
-
-
-$leftArrow: '#{$base-url}#{$icons}/left-arrow.png';
-$rightArrow: '#{$base-url}#{$icons}/right-arrow.png';
-$addEventBtn: '#{$base-url}#{$icons}/add-event-btn.png';
-$copyLinkBtn: '#{$base-url}#{$icons}/copy-link-btn.png';
-
-// screens
-$screen-xs: 0;
-$screen-sm: 480px;
-$screen-md: 768px;
-$screen-lg: 992px;
-$screen-xl: 1230px;
