@@ -1,0 +1,11 @@
+.anticon-left-circle,
+.anticon-right-circle,
+.anticon-plus-circle {
+  display: inline-block;
+  width: inherit;
+  height: inherit;
+
+  svg {
+    vertical-align: unset;
+  }
+}
