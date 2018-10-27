@@ -3,6 +3,7 @@
   flex: 0 0 auto;
   width: inherit;
   height: $height-header;
+  z-index: 200;
 
   &__back-layer {
     position: fixed;

@@ -7,6 +7,8 @@ $height-header: 3.5rem;
 
 //colors
 
+$col-active: #f00;
+
 // --layouts
 $bg-col-header: #0072ff;
 $bg-col-body: #f7f7f7;
@@ -21,8 +23,11 @@ $col-social-btn: #dfdfdf;
 $col-li-hovered: $col-btn-hovered;
 $bg-col-item-common: bg-col-main;
 
-// --fonts
+// --btn-like fonts
 $col-navbar-toggler: #fff;
+$col-add-event-btn: #f00;
+
+//font
 $col-navbar-text: #d8d8d8;
 $col-navbar-text-hovered: #fff;
 
