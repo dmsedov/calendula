@@ -8,16 +8,18 @@ export default class Search extends React.Component {
   }
 
   render() {
-    return [
-      <ModalHeader key={_.uniqueId()}>
-        Поиск события
-      </ModalHeader>,
-      <ModalBody key={_.uniqueId()}>
-        <form className="form-inline my-2 my-lg-0" onSubmit={this.handleSearchSubmit}>
-          <input className="form-control mr-sm-2" type="search" placeholder="Искать" aria-label="Search" />
-          <button className="btn" type="submit">Искать</button>
-        </form>
-      </ModalBody>,
-    ];
+    return (
+      <div className="search">
+        <ModalHeader key={_.uniqueId()}>
+          Поиск события
+        </ModalHeader>,
+        <ModalBody key={_.uniqueId()}>
+          <form className="form-inline" onSubmit={this.handleSearchSubmit}>
+            <input className="form-control mr-sm-2" type="search" placeholder="Искать событие" aria-label="Search" />
+            <button className="btn" type="submit">Искать</button>
+          </form>
+        </ModalBody>
+      </div>
+    );
   }
 }

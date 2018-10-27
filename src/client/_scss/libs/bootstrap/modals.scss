@@ -10,3 +10,10 @@
 .modal-footer {
   background-color: $bg-col-item-common;
 }
+
+@media (max-width: 576px) {
+  .modal-dialog {
+    margin: 1.75rem auto;
+    max-width: 500px;
+  }
+}
