@@ -1,11 +1,40 @@
 .access-form {
 
+  .modal-body {
+    padding: 0;
+  }
+
+  .modal-footer {
+    justify-content: center;
+  }
+
   &__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     padding: 1rem;
     box-sizing: border-box;
   }
 
   &__info-text {
+    text-align: center;
+  }
 
+  &__field {
+    margin-bottom: 10px;
+    width: 100%;
+    text-align: center;
+
+    .anticon {
+      color: $col-btn;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+  }
+
+  &__access-link {
+    margin-right: 10px;
+    width: 80%;
   }
 }
