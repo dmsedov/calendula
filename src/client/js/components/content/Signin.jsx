@@ -48,7 +48,7 @@ export default class Signin extends React.Component {
             <GoogleLogin
               clientId={GOOGLE_CLIENT_ID}
               buttonText="Google"
-              className="auth-form__btn-signin auth-form_btn-google"
+              className="btn btn__signin-google"
               onRequest={this.handleRequestToForeignApi}
               onSuccess={this.successGoogleResp}
               onFailure={this.failedGoogleResp}
@@ -57,7 +57,7 @@ export default class Signin extends React.Component {
               appId={FACEBOOK_APP_ID}
               fields="name,email,picture"
               textButton="Facebook"
-              cssClass="auth-form__btn-signin auth-form_btn-google"
+              cssClass="btn btn__signin-facebook"
               callback={this.successFbResp}
               onClick={this.handleRequestToForeignApi}
             />
