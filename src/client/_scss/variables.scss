@@ -18,20 +18,22 @@ $col-btn: $bg-col-header;
 $col-close-btn: #dfdfdf;//fix
 $col-btn-hovered: #2886fb;
 $col-social-btn: #dfdfdf;
+$border-col-social-btn: #aba6a6;
 
 //items
 $col-li-hovered: $col-btn-hovered;
 $bg-col-item-common: bg-col-main;
 
+$bg-col-day-not-current: #dadada;
+
 // --btn-like fonts
 $col-navbar-toggler: #fff;
 $col-add-event-btn: #f00;
+$col-add-event-btn-hovered: #e64545;
 
 //font
 $col-navbar-text: #d8d8d8;
 $col-navbar-text-hovered: #fff;
-
-// text
 $col-header-text: #fff;
 $col-btn-text: $col-header-text;
 $col-btn-signin-text: #000;
