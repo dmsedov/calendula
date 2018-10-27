@@ -19,7 +19,6 @@ export default class ErrorReport extends React.Component {
         onClose={this.handleOnClose}
         timeout={5000}
         position="bottom"
-        offset={100}
         effect="scale"
       />
     );
