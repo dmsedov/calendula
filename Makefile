@@ -1,11 +1,9 @@
 dev:
 	npm install && npm run build-dev
-
-	go get -u github.com/golang/dep/cmd/dep
-	dep ensure
+	# source ${HOME}/.profile
+	curl https://glide.sh/get | sh
+	glide up -v src/
 	go build src/main.go
 	./main
-
-
 prod:
 	go run main.go
