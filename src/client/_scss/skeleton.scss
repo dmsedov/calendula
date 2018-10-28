@@ -28,7 +28,7 @@ main {
   display: flex;
   justify-content: center;
   padding-bottom: 2rem;
-  min-height: 700px;
+  min-height: 1000px;
 
   @media (min-width: $width-main) {
     justify-content: center;
