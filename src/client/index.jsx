@@ -15,16 +15,23 @@ import App from './js/app';
 
 const store = createStore(rootReducer);
 
-const mediaQueryList = window.matchMedia('(max-width: 767.98px)');
+const mediaQueryMdScreen = window.matchMedia('(max-width: 767.98px)');
+const mediaQueryLgScreen = window.matchMedia('(max-width: 992px)');
 
-store.dispatch(resizeScreen({ isSmallScreen: mediaQueryList.matches }));
+store.dispatch(resizeScreen({ isLessThanMdScreen: mediaQueryMdScreen.matches }));
+store.dispatch(resizeScreen({ isLessThaLgScreen: mediaQueryLgScreen.matches }));
 
-mediaQueryList.addListener((mq) => {
-  store.dispatch(resizeScreen({ isSmallScreen: mq.matches }));
+
+mediaQueryMdScreen.addListener((mq) => {
+  store.dispatch(resizeScreen({ isLessThanMdScreen: mq.matches }));
   const { uiPopup: { isNavMenuOpen } } = store.getState();
   if (isNavMenuOpen) {
     store.dispatch(closeNavMenu());
   }
+});
+
+mediaQueryLgScreen.addListener((mq) => {
+  store.dispatch(resizeScreen({ isLessThanLgScreen: mq.matches }));
 });
 
 const jwt = localStorage.getItem('userData');
@@ -37,13 +44,6 @@ if (jwt) {
 
   store.dispatch(signinUserSuccess({ ...user, c_id: id }));
 }
-
-const options = {
-  position: 'bottom center',
-  timeout: 5000,
-  offset: '30px',
-  transition: 'scale',
-};
 
 ReactDOM.render(
   <Provider store={store}>
