@@ -26,8 +26,12 @@ describe('ui actions', () => {
 
 describe('ui screen', () => {
   it('SCREEN_RESIZE', () => {
-    const isSmallScreen = true;
-    expect(resizeScreen({ isSmallScreen }))
-      .toEqual({ type: 'SCREEN_RESIZE', payload: { isSmallScreen } });
+    const isLessThanMdScreen = true;
+    const isLessThanLgScreen = true;
+    expect(resizeScreen({ isLessThanMdScreen }))
+      .toEqual({ type: 'SCREEN_RESIZE', payload: { isLessThanMdScreen } });
+
+    expect(resizeScreen({ isLessThanLgScreen }))
+      .toEqual({ type: 'SCREEN_RESIZE', payload: { isLessThanLgScreen } });
   });
 });

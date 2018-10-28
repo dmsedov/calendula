@@ -14,9 +14,12 @@ export default {
     modalName: null,
   },
   uiScreen: {
-    isSmallScreen: null,
+    isLessThanMdScreen: null,
+    isLessThanLgScreen: null,
   },
   accessLinkFetchingState: 'none',
+  // calendarFetchingState: 'none',
   accessLink: '',
   errMsg: null,
+  // calendar: null,
 };

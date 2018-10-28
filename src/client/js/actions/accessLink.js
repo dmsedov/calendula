@@ -13,10 +13,10 @@ export const fetchAccessLink = id => async (dispatch) => {
   const { getAccessLink } = apiCall.private;
   dispatch(fetchLinkRequest());
   try {
-    // const {
-    //   data: { link },
-    // } = await getAccessLink(id);
-    const link = 'http://localhost:3000/calendar?c_id=123456';
+    const {
+      data: { link },
+    } = await getAccessLink(id);
+    // const link = 'http://localhost:3000/calendar?c_id=123456';
     dispatch(fetchLinkSuccess({ link }));
   } catch (e) {
     const errCode = errorHandler(e);
