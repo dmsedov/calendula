@@ -17,8 +17,8 @@ export default class Header extends React.Component {
   }
 
   toggleNavBar = () => {
-    const { isNavMenuOpen, openNavMenu, closeNavMenu, isSmallScreen } = this.props;
-    if (!isSmallScreen) {
+    const { isNavMenuOpen, openNavMenu, closeNavMenu, isLessThanMdScreen } = this.props;
+    if (!isLessThanMdScreen) {
       closeNavMenu();
     }
     if (isNavMenuOpen) {
@@ -41,7 +41,7 @@ export default class Header extends React.Component {
       isNavMenuOpen,
       renderNavMenu,
       handleOpenModal,
-      isSmallScreen,
+      isLessThanMdScreen,
       paths: { main, calendar },
       handleSignout,
       closeNavMenu,
@@ -54,11 +54,11 @@ export default class Header extends React.Component {
           <Navbar dark expand="md">
             <NavbarBrand href={main}>Calendula</NavbarBrand>
             <NavbarToggler onClick={this.toggleNavBar} />
-            <Collapse isOpen={isNavMenuOpen} exit={isSmallScreen} navbar>
+            <Collapse isOpen={isNavMenuOpen} exit={isLessThanMdScreen} navbar>
               <Menu
                 isNavMenuOpen={isNavMenuOpen}
                 navMenu={renderNavMenu()}
-                isSmallScreen={isSmallScreen}
+                isLessThanMdScreen={isLessThanMdScreen}
               />
             </Collapse>
           </Navbar>

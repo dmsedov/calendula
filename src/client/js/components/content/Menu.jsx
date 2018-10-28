@@ -4,8 +4,8 @@ import { Nav } from 'reactstrap';
 
 export default class Menu extends React.PureComponent {
   componentDidUpdate(prevProps) {
-    const { navMenu, isSmallScreen } = prevProps;
-    if (this.props.isNavMenuOpen && isSmallScreen) {
+    const { navMenu, isLessThanMdScreen } = prevProps;
+    if (this.props.isNavMenuOpen && isLessThanMdScreen) {
       this.snapshotNavMenu = navMenu;
     } else {
       this.snapshotNavMenu = null;

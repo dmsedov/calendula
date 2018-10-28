@@ -10,7 +10,7 @@ const mapStateToProps = (state) => {
   const {
     user: { name, isAuthenticated, imgUrl, c_id },
     uiPopup: { isNavMenuOpen, isModalShown, isPopoverOpen },
-    uiScreen: { isSmallScreen },
+    uiScreen: { isLessThanMdScreen },
   } = state;
 
   const mode = isAuthenticated ? 'authenticated' : 'guest';
@@ -23,7 +23,7 @@ const mapStateToProps = (state) => {
     isModalShown,
     isPopoverOpen,
     isNavMenuOpen,
-    isSmallScreen,
+    isLessThanMdScreen,
     paths,
   };
 };

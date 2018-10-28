@@ -58,7 +58,8 @@ describe('ui reducers', () => {
 
   describe('uiScreen reducers', () => {
     const initUiScreen = {
-      isSmallScreen: null,
+      isLessThanMdScreen: null,
+      isLessThanLgScreen: null,
     };
 
     it('should return the initial state', () => {
@@ -66,9 +67,17 @@ describe('ui reducers', () => {
     });
 
     it('SCREEN_RESIZE', () => {
-      expect(uiScreen(initUiScreen, resizeScreen({ isSmallScreen: true })))
+      expect(uiScreen(initUiScreen, resizeScreen({ isLessThanMdScreen: true })))
         .toEqual({
-          isSmallScreen: true,
+          isLessThanMdScreen: true,
+          isLessThanLgScreen: null,
+        });
+
+      expect(uiScreen({ ...initUiScreen, isLessThanMdScreen: true },
+        resizeScreen({ isLessThanLgScreen: true })))
+        .toEqual({
+          isLessThanMdScreen: true,
+          isLessThanLgScreen: true,
         });
     });
   });

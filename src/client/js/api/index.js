@@ -33,6 +33,17 @@ const getAccessLink = (id) => {
   });
 };
 
+const getCalendar = (monthId) => {
+  const queryParam = monthId ? `?month_id=${monthId}` : '';
+  return axios({
+    method: 'get',
+    url: `${urls.calendar}${queryParam}`,
+    headers: {
+      Authorization: makeAuthHeader(),
+    },
+  });
+};
+
 export default (
   {
     public: {
@@ -40,6 +51,7 @@ export default (
     },
     private: {
       getAccessLink,
+      getCalendar,
     },
   }
 );

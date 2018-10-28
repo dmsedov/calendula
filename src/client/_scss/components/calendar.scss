@@ -56,6 +56,13 @@
     }
   }
 
+  &__day-names {
+    width: 14%;
+    height: 30px;
+    font-size: 1.2rem;
+    text-align: center;
+  }
+
   &__day {
     position: relative;
     display: flex;
@@ -73,8 +80,9 @@
       height: 200px;
     }
 
-    &_not-current {
+    &_not-current_month {
       background-color: $bg-col-day-not-current;
+      opacity: .8;
     }
   }
 

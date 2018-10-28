@@ -10,8 +10,8 @@ import initGlobalState from './initGlobalState';
 
 
 export const uiScreen = handleActions({
-  [resizeScreen](state, { payload: { isSmallScreen } }) {
-    return { isSmallScreen };
+  [resizeScreen](state, { payload }) {
+    return { ...state, ...payload };
   },
 }, initGlobalState.uiScreen);
 
