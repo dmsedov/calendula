@@ -18,8 +18,8 @@ export default {
     isLessThanLgScreen: null,
   },
   accessLinkFetchingState: 'none',
-  // calendarFetchingState: 'none',
+  calendarFetchingState: 'none',
   accessLink: '',
   errMsg: null,
-  // calendar: null,
+  calendar: null,
 };
