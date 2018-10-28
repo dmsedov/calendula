@@ -3,7 +3,6 @@ import nock from 'nock';
 import httpAdapter from 'axios/lib/adapters/http';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import jwtGen from 'jwt-simple';
 import {
   fetchLinkRequest,
   fetchLinkSuccess,
@@ -46,15 +45,6 @@ describe('accessLink actions', () => {
     nock.disableNetConnect();
     const host = 'http://localhost';
     const c_id = '000000000';
-    const secret = 'xxx';
-    const user = {
-      uuid: 'test_uuid',
-      name: 'test_user',
-      email: 'test_email',
-      imgUrl: 'test_img_url',
-    };
-    const payload = { user, calendar: { id: c_id } };
-    const testJwtToken = jwtGen.encode(payload, secret);
 
     describe('success fetchAccessLink', async () => {
       const store = mockStore({});
