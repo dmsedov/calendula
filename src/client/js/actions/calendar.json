@@ -1,0 +1,505 @@
+{
+  "current_day_id": 58,
+  "previous_month": {
+    "id": 1,
+    "year_data": {
+      "id": 1,
+      "year": 2018,
+      "is_leap": false
+    },
+    "month_info": {
+      "month_name_ru": "Сентябрь",
+      "month_name_en": "September"
+    }
+  },
+  "current_month": {
+    "id": 2,
+    "year_data": {
+      "id": 1,
+      "year": 2018,
+      "is_leap": false
+    },
+    "month_info": {
+      "month_name_ru": "Октябрь",
+      "month_name_en": "October"
+    }
+  },
+  "next_month": {
+    "id": 3,
+    "year_data": {
+      "id": 1,
+      "year": 2018,
+      "is_leap": false
+    },
+    "month_info": {
+      "month_name_ru": "Ноябрь",
+      "month_name_en": "November"
+    }
+  },
+  "previous_month_days": [],
+  "current_month_days": [
+    {
+      "id": 31,
+      "number": 1,
+      "week_day": "Понедельник",
+      "month_id": 2,
+      "events_data": {
+        "count": 0,
+        "events": []
+      }
+    },
+    {
+      "id": 32,
+      "number": 2,
+      "week_day": "Вторник",
+      "month_id": 2,
+      "events_data": {
+        "count": 10,
+        "events": [
+          {
+            "id": 1,
+            "title": "Встреча с другом №1"
+          },
+          {
+            "id": 2,
+            "title": "Встреча с другом №2"
+          },
+          {
+            "id": 3,
+            "title": "Встреча с другом №3"
+          },
+          {
+            "id": 4,
+            "title": "Встреча с другом №4"
+          },
+          {
+            "id": 5,
+            "title": "Встреча с другом №5"
+          },
+          {
+            "id": 6,
+            "title": "Встреча с другом №6"
+          },
+          {
+            "id": 7,
+            "title": "Встреча с другом №7"
+          },
+          {
+            "id": 8,
+            "title": "Встреча с другом №8"
+          },
+          {
+            "id": 9,
+            "title": "Встреча с другом №9"
+          },
+          {
+            "id": 10,
+            "title": "Встреча с другом №10"
+          }
+        ]
+      }
+    },
+    {
+      "id": 33,
+      "number": 3,
+      "week_day": "Среда",
+      "month_id": 2,
+      "events_data": {
+        "count": 0,
+        "events": []
+      }
+    },
+    {
+      "id": 34,
+      "number": 4,
+      "week_day": "Четверг",
+      "month_id": 2,
+      "events_data": {
+        "count": 0,
+        "events": []
+      }
+    },
+    {
+      "id": 35,
+      "number": 5,
+      "week_day": "Пятница",
+      "month_id": 2,
+      "events_data": {
+        "count": 0,
+        "events": []
+      }
+    },
+    {
+      "id": 36,
+      "number": 6,
+      "week_day": "Суббота",
+      "month_id": 2,
+      "events_data": {
+        "count": 0,
+        "events": []
+      }
+    },
+    {
+      "id": 37,
+      "number": 7,
+      "week_day": "Воскресенье",
+      "month_id": 2,
+      "events_data": {
+        "count": 0,
+        "events": []
+      }
+    },
+    {
+      "id": 38,
+      "number": 8,
+      "week_day": "Понедельник",
+      "month_id": 2,
+      "events_data": {
+        "count": 0,
+        "events": []
+      }
+    },
+    {
+      "id": 39,
+      "number": 9,
+      "week_day": "Вторник",
+      "month_id": 2,
+      "events_data": {
+        "count": 0,
+        "events": []
+      }
+    },
+    {
+      "id": 40,
+      "number": 10,
+      "week_day": "Среда",
+      "month_id": 2,
+      "events_data": {
+        "count": 0,
+        "events": []
+      }
+    },
+    {
+      "id": 41,
+      "number": 11,
+      "week_day": "Четверг",
+      "month_id": 2,
+      "events_data": {
+        "count": 0,
+        "events": []
+      }
+    },
+    {
+      "id": 42,
+      "number": 12,
+      "week_day": "Пятница",
+      "month_id": 2,
+      "events_data": {
+        "count": 0,
+        "events": []
+      }
+    },
+    {
+      "id": 43,
+      "number": 13,
+      "week_day": "Суббота",
+      "month_id": 2,
+      "events_data": {
+        "count": 0,
+        "events": []
+      }
+    },
+    {
+      "id": 44,
+      "number": 14,
+      "week_day": "Воскресенье",
+      "month_id": 2,
+      "events_data": {
+        "count": 0,
+        "events": []
+      }
+    },
+    {
+      "id": 45,
+      "number": 15,
+      "week_day": "Понедельник",
+      "month_id": 2,
+      "events_data": {
+        "count": 0,
+        "events": []
+      }
+    },
+    {
+      "id": 46,
+      "number": 16,
+      "week_day": "Вторник",
+      "month_id": 2,
+      "events_data": {
+        "count": 0,
+        "events": []
+      }
+    },
+    {
+      "id": 47,
+      "number": 17,
+      "week_day": "Среда",
+      "month_id": 2,
+      "events_data": {
+        "count": 0,
+        "events": []
+      }
+    },
+    {
+      "id": 48,
+      "number": 18,
+      "week_day": "Четверг",
+      "month_id": 2,
+      "events_data": {
+        "count": 0,
+        "events": []
+      }
+    },
+    {
+      "id": 49,
+      "number": 19,
+      "week_day": "Пятница",
+      "month_id": 2,
+      "events_data": {
+        "count": 0,
+        "events": []
+      }
+    },
+    {
+      "id": 50,
+      "number": 20,
+      "week_day": "Суббота",
+      "month_id": 2,
+      "events_data": {
+        "count": 0,
+        "events": []
+      }
+    },
+    {
+      "id": 51,
+      "number": 21,
+      "week_day": "Воскресенье",
+      "month_id": 2,
+      "events_data": {
+        "count": 0,
+        "events": []
+      }
+    },
+    {
+      "id": 52,
+      "number": 22,
+      "week_day": "Понедельник",
+      "month_id": 2,
+      "events_data": {
+        "count": 0,
+        "events": []
+      }
+    },
+    {
+      "id": 53,
+      "number": 23,
+      "week_day": "Вторник",
+      "month_id": 2,
+      "events_data": {
+        "count": 0,
+        "events": []
+      }
+    },
+    {
+      "id": 54,
+      "number": 24,
+      "week_day": "Среда",
+      "month_id": 2,
+      "events_data": {
+        "count": 0,
+        "events": []
+      }
+    },
+    {
+      "id": 55,
+      "number": 25,
+      "week_day": "Четверг",
+      "month_id": 2,
+      "events_data": {
+        "count": 0,
+        "events": []
+      }
+    },
+    {
+      "id": 56,
+      "number": 26,
+      "week_day": "Пятница",
+      "month_id": 2,
+      "events_data": {
+        "count": 0,
+        "events": []
+      }
+    },
+    {
+      "id": 57,
+      "number": 27,
+      "week_day": "Суббота",
+      "month_id": 2,
+      "events_data": {
+        "count": 0,
+        "events": []
+      }
+    },
+    {
+      "id": 58,
+      "number": 28,
+      "week_day": "Воскресенье",
+      "month_id": 2,
+      "events_data": {
+        "count": 0,
+        "events": []
+      }
+    },
+    {
+      "id": 59,
+      "number": 29,
+      "week_day": "Понедельник",
+      "month_id": 2,
+      "events_data": {
+        "count": 0,
+        "events": []
+      }
+    },
+    {
+      "id": 60,
+      "number": 30,
+      "week_day": "Вторник",
+      "month_id": 2,
+      "events_data": {
+        "count": 0,
+        "events": []
+      }
+    },
+    {
+      "id": 61,
+      "number": 31,
+      "week_day": "Среда",
+      "month_id": 2,
+      "events_data": {
+        "count": 0,
+        "events": []
+      }
+    }
+  ],
+  "next_month_days": [
+    {
+      "id": 62,
+      "number": 1,
+      "week_day": "Четверг",
+      "month_id": 3,
+      "events_data": {
+        "count": 0,
+        "events": []
+      }
+    },
+    {
+      "id": 63,
+      "number": 2,
+      "week_day": "Пятница",
+      "month_id": 3,
+      "events_data": {
+        "count": 0,
+        "events": []
+      }
+    },
+    {
+      "id": 64,
+      "number": 3,
+      "week_day": "Суббота",
+      "month_id": 3,
+      "events_data": {
+        "count": 0,
+        "events": []
+      }
+    },
+    {
+      "id": 65,
+      "number": 4,
+      "week_day": "Воскресенье",
+      "month_id": 3,
+      "events_data": {
+        "count": 0,
+        "events": []
+      }
+    },
+    {
+      "id": 66,
+      "number": 5,
+      "week_day": "Понедельник",
+      "month_id": 3,
+      "events_data": {
+        "count": 0,
+        "events": []
+      }
+    },
+    {
+      "id": 67,
+      "number": 6,
+      "week_day": "Вторник",
+      "month_id": 3,
+      "events_data": {
+        "count": 0,
+        "events": []
+      }
+    },
+    {
+      "id": 68,
+      "number": 7,
+      "week_day": "Среда",
+      "month_id": 3,
+      "events_data": {
+        "count": 0,
+        "events": []
+      }
+    },
+    {
+      "id": 69,
+      "number": 8,
+      "week_day": "Четверг",
+      "month_id": 3,
+      "events_data": {
+        "count": 0,
+        "events": []
+      }
+    },
+    {
+      "id": 70,
+      "number": 9,
+      "week_day": "Пятница",
+      "month_id": 3,
+      "events_data": {
+        "count": 0,
+        "events": []
+      }
+    },
+    {
+      "id": 71,
+      "number": 10,
+      "week_day": "Суббота",
+      "month_id": 3,
+      "events_data": {
+        "count": 0,
+        "events": []
+      }
+    },
+    {
+      "id": 72,
+      "number": 11,
+      "week_day": "Воскресенье",
+      "month_id": 3,
+      "events_data": {
+        "count": 0,
+        "events": []
+      }
+    }
+  ]
+}
