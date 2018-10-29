@@ -19,7 +19,7 @@ const mediaQueryMdScreen = window.matchMedia('(max-width: 767.98px)');
 const mediaQueryLgScreen = window.matchMedia('(max-width: 992px)');
 
 store.dispatch(resizeScreen({ isLessThanMdScreen: mediaQueryMdScreen.matches }));
-store.dispatch(resizeScreen({ isLessThaLgScreen: mediaQueryLgScreen.matches }));
+store.dispatch(resizeScreen({ isLessThanLgScreen: mediaQueryLgScreen.matches }));
 
 
 mediaQueryMdScreen.addListener((mq) => {
