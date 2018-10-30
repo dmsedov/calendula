@@ -67,11 +67,9 @@ export default class Day extends React.Component {
             События
           </PopoverHeader>
           <PopoverBody>
-            <div className="info-panel__user-data">
-              <ul>
+              <ul className="calendar__day-events-popup">
                 {eventsListItems}
               </ul>
-            </div>
           </PopoverBody>
           <div className="popover-footer">
             <div className="info-panel__account-controls">

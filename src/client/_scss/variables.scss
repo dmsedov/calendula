@@ -1,6 +1,5 @@
 // geometry
 
-$basisWidth: 100%; // demanded fix
 $width-wrapper: 1230px;
 $width-main: 1366px;
 $height-header: 3.5rem;
@@ -22,9 +21,10 @@ $border-col-social-btn: #aba6a6;
 
 //items
 $col-li-hovered: $col-btn-hovered;
-$bg-col-item-common: #eaeaea;
+$bg-col-item-common: #fcfcfc;
 $border-col-day: #c0c0c0;
 $bg-col-day-not-current: #dadada;
+$border-col-li-day: #c0c0c0;
 
 
 // --btn-like fonts

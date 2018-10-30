@@ -68,17 +68,18 @@
     display: flex;
     justify-content: center;
     padding: 1rem;
-    padding-left: 2rem;
+    padding-left: 1.5rem;
     width: 90%;
-    max-width: 400px;
-    height: 300px;
-    font-size: 12px;
+    max-width: 500px;
+    height: 400px;
+    font-size: 16px;
     border: 1px solid $border-col-day;
     cursor: pointer;
 
     @media (min-width: $screen-lg + 1) {
       width: 14%;
       height: 200px;
+      font-size: 12px;
     }
 
     &_not-current_month {
@@ -108,14 +109,48 @@
   }
 
   &__day-content {
-    padding-left: 1rem;
+    padding-left: 16px;
     height: 90%;
-    overflow-y: hidden;
     z-index: -1;
+    overflow-y: hidden;
+
+    @media (max-width: $screen-lg) {
+      margin-top: 40px;
+      padding: 16px;
+      width: 100%;
+      height: 220px;
+      overflow: scroll;
+      z-index: 1;
+    }
+
+    @media (max-width: $screen-sm) {
+      padding: 16px 0;
+    }
   }
 
   &__day-events {
     margin: 0;
     padding: 0;
+
+    @media (max-width: $screen-lg) {
+      li {
+        list-style-type: none;
+      }
+    }
+  }
+
+  &__day-events-popup {
+    margin: 0;
+    padding: 1rem;
+    height: 220px;
+    overflow-y: scroll;
+
+    li {
+      padding: .2rem;
+      width: 95%;
+      text-align: center;
+      border-bottom: 1px solid $border-col-li-day;
+      list-style-type: none;
+    }
   }
 }
