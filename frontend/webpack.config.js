@@ -12,12 +12,14 @@ const isProduction = !isDevelopment;
 
 const config = {
   entry: {
-    './src/client/index.js': './src/client/index.jsx',
+    './src/index.js': './src/index.jsx',
   },
   module: {
     rules: [{
       test: /\.html$/,
-      use: 'html-loader',
+      use: [
+        'html-loader',
+      ],
     }, {
       test: /\.jsx?$/,
       exclude: /node_modules/,
@@ -31,7 +33,7 @@ const config = {
       test: /\.scss$/,
       exclude: /node_modules/,
       use: [
-        MiniCssExtractPlugin.loader,
+         MiniCssExtractPlugin.loader,
         {
           loader: 'css-loader',
           options: {
@@ -54,6 +56,7 @@ const config = {
     {
       test: /\.less$/,
       use: [
+        MiniCssExtractPlugin.loader,
         {
           loader: 'css-loader',
           options: {
@@ -61,10 +64,26 @@ const config = {
             sourceMap: isProduction,
           },
         },
+        {
+          loader: 'postcss-loader',
+          options: {
+            plugins: function() {
+              return [autoprefixer];
+            },
+            sourceMap: isProduction,
+          },
+        },
         'less-loader',
       ],
     },
-  ],
+    {
+      test: /\.(png|jpg|gif|ico|svg)$/,
+      loader: 'file-loader',
+      options: {
+        name: '[path][name].[ext]',
+        context: 'src',
+      },
+    }],
   },
   plugins: [
     new MiniCssExtractPlugin({
@@ -72,7 +91,7 @@ const config = {
       chunkFilename: '[id].css',
     }),
     new HtmlWebpackPlugin({
-      template: './src/client/html/index.html',
+      template: './src/html/index.html',
     }),
   ],
   optimization: isProduction ? {
