@@ -11,21 +11,27 @@ const isDevelopment = env === 'development';
 const isProduction = !isDevelopment;
 
 const config = {
+  context: path.join(__dirname, 'src'),
   entry: {
-    './src/index.js': './src/index.jsx',
+    './index.js': './index.jsx',
   },
+  output: {
+    path: path.join(__dirname, 'public'),
+    filename: 'js/bundle.js',
+    publicPath: '/assets/',
+  },
+  // devtool: 'eval',
   module: {
     rules: [{
       test: /\.html$/,
-      use: [
-        'html-loader',
-      ],
+      use: 'html-loader',
     }, {
       test: /\.jsx?$/,
       exclude: /node_modules/,
       use: [{
         loader: 'babel-loader',
         options: {
+          sourceMap: isDevelopment,
           presets: ['react'],
         },
       }],
@@ -33,12 +39,12 @@ const config = {
       test: /\.scss$/,
       exclude: /node_modules/,
       use: [
-         MiniCssExtractPlugin.loader,
+        MiniCssExtractPlugin.loader,
         {
           loader: 'css-loader',
           options: {
             minimize: isProduction,
-            sourceMap: isProduction,
+            sourceMap: isDevelopment,
           },
         },
         {
@@ -47,7 +53,7 @@ const config = {
             plugins: function() {
               return [autoprefixer];
             },
-            sourceMap: isProduction,
+            sourceMap: isDevelopment,
           },
         },
         'sass-loader',
@@ -56,21 +62,11 @@ const config = {
     {
       test: /\.less$/,
       use: [
-        MiniCssExtractPlugin.loader,
         {
           loader: 'css-loader',
           options: {
             importLoaders: 1,
-            sourceMap: isProduction,
-          },
-        },
-        {
-          loader: 'postcss-loader',
-          options: {
-            plugins: function() {
-              return [autoprefixer];
-            },
-            sourceMap: isProduction,
+            sourceMap: isDevelopment,
           },
         },
         'less-loader',
@@ -81,17 +77,17 @@ const config = {
       loader: 'file-loader',
       options: {
         name: '[path][name].[ext]',
-        context: 'src',
       },
-    }],
+    }
+  ],
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: '[name].css',
+      filename: 'css/bundle.css',
       chunkFilename: '[id].css',
     }),
     new HtmlWebpackPlugin({
-      template: './src/html/index.html',
+      template: './html/index.html',
     }),
   ],
   optimization: isProduction ? {
@@ -115,7 +111,9 @@ const config = {
   devServer: {
     port: 3000,
     open: true,
-    historyApiFallback: true,
+    historyApiFallback: {
+      index: '/assets/',
+    },
   },
 };
 
