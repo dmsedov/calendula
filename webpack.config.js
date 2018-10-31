@@ -17,7 +17,7 @@ const config = {
   },
   output: {
     path: path.join(__dirname, 'public'),
-    filename: 'js/[name].min.js',
+    filename: 'js/bundle.js',
     publicPath: '/public/static/',
   },
   module: {
@@ -74,7 +74,7 @@ const config = {
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: 'css/[name].css',
+      filename: 'css/bundle.css',
       chunkFilename: '[id].css',
     }),
     new HtmlWebpackPlugin({
@@ -104,6 +104,7 @@ const config = {
     compress: true,
     open: true,
     historyApiFallback: true,
+    contentBase: '/public/static/',
   },
 };
 
