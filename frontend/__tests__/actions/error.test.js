@@ -1,4 +1,4 @@
-import { resetErrorMsg } from '../../js/actions/error';
+import { resetErrorMsg } from '../../src/js/actions/error';
 
 describe('error action', () => {
   it('RESET_ERROR_MESSAGE', () => {

@@ -4,8 +4,8 @@ import {
   signinUserFailure,
   signout,
   foreignAuthUserRequest,
-} from '../../js/actions/auth';
-import { userFetchingProfileState, user } from '../../js/reducers/auth';
+} from '../../src/js/actions/auth';
+import { userFetchingProfileState, user } from '../../src/js/reducers/auth';
 
 describe('Fetching user data reducers', () => {
   const initialState = {

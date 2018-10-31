@@ -3,9 +3,9 @@ import {
   closeModal,
   openNavMenu,
   closeNavMenu,
-} from '../../js/actions/uiPopup';
-import resizeScreen from '../../js/actions/uiScreen';
-import { uiScreen, uiPopup } from '../../js/reducers/ui';
+} from '../../src/js/actions/uiPopup';
+import resizeScreen from '../../src/js/actions/uiScreen';
+import { uiScreen, uiPopup } from '../../src/js/reducers/ui';
 
 describe('ui reducers', () => {
   describe('uiPopup reducers', () => {

@@ -2,8 +2,8 @@ import {
   fetchCalendarRequest,
   fetchCalendarSuccess,
   fetchCalendarFailure,
-} from '../../js/actions/calendar';
-import { calendarFetching, calendar } from '../../js/reducers/calendar';
+} from '../../src/js/actions/calendar';
+import { calendarFetching, calendar } from '../../src/js/reducers/calendar';
 import testCalendar from './testData/calendar.json';
 
 describe('Fetching calendar reducers', () => {

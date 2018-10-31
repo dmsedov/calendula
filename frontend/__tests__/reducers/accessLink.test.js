@@ -2,8 +2,8 @@ import {
   fetchLinkRequest,
   fetchLinkSuccess,
   fetchLinkFailure,
-} from '../../js/actions/accessLink';
-import { accessLinkFetching, accessLink } from '../../js/reducers/accessLink';
+} from '../../src/js/actions/accessLink';
+import { accessLinkFetching, accessLink } from '../../src/js/reducers/accessLink';
 
 describe('Fetching accessLink reducers', () => {
   const initLinkState = '';

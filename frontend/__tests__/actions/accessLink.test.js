@@ -8,9 +8,9 @@ import {
   fetchLinkSuccess,
   fetchLinkFailure,
   fetchAccessLink,
-} from '../../js/actions/accessLink';
-import urls from '../../js/api/urls';
-import errors from '../../js/errors';
+} from '../../src/js/actions/accessLink';
+import urls from '../../src/js/api/urls';
+import errors from '../../src/js/errors';
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);

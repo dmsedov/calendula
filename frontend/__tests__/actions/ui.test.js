@@ -3,8 +3,8 @@ import {
   closeModal,
   openNavMenu,
   closeNavMenu,
-} from '../../js/actions/uiPopup';
-import resizeScreen from '../../js/actions/uiScreen';
+} from '../../src/js/actions/uiPopup';
+import resizeScreen from '../../src/js/actions/uiScreen';
 
 describe('ui actions', () => {
   it('MODAL_OPEN', () => {

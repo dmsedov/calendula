@@ -4,9 +4,9 @@ import httpAdapter from 'axios/lib/adapters/http';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import jwtGen from 'jwt-simple';
-import * as authActions from '../../js/actions/auth';
-import urls from '../../js/api/urls';
-import errors from '../../js/errors';
+import * as authActions from '../../src/js/actions/auth';
+import urls from '../../src/js/api/urls';
+import errors from '../../src/js/errors';
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);

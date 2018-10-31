@@ -8,9 +8,9 @@ import {
   fetchCalendarSuccess,
   fetchCalendarFailure,
   fetchCalendar,
-} from '../../js/actions/calendar';
-import urls from '../../js/api/urls';
-import errors from '../../js/errors';
+} from '../../src/js/actions/calendar';
+import urls from '../../src/js/api/urls';
+import errors from '../../src/js/errors';
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);

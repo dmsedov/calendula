@@ -1,6 +1,6 @@
-import error from '../../js/reducers/error';
-import { resetErrorMsg } from '../../js/actions/error';
-import { signinUserSuccess, signinUserFailure } from '../../js/actions/auth';
+import error from '../../src/js/reducers/error';
+import { resetErrorMsg } from '../../src/js/actions/error';
+import { signinUserSuccess, signinUserFailure } from '../../src/js/actions/auth';
 
 describe('error reducer', () => {
   it('should reset error message', () => {
