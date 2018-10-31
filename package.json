@@ -6,7 +6,7 @@
   "scripts": {
     "lint": "./node_modules/eslint/bin/eslint.js src",
     "dev-server": "webpack-dev-server --mode development",
-    "build-dev": "webpack --mode development ./src/client/index.jsx --output-public-path='/static/' --output ./static/main.js",
+    "build-dev": "webpack --mode development",
     "build": "webpack --mode production ./src/client/index.jsx --output-public-path='/static/' --output ./static/main.js",
     "test": "jest --colors"
   },

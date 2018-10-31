@@ -11,8 +11,14 @@ const isDevelopment = env === 'development';
 const isProduction = !isDevelopment;
 
 const config = {
+  context: __dirname + "/src/client/",
   entry: {
-    './src/client/index.js': './src/client/index.jsx',
+    './index.js': './index.jsx',
+  },
+  output: {
+    path: path.join(__dirname, 'public'),
+    filename: 'js/[name].min.js',
+    publicPath: '/public/static/',
   },
   module: {
     rules: [{
@@ -68,11 +74,11 @@ const config = {
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: '[name].css',
+      filename: 'css/[name].css',
       chunkFilename: '[id].css',
     }),
     new HtmlWebpackPlugin({
-      template: './src/client/html/index.html',
+      template: './html/index.html',
     }),
   ],
   optimization: isProduction ? {
