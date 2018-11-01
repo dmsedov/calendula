@@ -3,11 +3,13 @@ import { Popover, PopoverHeader, PopoverBody, Button } from 'reactstrap';
 import cn from 'classnames';
 
 export default class Day extends React.Component {
-  state = { isOpenEventsList: false }
+  state = {
+    isOpenEventsList: false,
+  }
 
   componentDidUpdate = (prevProps) => {
     if (this.props.isLessThanLgScreen !== prevProps.isLessThanLgScreen) {
-      this.setState({ isOpenEventsList: false });
+      this.props.resetState();
     }
   }
 
@@ -27,17 +29,18 @@ export default class Day extends React.Component {
     }[weekDay];
   }
 
-  handleClickOnEvent = id => () => {
-    console.log(id, 'getEventData on this id');
-  }
-
-  makeVerboseDayEventsList = () => {
-    const { events } = this.props;
+  makeVerboseDayEventsList = (elStyle) => {
+    const { events, idClickedEvent, handleClickOnEvent } = this.props;
 
     return events.map((eventData) => {
       const { id, title, time_interval } = eventData;
+      const classNamesEventEl = cn({
+        [`calendar${elStyle}`]: true,
+        'calendar__day-event_clicked': idClickedEvent === id,
+      });
+
       return (
-        <li key={id} className="calendar__day-event" onClick={this.handleClickOnEvent(id)}>
+        <li key={id} className={classNamesEventEl} onClick={handleClickOnEvent(id)}>
           <span>
             {time_interval}
           </span>
@@ -47,12 +50,12 @@ export default class Day extends React.Component {
     });
   }
 
-  makeShortDayEventsList = () => {
+  makeShortDayEventsList = (elStyle) => {
     const { events } = this.props;
     return events.map((eventData) => {
       const { id, title } = eventData;
       return title ? (
-        <li key={id} className="calendar__day-event">
+        <li key={id} className={`calendar${elStyle}`}>
           {title}
         </li>
       ) : null;
@@ -62,6 +65,7 @@ export default class Day extends React.Component {
   renderPopupEventList = () => {
     const { isOpenEventsList } = this.state;
     const { dayId } = this.props;
+
     return (
       <Popover
         className="calendar__popup-events"
@@ -75,7 +79,7 @@ export default class Day extends React.Component {
         </PopoverHeader>
         <PopoverBody>
           <ul className="calendar__popup-day-events">
-            {this.makeVerboseDayEventsList()}
+            {this.makeVerboseDayEventsList('__day-event')}
           </ul>
         </PopoverBody>
         <div className="popover-footer">
@@ -88,13 +92,11 @@ export default class Day extends React.Component {
   }
 
   render() {
-    const { isOpenEventsList } = this.state;
     const {
       isLessThanLgScreen,
       dayId,
       number,
       weekDay,
-      events,
       classNamesDayNumber,
       classNamesDay,
     } = this.props;
@@ -112,8 +114,8 @@ export default class Day extends React.Component {
         <div className="calendar__day-content">
           <ul className={classNamesDayEvents}>
             {!isLessThanLgScreen ?
-              this.makeShortDayEventsList()
-              : this.makeVerboseDayEventsList()}
+              this.makeShortDayEventsList('__day-event')
+              : this.makeVerboseDayEventsList('__day-event')}
           </ul>
         </div>
         {!isLessThanLgScreen ? this.renderPopupEventList() : null}

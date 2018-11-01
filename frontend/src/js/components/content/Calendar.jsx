@@ -5,9 +5,34 @@ import _ from 'lodash';
 import Day from './Day';
 
 export default class Calendar extends React.Component {
+  state = {
+    isEventElClicked: false,
+    idClickedEvent: null,
+  }
+
   componentDidMount() {
     const { fetchCalendar } = this.props;
     fetchCalendar();
+  }
+
+  resetDayState = () => {
+    this.setState({
+      isEventElClicked: false,
+      idClickedEvent: null,
+    });
+  }
+
+  handleClickOnEvent = id => () => {
+    const { idClickedEvent } = this.state;
+    if (idClickedEvent === id) {
+      console.log(id, 'getEventData on this id');
+      this.resetDayState();
+    } else {
+      this.setState({
+        isEventElClicked: true,
+        idClickedEvent: id,
+      });
+    }
   }
 
   renderPanelWithWeekDayNames = () => {
@@ -72,6 +97,9 @@ export default class Calendar extends React.Component {
                 isLessThanLgScreen={isLessThanLgScreen}
                 classNamesDay={classNamesDay}
                 classNamesDayNumber={classNamesDayNumber}
+                {...this.state}
+                handleClickOnEvent={this.handleClickOnEvent}
+                resetState={this.resetDayState}
               />
             );
           })}

@@ -68,7 +68,6 @@
     display: flex;
     justify-content: center;
     padding: 1rem;
-    // padding-left: 1.5rem;
     width: 90%;
     max-width: 500px;
     height: 400px;
@@ -110,7 +109,7 @@
 
   &__day-content {
     height: 90%;
-    z-index: -1;
+    // z-index: -1;
     overflow-y: hidden;
 
     @media (max-width: $screen-lg) {
@@ -142,6 +141,12 @@
   }
 
   &__day-event {
+
+    &_clicked {
+      background-color: $list-item-event;
+      color: $col-list-item-event;
+    }
+
     span {
       padding-right: 10px;
       font-size: x-small;
