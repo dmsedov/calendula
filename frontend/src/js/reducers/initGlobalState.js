@@ -1,5 +1,7 @@
 export default {
   userFetchingProfileState: 'none',
+  accessLinkFetchingState: 'none',
+  calendarFetchingState: 'none',
   user: {
     isAuthenticated: false,
     uuid: null,
@@ -8,6 +10,9 @@ export default {
     imgUrl: null,
     c_id: null,
   },
+  accessLink: '',
+  errMsg: null,
+  calendar: null,
   uiPopup: {
     isNavMenuOpen: false,
     isModalShown: false,
@@ -17,9 +22,8 @@ export default {
     isLessThanMdScreen: null,
     isLessThanLgScreen: null,
   },
-  accessLinkFetchingState: 'none',
-  calendarFetchingState: 'none',
-  accessLink: '',
-  errMsg: null,
-  calendar: null,
+  uiCalendar: {
+    idClickedEvent: null,
+    isOpenEventsList: false,
+  },
 };

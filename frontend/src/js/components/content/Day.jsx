@@ -3,18 +3,10 @@ import { Popover, PopoverHeader, PopoverBody, Button } from 'reactstrap';
 import cn from 'classnames';
 
 export default class Day extends React.Component {
-  state = {
-    isOpenEventsList: false,
-  }
-
   componentDidUpdate = (prevProps) => {
     if (this.props.isLessThanLgScreen !== prevProps.isLessThanLgScreen) {
       this.props.resetState();
     }
-  }
-
-  toggle = () => {
-    this.setState({ isOpenEventsList: !this.state.isOpenEventsList });
   }
 
   makeShortWeekDayNames = (weekDay) => {
@@ -34,6 +26,7 @@ export default class Day extends React.Component {
 
     return events.map((eventData) => {
       const { id, title, time_interval } = eventData;
+      console.log(idClickedEvent === id, 'comparing is');
       const classNamesEventEl = cn({
         [`calendar${elStyle}`]: true,
         'calendar__day-event_clicked': idClickedEvent === id,
@@ -63,8 +56,7 @@ export default class Day extends React.Component {
   }
 
   renderPopupEventList = () => {
-    const { isOpenEventsList } = this.state;
-    const { dayId } = this.props;
+    const { dayId, isOpenEventsList, toggleEventsList } = this.props;
 
     return (
       <Popover
@@ -72,7 +64,7 @@ export default class Day extends React.Component {
         placement="top-start"
         isOpen={isOpenEventsList}
         target={`calendar-day-${dayId}`}
-        toggle={this.toggle}
+        toggle={toggleEventsList(dayId)}
       >
         <PopoverHeader>
           События
@@ -99,6 +91,7 @@ export default class Day extends React.Component {
       weekDay,
       classNamesDayNumber,
       classNamesDay,
+      toggleEventsList,
     } = this.props;
 
     const classNamesDayEvents = cn({
@@ -106,7 +99,12 @@ export default class Day extends React.Component {
       'calendar__day-events_screen_small': isLessThanLgScreen,
     });
     return (
-      <div key={dayId} id={`calendar-day-${dayId}`} className={classNamesDay} onClick={!isLessThanLgScreen ? this.toggle : null}>
+      <div
+        key={dayId}
+        id={`calendar-day-${dayId}`}
+        className={classNamesDay}
+        onClick={!isLessThanLgScreen ? toggleEventsList(dayId) : null}
+      >
         <div className="calendar__day-of-week">
           {isLessThanLgScreen && <span className="calendar__day-name">{this.makeShortWeekDayNames(weekDay)}</span>}
           <span className={classNamesDayNumber}>{number}</span>

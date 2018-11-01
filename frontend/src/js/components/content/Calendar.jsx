@@ -5,35 +5,25 @@ import _ from 'lodash';
 import Day from './Day';
 
 export default class Calendar extends React.Component {
-  state = {
-    isEventElClicked: false,
-    idClickedEvent: null,
-  }
-
   componentDidMount() {
     const { fetchCalendar } = this.props;
     fetchCalendar();
   }
 
-  resetDayState = () => {
-    this.setState({
-      isEventElClicked: false,
-      idClickedEvent: null,
-    });
-  }
-
   handleClickOnEvent = id => () => {
-    const { idClickedEvent } = this.state;
+    const { idClickedEvent, resetDayState, clickEventEl } = this.props;
     if (idClickedEvent === id) {
       console.log(id, 'getEventData on this id');
-      this.resetDayState();
+      resetDayState();
     } else {
-      this.setState({
-        isEventElClicked: true,
-        idClickedEvent: id,
-      });
+      clickEventEl({ id });
     }
   }
+
+  handleToggleEventList = dayId => () => {
+    const { toggleEventsList } = this.props;
+    toggleEventsList({ dayId });
+  };
 
   renderPanelWithWeekDayNames = () => {
     const dayNames = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
@@ -41,7 +31,13 @@ export default class Calendar extends React.Component {
   }
 
   render() {
-    const { calendar, isLessThanLgScreen } = this.props;
+    const {
+      calendar,
+      isLessThanLgScreen,
+      isOpenEventsList,
+      idClickedEvent,
+      resetDayState,
+    } = this.props;
 
     if (!calendar) {
       return null;
@@ -97,9 +93,11 @@ export default class Calendar extends React.Component {
                 isLessThanLgScreen={isLessThanLgScreen}
                 classNamesDay={classNamesDay}
                 classNamesDayNumber={classNamesDayNumber}
-                {...this.state}
                 handleClickOnEvent={this.handleClickOnEvent}
-                resetState={this.resetDayState}
+                resetState={resetDayState}
+                isOpenEventsList={isOpenEventsList}
+                idClickedEvent={idClickedEvent}
+                toggleEventsList={this.handleToggleEventList}
               />
             );
           })}
