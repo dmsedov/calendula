@@ -1,8 +1,15 @@
 import React from 'react';
 import { Popover, PopoverHeader, PopoverBody, Button } from 'reactstrap';
+import cn from 'classnames';
 
 export default class Day extends React.Component {
   state = { isOpenEventsList: false }
+
+  componentDidUpdate = (prevProps) => {
+    if (this.props.isLessThanLgScreen !== prevProps.isLessThanLgScreen) {
+      this.setState({ isOpenEventsList: false });
+    }
+  }
 
   toggle = () => {
     this.setState({ isOpenEventsList: !this.state.isOpenEventsList });
@@ -24,12 +31,61 @@ export default class Day extends React.Component {
     console.log(id, 'getEventData on this id');
   }
 
-  makeDayEventsList = eventsList => eventsList.map((eventData) => {
-    const { id, title } = eventData;
+  makeVerboseDayEventsList = () => {
+    const { events } = this.props;
+
+    return events.map((eventData) => {
+      const { id, title, time_interval } = eventData;
+      return (
+        <li key={id} className="calendar__day-event" onClick={this.handleClickOnEvent(id)}>
+          <span>
+            {time_interval}
+          </span>
+          {title}
+        </li>
+      );
+    });
+  }
+
+  makeShortDayEventsList = () => {
+    const { events } = this.props;
+    return events.map((eventData) => {
+      const { id, title } = eventData;
+      return title ? (
+        <li key={id} className="calendar__day-event">
+          {title}
+        </li>
+      ) : null;
+    });
+  }
+
+  renderPopupEventList = () => {
+    const { isOpenEventsList } = this.state;
+    const { dayId } = this.props;
     return (
-      <li key={id} className="calendar__day-event" onClick={this.handleClickOnEvent(id)}>{title}</li>
+      <Popover
+        className="calendar__popup-events"
+        placement="top-start"
+        isOpen={isOpenEventsList}
+        target={`calendar-day-${dayId}`}
+        toggle={this.toggle}
+      >
+        <PopoverHeader>
+          События
+        </PopoverHeader>
+        <PopoverBody>
+          <ul className="calendar__popup-day-events">
+            {this.makeVerboseDayEventsList()}
+          </ul>
+        </PopoverBody>
+        <div className="popover-footer">
+          <div className="calendar__popup-control-panel">
+            Control
+          </div>
+        </div>
+      </Popover>
     );
-  });
+  }
 
   render() {
     const { isOpenEventsList } = this.state;
@@ -43,39 +99,24 @@ export default class Day extends React.Component {
       classNamesDay,
     } = this.props;
 
-    const eventsListItems = this.makeDayEventsList(events);
-
+    const classNamesDayEvents = cn({
+      'calendar__day-events': true,
+      'calendar__day-events_screen_small': isLessThanLgScreen,
+    });
     return (
-      <div key={dayId} id={`calendar-day-${dayId}`} className={classNamesDay} onClick={this.toggle}>
+      <div key={dayId} id={`calendar-day-${dayId}`} className={classNamesDay} onClick={!isLessThanLgScreen ? this.toggle : null}>
         <div className="calendar__day-of-week">
           {isLessThanLgScreen && <span className="calendar__day-name">{this.makeShortWeekDayNames(weekDay)}</span>}
           <span className={classNamesDayNumber}>{number}</span>
         </div>
         <div className="calendar__day-content">
-          <ul className="calendar__day-events">
-            {eventsListItems}
+          <ul className={classNamesDayEvents}>
+            {!isLessThanLgScreen ?
+              this.makeShortDayEventsList()
+              : this.makeVerboseDayEventsList()}
           </ul>
         </div>
-        <Popover
-          className="info-panel__user-bio"
-          placement="top-start"
-          isOpen={isOpenEventsList}
-          target={`calendar-day-${dayId}`}
-          toggle={this.toggle}
-        >
-          <PopoverHeader>
-            События
-          </PopoverHeader>
-          <PopoverBody>
-              <ul className="calendar__day-events-popup">
-                {eventsListItems}
-              </ul>
-          </PopoverBody>
-          <div className="popover-footer">
-            <div className="info-panel__account-controls">
-            </div>
-          </div>
-        </Popover>
+        {!isLessThanLgScreen ? this.renderPopupEventList() : null}
       </div>
     );
   }
