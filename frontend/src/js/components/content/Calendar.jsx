@@ -17,14 +17,12 @@ export default class Calendar extends React.Component {
   // }
 
   handleClickOnDay = dayId => () => {
-    const { clickOnDay, resetDayState, toggleEventsList, idClickedDay } = this.props;
-    // console.log(idClickedDay, dayId,'handleClickonDay');
+    const { clickOnDay, resetDayState, idClickedDay } = this.props;
+
     if (idClickedDay !== dayId) {
       resetDayState();
-      return;
+      clickOnDay({ dayId });
     }
-    // resetDayState();
-    clickOnDay({ dayId });
   }
 
   handleClickOnEvent = (id, dayId) => () => {

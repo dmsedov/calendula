@@ -5,18 +5,15 @@ import cn from 'classnames';
 export default class Day extends React.Component {
   state = { isOpenEventsList: false };
 
-  controlToggle = (func) => (e) => {
-    const { idClickedDay } = this.props;
-    func.forEach((f) => {
-      f(e);
-    });
-  }
+  controlToggle = func => e => func.forEach(f => f(e));
 
-  toggle = () => {
+  toggle = idDay => () => {
     const { isOpenEventsList } = this.state;
-    // if (idClickedDay === id) {
-      this.setState({ isOpenEventsList: !isOpenEventsList });
-    // }
+    const { idClickedDay } = this.props;
+    if (idClickedDay !== idDay) {
+      this.setState({ isOpenEventsList: false });
+    }
+    this.setState({ isOpenEventsList: !isOpenEventsList });
     // const { resetState, idClickedEvent } = this.props;
 
     // if (isOpenEventsList && !idClickedEvent) {
@@ -81,7 +78,7 @@ export default class Day extends React.Component {
         placement="top-start"
         isOpen={isOpenEventsList}
         target={`calendar-day-${dayId}`}
-        toggle={this.toggle}
+        toggle={this.toggle(dayId)}
       >
         <PopoverHeader>
           События
@@ -123,7 +120,7 @@ export default class Day extends React.Component {
         key={dayId}
         id={`calendar-day-${dayId}`}
         className={classNamesDay}
-        onClick={this.controlToggle([this.toggle, handleClickOnDay(dayId)])}
+        onClick={this.controlToggle([this.toggle((dayId)), handleClickOnDay(dayId)])}
       >
         <div className="calendar__day-of-week">
           {isLessThanLgScreen && <span className="calendar__day-name">{this.makeShortWeekDayNames(weekDay)}</span>}
