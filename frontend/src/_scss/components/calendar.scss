@@ -67,7 +67,6 @@
     position: relative;
     display: flex;
     justify-content: center;
-    padding: 1rem;
     width: 90%;
     max-width: 500px;
     height: 400px;
@@ -108,7 +107,8 @@
   }
 
   &__day-content {
-    height: 90%;
+    padding: 1rem;
+    height: 95%;
     // z-index: -1;
     overflow-y: hidden;
 

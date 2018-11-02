@@ -10,13 +10,39 @@ export default class Calendar extends React.Component {
     fetchCalendar();
   }
 
-  handleClickOnEvent = id => () => {
-    const { idClickedEvent, resetDayState, clickEventEl } = this.props;
-    if (idClickedEvent === id) {
+  // componentDidUpdate = (prevProps) => {
+  //   if (this.props.isLessThanLgScreen !== prevProps.isLessThanLgScreen) {
+  //     this.props.resetDayState();
+  //   }
+  // }
+
+  handleClickOnDay = dayId => () => {
+    const { clickOnDay, resetDayState, toggleEventsList, idClickedDay } = this.props;
+    // console.log(idClickedDay, dayId,'handleClickonDay');
+    if (idClickedDay !== dayId) {
+      resetDayState();
+      return;
+    }
+    // resetDayState();
+    clickOnDay({ dayId });
+  }
+
+  handleClickOnEvent = (id, dayId) => () => {
+    const {
+      idClickedEvent,
+      idClickedDay,
+      resetDayState,
+      clickOnEventEl,
+    } = this.props;
+
+    // if (idClickedDay !== dayId) {
+    //   idClickedEvent && resetDayState();
+    // }
+    if (idClickedEvent !== id) {
+      clickOnEventEl({ id, dayId });
+    } else if (idClickedDay !== dayId || idClickedEvent === id ) {
       console.log(id, 'getEventData on this id');
       resetDayState();
-    } else {
-      clickEventEl({ id });
     }
   }
 
@@ -30,7 +56,9 @@ export default class Calendar extends React.Component {
       calendar,
       isLessThanLgScreen,
       idClickedEvent,
+      idClickedDay,
       resetDayState,
+      isOpenEventsList,
     } = this.props;
 
     if (!calendar) {
@@ -85,11 +113,14 @@ export default class Calendar extends React.Component {
                 events={events}
                 number={number}
                 isLessThanLgScreen={isLessThanLgScreen}
+                isOpenEventsList={isOpenEventsList}
                 classNamesDay={classNamesDay}
                 classNamesDayNumber={classNamesDayNumber}
+                handleClickOnDay={this.handleClickOnDay}
                 handleClickOnEvent={this.handleClickOnEvent}
                 resetState={resetDayState}
                 idClickedEvent={idClickedEvent}
+                idClickedDay={idClickedDay}
               />
             );
           })}

@@ -24,6 +24,7 @@ export default {
   },
   uiCalendar: {
     idClickedEvent: null,
-    // isOpenEventsList: false,
+    idClickedDay: null,
+    isOpenEventsList: false,
   },
 };

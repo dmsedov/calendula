@@ -5,19 +5,24 @@ import cn from 'classnames';
 export default class Day extends React.Component {
   state = { isOpenEventsList: false };
 
-  componentDidUpdate = (prevProps) => {
-    if (this.props.isLessThanLgScreen !== prevProps.isLessThanLgScreen) {
-      this.props.resetState();
-    }
+  controlToggle = (func) => (e) => {
+    const { idClickedDay } = this.props;
+    func.forEach((f) => {
+      f(e);
+    });
   }
 
   toggle = () => {
     const { isOpenEventsList } = this.state;
-    const { resetState, idClickedEvent } = this.props;
-    this.setState({ isOpenEventsList: !isOpenEventsList });
-    if (isOpenEventsList && !idClickedEvent) {
-      resetState();
-    }
+    // if (idClickedDay === id) {
+      this.setState({ isOpenEventsList: !isOpenEventsList });
+    // }
+    // const { resetState, idClickedEvent } = this.props;
+
+    // if (isOpenEventsList && !idClickedEvent) {
+    //   resetState();
+    // }
+
   }
 
   makeShortWeekDayNames = (weekDay) => {
@@ -33,7 +38,7 @@ export default class Day extends React.Component {
   }
 
   makeVerboseDayEventsList = (elStyle) => {
-    const { events, idClickedEvent, handleClickOnEvent } = this.props;
+    const { dayId, events, idClickedEvent, handleClickOnEvent } = this.props;
 
     return events.map((eventData) => {
       const { id, title, time_interval } = eventData;
@@ -44,7 +49,7 @@ export default class Day extends React.Component {
       });
 
       return (
-        <li key={id} className={classNamesEventEl} onClick={handleClickOnEvent(id)}>
+        <li key={id} className={classNamesEventEl} onClick={handleClickOnEvent(id, dayId)}>
           <span>
             {time_interval}
           </span>
@@ -68,8 +73,8 @@ export default class Day extends React.Component {
 
   renderPopupEventList = () => {
     const { isOpenEventsList } = this.state;
-    const { dayId } = this.props;
-
+    const { dayId, idClickedDay } = this.props;
+// isOpenEventsList
     return (
       <Popover
         className="calendar__popup-events"
@@ -98,24 +103,27 @@ export default class Day extends React.Component {
   render() {
     const {
       isLessThanLgScreen,
+      idClickedDay,
       dayId,
       number,
       weekDay,
       classNamesDayNumber,
       classNamesDay,
       toggleEventsList,
+      handleClickOnDay,
     } = this.props;
 
     const classNamesDayEvents = cn({
       'calendar__day-events': true,
       'calendar__day-events_screen_small': isLessThanLgScreen,
     });
+
     return (
       <div
         key={dayId}
         id={`calendar-day-${dayId}`}
         className={classNamesDay}
-        onClick={!isLessThanLgScreen ? this.toggle : null}
+        onClick={this.controlToggle([this.toggle, handleClickOnDay(dayId)])}
       >
         <div className="calendar__day-of-week">
           {isLessThanLgScreen && <span className="calendar__day-name">{this.makeShortWeekDayNames(weekDay)}</span>}

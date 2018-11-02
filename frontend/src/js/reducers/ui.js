@@ -7,7 +7,8 @@ import {
 } from '../actions/uiPopup';
 import resizeScreen from '../actions/uiScreen';
 import {
-  clickEventEl,
+  clickOnEventEl,
+  clickOnDay,
   toggleEventsList,
   resetDayState,
 } from '../actions/uiCalendar';
@@ -44,15 +45,18 @@ export const uiPopup = handleActions({
 }, initGlobalState.uiPopup);
 
 export const uiCalendar = handleActions({
-  [clickEventEl](state, { payload: { id, dayId } }) {
-    return { ...state, idClickedEvent: id, dayId };
+  [clickOnEventEl](state, { payload: { id, dayId } }) {
+    return { ...state, idClickedEvent: id, idClickedDay: dayId };
   },
-  // [toggleEventsList](state, { payload: { dayId }}) {
-  //   if (dayId === state.dayId) {
-  //     return  { ...state, isOpenEventsList: !state.isOpenEventsList };
-  //   }
-  //   return state;
-  // },
+  [clickOnDay](state, { payload: { dayId } }) {
+    return { ...state, idClickedDay: dayId };
+  },
+  [toggleEventsList](state, { payload: { dayId } }) {
+    // if (dayId === state.dayId) {
+      return { ...state, isOpenEventsList: !state.isOpenEventsList };
+    // }
+    // return state;
+  },
   [resetDayState]() {
     return initGlobalState.uiCalendar;
   },

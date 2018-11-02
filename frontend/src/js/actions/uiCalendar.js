@@ -1,6 +1,8 @@
 import { createAction } from 'redux-actions';
 
-export const clickEventEl = createAction('CLICK_ON_EVENT');
+export const clickOnDay = createAction('CLICK_ON_DAY');
+
+export const clickOnEventEl = createAction('CLICK_ON_EVENT');
 
 export const toggleEventsList = createAction('TOGGLE_EVENT_LIST');
 
