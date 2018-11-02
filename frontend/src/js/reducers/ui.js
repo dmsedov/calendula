@@ -47,12 +47,12 @@ export const uiCalendar = handleActions({
   [clickEventEl](state, { payload: { id, dayId } }) {
     return { ...state, idClickedEvent: id, dayId };
   },
-  [toggleEventsList](state, { payload: { dayId }}) {
-    if (dayId === state.dayId) {
-      return  { ...state, isOpenEventsList: !state.isOpenEventsList };
-    }
-    return state;
-  },
+  // [toggleEventsList](state, { payload: { dayId }}) {
+  //   if (dayId === state.dayId) {
+  //     return  { ...state, isOpenEventsList: !state.isOpenEventsList };
+  //   }
+  //   return state;
+  // },
   [resetDayState]() {
     return initGlobalState.uiCalendar;
   },

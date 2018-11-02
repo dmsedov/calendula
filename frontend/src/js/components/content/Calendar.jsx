@@ -20,11 +20,6 @@ export default class Calendar extends React.Component {
     }
   }
 
-  handleToggleEventList = dayId => () => {
-    const { toggleEventsList } = this.props;
-    toggleEventsList({ dayId });
-  };
-
   renderPanelWithWeekDayNames = () => {
     const dayNames = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
     return dayNames.map(dayName => <div key={_.uniqueId()} className="calendar__day-names">{dayName}</div>);
@@ -34,7 +29,6 @@ export default class Calendar extends React.Component {
     const {
       calendar,
       isLessThanLgScreen,
-      isOpenEventsList,
       idClickedEvent,
       resetDayState,
     } = this.props;
@@ -95,9 +89,7 @@ export default class Calendar extends React.Component {
                 classNamesDayNumber={classNamesDayNumber}
                 handleClickOnEvent={this.handleClickOnEvent}
                 resetState={resetDayState}
-                isOpenEventsList={isOpenEventsList}
                 idClickedEvent={idClickedEvent}
-                toggleEventsList={this.handleToggleEventList}
               />
             );
           })}

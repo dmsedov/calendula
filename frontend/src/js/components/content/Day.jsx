@@ -3,9 +3,20 @@ import { Popover, PopoverHeader, PopoverBody, Button } from 'reactstrap';
 import cn from 'classnames';
 
 export default class Day extends React.Component {
+  state = { isOpenEventsList: false };
+
   componentDidUpdate = (prevProps) => {
     if (this.props.isLessThanLgScreen !== prevProps.isLessThanLgScreen) {
       this.props.resetState();
+    }
+  }
+
+  toggle = () => {
+    const { isOpenEventsList } = this.state;
+    const { resetState, idClickedEvent } = this.props;
+    this.setState({ isOpenEventsList: !isOpenEventsList });
+    if (isOpenEventsList && !idClickedEvent) {
+      resetState();
     }
   }
 
@@ -56,7 +67,8 @@ export default class Day extends React.Component {
   }
 
   renderPopupEventList = () => {
-    const { dayId, isOpenEventsList, toggleEventsList } = this.props;
+    const { isOpenEventsList } = this.state;
+    const { dayId } = this.props;
 
     return (
       <Popover
@@ -64,7 +76,7 @@ export default class Day extends React.Component {
         placement="top-start"
         isOpen={isOpenEventsList}
         target={`calendar-day-${dayId}`}
-        toggle={toggleEventsList(dayId)}
+        toggle={this.toggle}
       >
         <PopoverHeader>
           События
@@ -103,7 +115,7 @@ export default class Day extends React.Component {
         key={dayId}
         id={`calendar-day-${dayId}`}
         className={classNamesDay}
-        onClick={!isLessThanLgScreen ? toggleEventsList(dayId) : null}
+        onClick={!isLessThanLgScreen ? this.toggle : null}
       >
         <div className="calendar__day-of-week">
           {isLessThanLgScreen && <span className="calendar__day-name">{this.makeShortWeekDayNames(weekDay)}</span>}
