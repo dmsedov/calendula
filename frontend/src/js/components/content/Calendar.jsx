@@ -10,40 +10,6 @@ export default class Calendar extends React.Component {
     fetchCalendar();
   }
 
-  // componentDidUpdate = (prevProps) => {
-  //   if (this.props.isLessThanLgScreen !== prevProps.isLessThanLgScreen) {
-  //     this.props.resetDayState();
-  //   }
-  // }
-
-  handleClickOnDay = dayId => () => {
-    const { clickOnDay, resetDayState, idClickedDay } = this.props;
-
-    if (idClickedDay !== dayId) {
-      resetDayState();
-      clickOnDay({ dayId });
-    }
-  }
-
-  handleClickOnEvent = (id, dayId) => () => {
-    const {
-      idClickedEvent,
-      idClickedDay,
-      resetDayState,
-      clickOnEventEl,
-    } = this.props;
-
-    // if (idClickedDay !== dayId) {
-    //   idClickedEvent && resetDayState();
-    // }
-    if (idClickedEvent !== id) {
-      clickOnEventEl({ id, dayId });
-    } else if (idClickedDay !== dayId || idClickedEvent === id ) {
-      console.log(id, 'getEventData on this id');
-      resetDayState();
-    }
-  }
-
   renderPanelWithWeekDayNames = () => {
     const dayNames = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
     return dayNames.map(dayName => <div key={_.uniqueId()} className="calendar__day-names">{dayName}</div>);
@@ -56,7 +22,7 @@ export default class Calendar extends React.Component {
       idClickedEvent,
       idClickedDay,
       resetDayState,
-      isOpenEventsList,
+      clickOnDay,
     } = this.props;
 
     if (!calendar) {
@@ -111,14 +77,14 @@ export default class Calendar extends React.Component {
                 events={events}
                 number={number}
                 isLessThanLgScreen={isLessThanLgScreen}
-                isOpenEventsList={isOpenEventsList}
                 classNamesDay={classNamesDay}
                 classNamesDayNumber={classNamesDayNumber}
-                handleClickOnDay={this.handleClickOnDay}
-                handleClickOnEvent={this.handleClickOnEvent}
                 resetState={resetDayState}
                 idClickedEvent={idClickedEvent}
                 idClickedDay={idClickedDay}
+                clickOnDay={clickOnDay}
+                changeDayState={this.changeDayState}
+                {...this.state}
               />
             );
           })}

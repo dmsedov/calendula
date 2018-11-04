@@ -1,5 +1,9 @@
 .popover {
   font-size: 14px;
+
+  &_hidden {
+    display: none;
+  }
 }
 
 .popover-header {

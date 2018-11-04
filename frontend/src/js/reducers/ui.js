@@ -9,7 +9,6 @@ import resizeScreen from '../actions/uiScreen';
 import {
   clickOnEventEl,
   clickOnDay,
-  toggleEventsList,
   resetDayState,
 } from '../actions/uiCalendar';
 import initGlobalState from './initGlobalState';
@@ -49,13 +48,19 @@ export const uiCalendar = handleActions({
     return { ...state, idClickedEvent: id, idClickedDay: dayId };
   },
   [clickOnDay](state, { payload: { dayId } }) {
-    return { ...state, idClickedDay: dayId };
+    return { ...state, isOpenEventsList: !state.isOpenEventsList, idClickedDay: dayId };
   },
-  [toggleEventsList](state, { payload: { dayId } }) {
-    // if (dayId === state.dayId) {
-      return { ...state, isOpenEventsList: !state.isOpenEventsList };
-    // }
-    // return state;
+  // [toggleEventsList](state, { payload: { dayId } }) {
+  //   // if (dayId === state.dayId) {
+  //     return { ...state, isOpenEventsList: !state.isOpenEventsList };
+  //   // }
+  //   // return state;
+  // },
+  [resizeScreen](state, { payload: { isLessThanLgScreen } }) {
+    if (!isLessThanLgScreen && state.idClickedDay) {
+      return { ...state, isOpenEventsList: true };
+    }
+    return state;
   },
   [resetDayState]() {
     return initGlobalState.uiCalendar;

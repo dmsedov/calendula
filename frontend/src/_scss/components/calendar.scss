@@ -73,6 +73,7 @@
     font-size: 16px;
     border: 1px solid $border-col-day;
     cursor: pointer;
+    z-index: 100;
 
     @media (min-width: $screen-lg + 1) {
       width: 14%;
