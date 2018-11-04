@@ -4,19 +4,34 @@ import cn from 'classnames';
 
 export default class Day extends React.Component {
   state = {
-    // dayId: null,
-    isOpenEventsList: false,
+    idClickedEvent: null,
+    isClickedDay: false,
   }
 
-  changeDayState = () => {
+  toggle = () => {
     console.log('changeDayState');
-    this.setState({ isOpenEventsList: !this.state.isOpenEventsList });
+    const { isClickedDay } = this.state;
+    isClickedDay ? this.resetState():
+    this.setState({ isClickedDay: true });
   }
 
-  // toggle = () => {
-  //   console.log('tooggle');
-  //   this.setState({ isOpenEventsList: false });
-  // }
+  resetState = () => {
+    this.setState({
+      isClickedDay: false,
+      idClickedEvent: null,
+    })
+  }
+
+  handleClickOnEvent = id => ({ target }) => {
+    const { idClickedEvent } = this.state;
+    if (id === idClickedEvent) {
+      this.resetState();
+      console.log('request to get form');
+      return;
+    }
+    console.log('handleClickOnEvent');
+    this.setState({ idClickedEvent: id, isClickedDay: true });
+  }
 
   makeShortWeekDayNames = (weekDay) => {
     return {
@@ -31,7 +46,8 @@ export default class Day extends React.Component {
   }
 
   makeVerboseDayEventsList = (elStyle) => {
-    const { dayId, events, idClickedEvent } = this.props;
+    const { idClickedEvent } = this.state;
+    const { events } = this.props;
 
     return events.map((eventData) => {
       const { id, title, time_interval } = eventData;
@@ -42,7 +58,11 @@ export default class Day extends React.Component {
       });
 
       return (
-        <li key={id} className={classNamesEventEl}>
+        <li
+          key={id}
+          className={classNamesEventEl}
+          onClick={this.handleClickOnEvent(id)}
+        >
           <span>
             {time_interval}
           </span>
@@ -64,8 +84,8 @@ export default class Day extends React.Component {
     });
   }
 
-  renderPopupEventList = () => {
-    const { isOpenEventsList } = this.state;
+  renderPopupEventList = (eventList) => {
+    const { isClickedDay } = this.state;
     const { dayId, isLessThanLgScreen } = this.props;
 
     const popoverClassnames = cn({
@@ -77,16 +97,16 @@ export default class Day extends React.Component {
       <Popover
         className={popoverClassnames}
         placement="top-start"
-        isOpen={isOpenEventsList}
+        isOpen={isClickedDay}
         target={`calendar-day-${dayId}`}
-        toggle={this.changeDayState}
+        toggle={this.toggle}
       >
         <PopoverHeader>
           События
         </PopoverHeader>
         <PopoverBody>
           <ul className="calendar__popup-day-events">
-            {this.makeVerboseDayEventsList('__day-event')}
+            {eventList}
           </ul>
         </PopoverBody>
         <div className="popover-footer">
@@ -101,7 +121,6 @@ export default class Day extends React.Component {
   render() {
     const {
       isLessThanLgScreen,
-      idClickedDay,
       dayId,
       number,
       weekDay,
@@ -113,14 +132,16 @@ export default class Day extends React.Component {
       'calendar__day-events': true,
       'calendar__day-events_screen_small': isLessThanLgScreen,
     });
+    const verboseEventList = this.makeVerboseDayEventsList('__day-event');
+    const shortEventList = this.makeShortDayEventsList('__day-event');
 
+    const eventListToggler = !isLessThanLgScreen ? this.toggle : null;
     return (
       <div
         key={dayId}
         id={`calendar-day-${dayId}`}
         className={classNamesDay}
-        onClick={this.changeDayState}
-        ref={node => this.dayEl = node}
+        onClick={eventListToggler}
       >
         <div className="calendar__day-of-week">
           {isLessThanLgScreen && <span className="calendar__day-name">{this.makeShortWeekDayNames(weekDay)}</span>}
@@ -128,12 +149,10 @@ export default class Day extends React.Component {
         </div>
         <div className="calendar__day-content">
           <ul className={classNamesDayEvents}>
-            {!isLessThanLgScreen ?
-              this.makeShortDayEventsList('__day-event')
-              : this.makeVerboseDayEventsList('__day-event')}
+            {!isLessThanLgScreen ? shortEventList : verboseEventList}
           </ul>
         </div>
-        {this.renderPopupEventList()}
+        {this.renderPopupEventList(verboseEventList)}
       </div>
     );
   }

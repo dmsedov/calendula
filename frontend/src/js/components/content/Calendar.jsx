@@ -19,10 +19,6 @@ export default class Calendar extends React.Component {
     const {
       calendar,
       isLessThanLgScreen,
-      idClickedEvent,
-      idClickedDay,
-      resetDayState,
-      clickOnDay,
     } = this.props;
 
     if (!calendar) {
@@ -79,12 +75,6 @@ export default class Calendar extends React.Component {
                 isLessThanLgScreen={isLessThanLgScreen}
                 classNamesDay={classNamesDay}
                 classNamesDayNumber={classNamesDayNumber}
-                resetState={resetDayState}
-                idClickedEvent={idClickedEvent}
-                idClickedDay={idClickedDay}
-                clickOnDay={clickOnDay}
-                changeDayState={this.changeDayState}
-                {...this.state}
               />
             );
           })}

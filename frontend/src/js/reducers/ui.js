@@ -42,27 +42,3 @@ export const uiPopup = handleActions({
     return { ...state, isModalShown: false, modalName: null };
   },
 }, initGlobalState.uiPopup);
-
-export const uiCalendar = handleActions({
-  [clickOnEventEl](state, { payload: { id, dayId } }) {
-    return { ...state, idClickedEvent: id, idClickedDay: dayId };
-  },
-  [clickOnDay](state, { payload: { dayId } }) {
-    return { ...state, isOpenEventsList: !state.isOpenEventsList, idClickedDay: dayId };
-  },
-  // [toggleEventsList](state, { payload: { dayId } }) {
-  //   // if (dayId === state.dayId) {
-  //     return { ...state, isOpenEventsList: !state.isOpenEventsList };
-  //   // }
-  //   // return state;
-  // },
-  [resizeScreen](state, { payload: { isLessThanLgScreen } }) {
-    if (!isLessThanLgScreen && state.idClickedDay) {
-      return { ...state, isOpenEventsList: true };
-    }
-    return state;
-  },
-  [resetDayState]() {
-    return initGlobalState.uiCalendar;
-  },
-}, initGlobalState.uiCalendar);

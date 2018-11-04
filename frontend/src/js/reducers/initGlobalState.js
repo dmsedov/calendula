@@ -22,9 +22,4 @@ export default {
     isLessThanMdScreen: null,
     isLessThanLgScreen: null,
   },
-  uiCalendar: {
-    idClickedEvent: null,
-    idClickedDay: null,
-    isOpenEventsList: false,
-  },
 };
