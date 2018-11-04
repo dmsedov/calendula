@@ -6,11 +6,6 @@ import {
   closeNavMenu,
 } from '../actions/uiPopup';
 import resizeScreen from '../actions/uiScreen';
-import {
-  clickOnEventEl,
-  clickOnDay,
-  resetDayState,
-} from '../actions/uiCalendar';
 import initGlobalState from './initGlobalState';
 
 

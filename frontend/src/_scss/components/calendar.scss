@@ -110,7 +110,6 @@
   &__day-content {
     padding: 1rem;
     height: 95%;
-    // z-index: -1;
     overflow-y: hidden;
 
     @media (max-width: $screen-lg) {
@@ -142,6 +141,8 @@
   }
 
   &__day-event {
+    padding: 5px;
+    border-radius: 10px;
 
     &_clicked {
       background-color: $list-item-event;
