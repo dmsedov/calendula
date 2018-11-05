@@ -1,6 +1,7 @@
 import React from 'react';
 import { Popover, PopoverHeader, PopoverBody, Button } from 'reactstrap';
 import cn from 'classnames';
+import _ from 'lodash';
 
 export default class Day extends React.Component {
   state = {
@@ -10,7 +11,7 @@ export default class Day extends React.Component {
 
   toggle = () => {
     const { isClickedDay } = this.state;
-    console.log(isClickedDay, 'isClickedDay');
+    // console.log(isClickedDay, 'isClickedDay');
     isClickedDay ? this.resetState():
     this.setState({ isClickedDay: true });
   }
@@ -26,10 +27,10 @@ export default class Day extends React.Component {
     const { idClickedEvent } = this.state;
     if (id === idClickedEvent) {
       this.resetState();
-      console.log('request to get form');
+      // console.log('request to get form');
       return;
     }
-    console.log('handleClickOnEvent');
+    // console.log('handleClickOnEvent');
     this.setState({ idClickedEvent: id, isClickedDay: true });
   }
 
@@ -74,18 +75,28 @@ export default class Day extends React.Component {
 
   makeShortDayEventsList = () => {
     const { events } = this.props;
-    return events
-      .filter(eventData => eventData.title)
+    const countVisibleEvent = 4;
+    const titledEvents = events.filter(eventData => eventData.title);
+    const visibleEvents = titledEvents
       .map((eventData, index) => {
         const { id, title } = eventData;
         const shortTitle = title.slice(0, 15);
         const endStr = shortTitle.length === 15 ? '...' : '';
-        return title && index <= 4 ? (
+        return title && index <= countVisibleEvent ? (
           <li key={id} className="calendar__day-event-short">
             {`${shortTitle}${endStr}`}
           </li>
         ) : null;
       });
+
+    const countOfHiddenEvents = titledEvents.length - countVisibleEvent;
+    const eventsCounter = countOfHiddenEvents > 0 ?
+      (<div key={_.uniqueId()} className="calendar__eventsCounter">{`+${countOfHiddenEvents}`}</div>) :
+      null;
+    return [
+      visibleEvents,
+      eventsCounter,
+    ];
   }
 
   renderPopupEventList = (listEvents) => {

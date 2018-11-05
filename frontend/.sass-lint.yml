@@ -1,6 +1,6 @@
 files:
-  include: 'src/client/_scss/**/*.s+(a|c)ss'
-  ignore: 'src/client/_scss/libs/*.s+(a|c)ss'
+  include: 'src/_scss/**/*.s+(a|c)ss'
+  ignore: 'src/_scss/libs/*.s+(a|c)ss'
 
 rules:
   # Extends

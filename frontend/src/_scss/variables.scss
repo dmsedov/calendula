@@ -4,8 +4,8 @@ $width-wrapper: 1230px;
 $width-main: 1366px;
 $height-header: 3.5rem;
 
-//colors
-
+//common-colors
+$common-col-font: #fff;
 $col-active: #f00;
 
 // --layouts
@@ -25,21 +25,24 @@ $bg-col-item-common: #fcfcfc;
 $border-col-day: #c0c0c0;
 $bg-col-day-not-current: #dadada;
 $border-col-li-day: #c0c0c0;
-$list-item-event: #2886fb;
+$col-bg-list-item-event: #2886fb;
+$col-bg-day-event-short: $col-bg-list-item-event;
+$col-bg-events-counter: #f76666;
 
 
 // --btn-like fonts
-$col-navbar-toggler: #fff;
+$col-navbar-toggler: $common-col-font;
 $col-add-event-btn: #f00;
 $col-add-event-btn-hovered: #e64545;
 
 //font
 $col-navbar-text: #d8d8d8;
-$col-navbar-text-hovered: #fff;
-$col-header-text: #fff;
+$col-navbar-text-hovered: $common-col-font;
+$col-header-text: $common-col-font;
 $col-btn-text: $col-header-text;
 $col-btn-signin-text: #000;
-$col-list-item-event: #fff;
+$col-list-item-event: $common-col-font;
+$col-day-event-short: $col-list-item-event;
 
 // path to icons
 $base-url: '/src/images';

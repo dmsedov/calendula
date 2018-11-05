@@ -130,7 +130,7 @@
     border-bottom: 1px solid $border-col-li-day;
 
     &.active {
-      background-color: $list-item-event;
+      background-color: $col-bg-list-item-event;
       color: $col-list-item-event;
     }
 
@@ -153,7 +153,23 @@
   }
 
   &__day-event-short {
+    margin-bottom: 2px;
     padding: 5px;
+    background-color: $col-bg-day-event-short;
+    border-radius: 5px;
+    color: $col-day-event-short;
+  }
+
+  &__eventsCounter {
+    position: absolute;
+    display: inline-block;
+    right: 20px;
+    width: 26px;
+    height: 16px;
+    border-radius: 8px;
+    background-color: $col-bg-events-counter;
+    color: $common-col-font;
+    text-align: center;
   }
 
   &__popup-events {
