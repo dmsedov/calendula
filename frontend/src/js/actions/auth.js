@@ -12,7 +12,7 @@ export const foreignAuthUserRequest = createAction('FOREIGN_AUTH_USER_REQUEST');
 export const signout = createAction('SIGN_OUT_USER');
 
 export const signoutUser = history => (dispatch) => {
-  localStorage.removeItem('user');
+  localStorage.removeItem('userData');
   dispatch(signout());
   history.push(paths.login);
 };
