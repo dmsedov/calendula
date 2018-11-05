@@ -109,13 +109,17 @@ export default class Day extends React.Component {
           События
         </PopoverHeader>
         <PopoverBody>
-          <ul className="calendar__popup-day-events">
-            {listEvents}
-          </ul>
+          {listEvents.length === 0 ?
+            <p className="calendar__popup-info-msg">Здесь пока нет событий</p>
+            : (
+              <ul className="calendar__popup-day-events">
+                {listEvents}
+              </ul>
+            )}
         </PopoverBody>
         <div className="popover-footer">
           <div className="calendar__popup-control-panel">
-            Control
+            <Button>Cоздать событие</Button>
           </div>
         </div>
       </Popover>

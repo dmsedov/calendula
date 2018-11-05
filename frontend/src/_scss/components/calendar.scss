@@ -167,7 +167,8 @@
   &__popup-day-events {
     margin: 0;
     padding: 1rem;
-    height: 220px;
+    min-height: 80px;
+    max-height: 220px;
     overflow-y: scroll;
     list-style-type: none;
 
@@ -177,7 +178,18 @@
     }
   }
 
+  &__popup-info-msg {
+    padding: 5px;
+    text-align: center;
+  }
+
   &__popup-control-panel {
     height: 80px;
+    text-align: center;
+    line-height: 80px;
+
+    .btn  {
+      font-size: 12px;
+    }
   }
 }
