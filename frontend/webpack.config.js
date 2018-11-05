@@ -13,14 +13,13 @@ const isProduction = !isDevelopment;
 const config = {
   context: path.join(__dirname, 'src'),
   entry: {
-    './index.js': './index.jsx',
+    './app.js': './app.jsx',
   },
   output: {
     path: path.join(__dirname, 'public'),
     filename: 'js/bundle.js',
     publicPath: '/assets/',
   },
-  // devtool: 'eval',
   module: {
     rules: [{
       test: /\.html$/,
