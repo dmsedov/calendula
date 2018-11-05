@@ -30,14 +30,10 @@ export default (props) => {
     failured: null,
   };
   const processName = processNames[requestStatus];
-  return (
-    <div>
-      {processName && (
-        <div style={stylesLayot}>
-          <img alt="" src="/src/client/images/icons/preloader.gif" />
-          <p style={styleStatus}>{processName}...</p>
-        </div>
-      )}
+  return processName ? (
+    <div style={stylesLayot}>
+      <img alt="" src="/src/images/icons/preloader.gif" />
+      <p style={styleStatus}>{processName}...</p>
     </div>
-  );
+  ) : null;
 };
