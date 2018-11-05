@@ -4,7 +4,7 @@
   justify-content: space-between;
   height: inherit;
 
-  &__search-btn {
+  .btn {
     margin-right: .5rem;
     width: 32px;
     height: 32px;
@@ -41,9 +41,9 @@
   &__account-controls {
     padding: 1rem;
     text-align: center;
-  }
 
-  &__logout-btn {
-    width: 5rem;
+     .btn {
+      width: 5rem;
+    }
   }
 }

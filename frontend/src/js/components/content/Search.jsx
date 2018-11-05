@@ -5,7 +5,7 @@ const Search = (props) => {
   return show ? (
     <button
       type="button"
-      className="btn info-panel__search-btn"
+      className="btn"
       data-toggle="modal"
       onClick={openModal('Search')}
     />

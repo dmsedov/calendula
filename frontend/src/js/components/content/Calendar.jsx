@@ -44,7 +44,7 @@ export default class Calendar extends React.Component {
           <div className="calendar__nav-btn">
             <Icon type="left-circle" theme="filled" />
           </div>
-          <div className="calendar__date">{day.number} {month.name} {year} г.</div>
+          <div className="calendar__date">{month.name} {year} г.</div>
           <div className="calendar__nav-btn">
             <Icon type="right-circle" theme="filled" />
           </div>

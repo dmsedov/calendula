@@ -49,7 +49,7 @@ export default class AccessLink extends React.Component {
           </div>
         </ModalBody>
         <ModalFooter>
-          <Button className="access-form__gen-link-btn" onClick={this.handleGenAccessLink}>Сгенерировать ссылку</Button>
+          <Button onClick={this.handleGenAccessLink}>Сгенерировать ссылку</Button>
         </ModalFooter>
       </div>
     );

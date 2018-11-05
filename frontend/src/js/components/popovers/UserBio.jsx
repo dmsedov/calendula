@@ -51,7 +51,7 @@ export default class UserBio extends React.PureComponent {
           </PopoverBody>
           <div className="popover-footer">
             <div className="info-panel__account-controls">
-              <Button className="info-panel__logout-btn" size="sm" onClick={this.handleExit}>Выйти</Button>
+              <Button size="sm" onClick={this.handleExit}>Выйти</Button>
             </div>
           </div>
         </Popover>
