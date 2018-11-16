@@ -10,17 +10,18 @@ export default (store) => {
   store.dispatch(resizeScreen({ isLessThanMdScreen: mediaQueryMdScreen.matches }));
   store.dispatch(resizeScreen({ isLessThanLgScreen: mediaQueryLgScreen.matches }));
 
+  document.addEventListener('DOMContentLoaded', () => {
+    mediaQueryMdScreen.addListener((mq) => {
+      store.dispatch(resizeScreen({ isLessThanMdScreen: mq.matches }));
+      const { uiPopup: { isNavMenuOpen } } = store.getState();
+      if (isNavMenuOpen) {
+        store.dispatch(closeNavMenu());
+      }
+    });
 
-  mediaQueryMdScreen.addListener((mq) => {
-    store.dispatch(resizeScreen({ isLessThanMdScreen: mq.matches }));
-    const { uiPopup: { isNavMenuOpen } } = store.getState();
-    if (isNavMenuOpen) {
-      store.dispatch(closeNavMenu());
-    }
-  });
-
-  mediaQueryLgScreen.addListener((mq) => {
-    store.dispatch(resizeScreen({ isLessThanLgScreen: mq.matches }));
+    mediaQueryLgScreen.addListener((mq) => {
+      store.dispatch(resizeScreen({ isLessThanLgScreen: mq.matches }));
+    });
   });
 
   const jwt = localStorage.getItem('userData');

@@ -17,9 +17,9 @@ import setGlobalDispatchers from './js/globalDispatchers';
 
 const store = createStore(rootReducer);
 
-document.addEventListener('DOMContentLoaded', setGlobalDispatchers(store));
+setGlobalDispatchers(store);
 
-ReactDOM.render(
+const App = (
   <Provider store={store}>
     <BrowserRouter>
       <div className="app-wrapper">
@@ -31,7 +31,11 @@ ReactDOM.render(
         <ErrorReport />
       </div>
     </BrowserRouter>
-  </Provider>,
+  </Provider>
+);
+
+ReactDOM.render(
+  App,
   document.getElementById('app'),
 );
 
